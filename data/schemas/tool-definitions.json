@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EYD_V_Tool_Definitions",
+  "description": "Definisi skema function calling / tools resmi EYD V untuk OpenAI, Anthropic, Gemini, LangChain, dan LlamaIndex",
+  "openai_tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_eyd_rules",
+        "description": "Mencari aturan resmi Ejaan Bahasa Indonesia yang Disempurnakan (EYD V) milik Kemendikdasmen berdasarkan kata kunci atau topik.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Topik atau kata kunci yang dicari (misal: 'huruf kapital jabatan', 'tanda koma', 'partikel pun')"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Jumlah aturan maksimal yang ingin dikembalikan",
+              "default": 5
+            }
+          },
+          "required": ["query"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "check_eyd_spelling",
+        "description": "Memeriksa teks bahasa Indonesia terhadap kaidah resmi EYD V (kata depan di/ke, partikel pun, bentuk terikat, peluluhan KTSP, koma, kata baku) dan memberikan rekomendasi perbaikan.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "Teks kalimat atau paragraf bahasa Indonesia yang akan diperiksa"
+            }
+          },
+          "required": ["text"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "lookup_word_standard",
+        "description": "Memeriksa apakah suatu kata adalah bentuk baku menurut EYD V & KBBI, serta memberikan bentuk bakunya jika kata tersebut nonbaku.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "word": {
+              "type": "string",
+              "description": "Kata yang ingin diperiksa status kebakuan katanya"
+            }
+          },
+          "required": ["word"]
+        }
+      }
+    }
+  ],
+  "anthropic_tools": [
+    {
+      "name": "search_eyd_rules",
+      "description": "Mencari aturan resmi Ejaan Bahasa Indonesia yang Disempurnakan (EYD V) milik Kemendikdasmen berdasarkan kata kunci atau topik.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Topik atau kata kunci yang dicari"
+          },
+          "limit": {
+            "type": "integer",
+            "default": 5
+          }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "check_eyd_spelling",
+      "description": "Memeriksa teks bahasa Indonesia terhadap kaidah resmi EYD V dan memberikan rekomendasi perbaikan.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Teks bahasa Indonesia yang akan diperiksa"
+          }
+        },
+        "required": ["text"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "input": "Dimana kamu sekarang berada?",
+    "expected": "Di mana kamu sekarang berada?",
+    "type": "PREPOSISI"
+  },
+  {
+    "input": "Mereka berjalan kesana kemari mencari bantuan.",
+    "expected": "Mereka berjalan ke sana kemari mencari bantuan.",
+    "type": "PREPOSISI"
+  },
+  {
+    "input": "Buku itu ada diatas meja dan dibawah kursi.",
+    "expected": "Buku itu ada di atas meja dan di bawah kursi.",
+    "type": "PREPOSISI"
+  },
+  {
+    "input": "Dia melanjutkan studi pasca sarjana di luar negeri.",
+    "expected": "Dia melanjutkan studi pascasarjana di luar negeri.",
+    "type": "BENTUK_TERIKAT"
+  },
+  {
+    "input": "Bus antar kota melaju dengan kencang di jalan tol.",
+    "expected": "Bus antarkota melaju dengan kencang di jalan tol.",
+    "type": "BENTUK_TERIKAT"
+  },
+  {
+    "input": "Negara non ASEAN menghadiri konferensi tingkat tinggi.",
+    "expected": "Negara non-ASEAN menghadiri konferensi tingkat tinggi.",
+    "type": "BENTUK_TERIKAT"
+  },
+  {
+    "input": "Mohon bubuhkan tandatangan dan tanggungjawab pada dokumen ini.",
+    "expected": "Mohon bubuhkan tanda tangan dan tanggung jawab pada dokumen ini.",
+    "type": "GABUNGAN_KATA"
+  },
+  {
+    "input": "Saya mengucapkan terimakasih atas bantuan Anda.",
+    "expected": "Saya mengucapkan terima kasih atas bantuan Anda.",
+    "type": "GABUNGAN_KATA"
+  },
+  {
+    "input": "Apapun yang terjadi, kita harus tetap melangkah.",
+    "expected": "Apa pun yang terjadi, kita harus tetap melangkah.",
+    "type": "PARTIKEL"
+  },
+  {
+    "input": "Siapapun yang bersalah harus mempertanggungjawabkan perbuatannya.",
+    "expected": "Siapa pun yang bersalah harus mempertanggungjawabkan perbuatannya.",
+    "type": "PARTIKEL"
+  },
+  {
+    "input": "Kita harus merubah cara berpikir lama.",
+    "expected": "Kita harus mengubah cara berpikir lama.",
+    "type": "PELULUHAN_KTSP"
+  },
+  {
+    "input": "Pemerintah berupaya mensosialisasikan program baru.",
+    "expected": "Pemerintah berupaya menyosialisasikan program baru.",
+    "type": "PELULUHAN_KTSP"
+  },
+  {
+    "input": "Pemandangan pantai itu sungguh mempesona.",
+    "expected": "Pemandangan pantai itu sungguh memesona.",
+    "type": "PELULUHAN_KTSP"
+  },
+  {
+    "input": "Faktor lingkungan sangat mempengaruhi hasil panen.",
+    "expected": "Faktor lingkungan sangat memengaruhi hasil panen.",
+    "type": "PELULUHAN_KTSP"
+  },
+  {
+    "input": "Hasil analisa laboratorium menunjukkan penurunan kualitas.",
+    "expected": "Hasil analisis laboratorium menunjukkan penurunan kualitas.",
+    "type": "KOSAKATA_NONBAKU"
+  },
+  {
+    "input": "Dokter membuka praktek setiap hari kerja.",
+    "expected": "Dokter membuka praktik setiap hari kerja.",
+    "type": "KOSAKATA_NONBAKU"
+  },
+  {
+    "input": "Setiap keputusan bisnis pasti memiliki resiko.",
+    "expected": "Setiap keputusan bisnis pasti memiliki risiko.",
+    "type": "KOSAKATA_NONBAKU"
+  },
+  {
+    "input": "Warga antri sejak pagi untuk membeli tiket.",
+    "expected": "Warga antre sejak pagi untuk membeli tiket.",
+    "type": "KOSAKATA_NONBAKU"
+  },
+  {
+    "input": "Dia sudah meminta ijin kepada atasannya.",
+    "expected": "Dia sudah meminta izin kepada atasannya.",
+    "type": "KOSAKATA_NONBAKU"
+  },
+  {
+    "input": "Jadual rapat telah dikirimkan melalui surel.",
+    "expected": "Jadwal rapat telah dikirimkan melalui surel.",
+    "type": "KOSAKATA_NONBAKU"
+  },
+  {
+    "input": "Silahkan duduk di ruang tunggu yang telah disediakan.",
+    "expected": "Silakan duduk di ruang tunggu yang telah disediakan.",
+    "type": "KOSAKATA_NONBAKU"
+  },
+  {
+    "input": "Penebangan pohon merusak ekosistim hutan.",
+    "expected": "Penebangan pohon merusak ekosistem hutan.",
+    "type": "KOSAKATA_NONBAKU"
+  },
+  {
+    "input": "Saya ingin ikut tetapi saya harus bekerja.",
+    "expected": "Saya ingin ikut, tetapi saya harus bekerja.",
+    "type": "TANDA_BACA"
+  },
+  {
+    "input": "Bukan dia yang datang melainkan saudaranya.",
+    "expected": "Bukan dia yang datang, melainkan saudaranya.",
+    "type": "TANDA_BACA"
+  },
+  {
+    "input": "Kakaknya gemar membaca sedangkan adiknya senang menggambar.",
+    "expected": "Kakaknya gemar membaca, sedangkan adiknya senang menggambar.",
+    "type": "TANDA_BACA"
+  }
+]

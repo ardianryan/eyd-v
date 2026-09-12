@@ -1,0 +1,58 @@
+{
+  "name": "eyd-v",
+  "version": "5.0.0",
+  "description": "Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar based on EYD Edisi Kelima (Kemendikdasmen RI)",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "bin": {
+    "eyd-v": "./bin/cli.js",
+    "eyd-v-skill": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node tests/test-linter.js",
+    "scrape": "node scripts/scrape.js",
+    "mcp": "node src/mcp-server.js",
+    "check": "node bin/cli.js check",
+    "search": "node bin/cli.js search"
+  },
+  "keywords": [
+    "eyd",
+    "eyd-v",
+    "kemendikdasmen",
+    "ejaan-bahasa-indonesia",
+    "ai-agent",
+    "agent-skill",
+    "antigravity",
+    "claude-code",
+    "cursor-rules",
+    "mcp",
+    "mcp-server",
+    "rag",
+    "linter",
+    "grammar-checker",
+    "indonesia"
+  ],
+  "author": "Ardian Ryan <me@ardianryan.com>",
+  "homepage": "https://github.com/ardianryan/eyd-v-skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ardianryan/eyd-v-skill.git"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "turndown": "^7.2.1",
+    "turndown-plugin-gfm": "^1.0.2"
+  },
+  "files": [
+    "bin",
+    "src",
+    "data",
+    "docs",
+    "prompts",
+    "templates",
+    "assets",
+    "scripts",
+    "SKILL.md",
+    "README.md"
+  ]
+}

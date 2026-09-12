@@ -1,0 +1,25 @@
+---
+description: Pedoman Ejaan Bahasa Indonesia yang Disempurnakan (EYD V Kemendikdasmen)
+globs: ["**/*.md", "**/*.txt", "**/*.id.md", "**/*.id.json", "docs/**"]
+---
+
+# Aturan EYD Edisi V (Kemendikdasmen RI)
+
+Saat menulis teks, dokumentasi, commit message, atau respons dalam bahasa Indonesia, selalu patuhi pedoman resmi EYD Edisi V:
+
+1. **Kata Depan vs Awalan**:
+   - Kata depan *di* dan *ke* ditulis terpisah: `di mana`, `di sana`, `ke mana`, `ke sekolah`.
+   - Awalan *di-* dan *ke-* ditulis serangkai: `ditulis`, `dihapus`, `keluar`.
+2. **Bentuk Terikat**:
+   - Tulis serangkai: `pascasarjana`, `antarkota`, `multidimensi`, `nonaktif`, `subbagian`.
+   - Gunakan tanda hubung jika diikuti huruf kapital/asing: `non-ASEAN`, `anti-mainstream`.
+3. **Kata Majemuk**:
+   - Ditulis terpisah: `tanda tangan`, `tanggung jawab`, `kerja sama`, `terima kasih`.
+   - Serangkai jika ada awalan dan akhiran sekaligus: `menandatangani`, `pertanggungjawaban`.
+4. **Partikel pun**:
+   - Ditulis terpisah: `apa pun`, `siapa pun`, `di mana pun`.
+   - Dirangkai hanya pada 12 kata: `adapun`, `andaipun`, `ataupun`, `bagaimanapun`, `biarpun`, `kalaupun`, `kendatipun`, `maupun`, `meskipun`, `sekalipun`, `sungguhpun`, `walaupun`.
+5. **Peluluhan KTSP**:
+   - `mengubah` (bukan *merubah*), `menyosialisasikan` (bukan *mensosialisasikan*), `memesona` (bukan *mempesona*), `memproduksi` (gugus *pr* tidak luluh).
+6. **Kata Baku**:
+   - `analisis` (bukan *analisa*), `praktik` (bukan *praktek*), `risiko` (bukan *resiko*), `antre` (bukan *antri*), `izin` (bukan *ijin*), `jadwal` (bukan *jadual*).

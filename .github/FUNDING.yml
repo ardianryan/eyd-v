@@ -1,0 +1,5 @@
+# GitHub Native Sponsor / Funding Configuration
+# Menampilkan tombol "Sponsor / Dukung" resmi di GitHub
+
+custom:
+  - https://donate.ppti.me/
