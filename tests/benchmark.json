@@ -123,5 +123,20 @@
     "input": "Kakaknya gemar membaca sedangkan adiknya senang menggambar.",
     "expected": "Kakaknya gemar membaca, sedangkan adiknya senang menggambar.",
     "type": "TANDA_BACA"
+  },
+  {
+    "input": "Toko buka dari hari Senin s/d Jumat.",
+    "expected": "Toko buka dari hari Senin s.d. Jumat.",
+    "type": "SINGKATAN"
+  },
+  {
+    "input": "Harga buku itu adalah Rp. 50000 per eksemplar.",
+    "expected": "Harga buku itu adalah Rp50000 per eksemplar.",
+    "type": "ANGKA_DAN_MATA_UANG"
+  },
+  {
+    "input": "Pendidikan adalah merupakan hak asasi setiap warga negara.",
+    "expected": "Pendidikan adalah hak asasi setiap warga negara.",
+    "type": "PLEONASME"
   }
 ]

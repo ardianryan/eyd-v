@@ -245,6 +245,69 @@ function checkEyd(text) {
     }
   });
 
+  // 8. Singkatan Nonbaku dengan Garis Miring (s/d, a/n, d/a, u/p)
+  const singkatanPatterns = [
+    { regex: /\b(s\/d)\b/gi, fix: 's.d.', rule: "Singkatan 'sampai dengan' ditulis 's.d.' (bukan 's/d')", ref: 'eyd/penulisan-kata/singkatan-dan-akronim/#1' },
+    { regex: /\b(a\/n)\b/gi, fix: 'a.n.', rule: "Singkatan 'atas nama' ditulis 'a.n.' (bukan 'a/n')", ref: 'eyd/penulisan-kata/singkatan-dan-akronim/#1' },
+    { regex: /\b(d\/a)\b/gi, fix: 'd.a.', rule: "Singkatan 'dengan alamat' ditulis 'd.a.' (bukan 'd/a')", ref: 'eyd/penulisan-kata/singkatan-dan-akronim/#1' },
+    { regex: /\b(u\/p)\b/gi, fix: 'u.p.', rule: "Singkatan 'untuk perhatian' ditulis 'u.p.' (bukan 'u/p')", ref: 'eyd/penulisan-kata/singkatan-dan-akronim/#1' }
+  ];
+
+  singkatanPatterns.forEach(pat => {
+    let match;
+    while ((match = pat.regex.exec(text)) !== null) {
+      const original = match[0];
+      const isCapitalized = original[0] === original[0].toUpperCase();
+      const suggested = isCapitalized ? pat.fix.toUpperCase() : pat.fix;
+      errors.push({
+        type: 'SINGKATAN',
+        original: original,
+        suggestion: suggested,
+        rule: pat.rule,
+        reference: pat.ref,
+        index: match.index
+      });
+    }
+  });
+
+  // 9. Lambang Rupiah (Rp. 50.000 atau Rp.50.000 -> Rp50.000)
+  const rupiahRegex = /\b(Rp)\.?\s*(\d+)/gi;
+  let rpMatch;
+  while ((rpMatch = rupiahRegex.exec(text)) !== null) {
+    if (rpMatch[0] !== `Rp${rpMatch[2]}`) {
+      errors.push({
+        type: 'ANGKA_DAN_MATA_UANG',
+        original: rpMatch[0],
+        suggestion: `Rp${rpMatch[2]}`,
+        rule: "Lambang 'Rp' ditulis tanpa titik dan tanpa spasi sebelum angka",
+        reference: 'eyd/penulisan-kata/angka-dan-bilangan/#lambang-rupiah',
+        index: rpMatch.index
+      });
+    }
+  }
+
+  // 10. Pleonasme (Pemborosan Kata)
+  const pleonasmePatterns = [
+    { regex: /\b(adalah\s+merupakan)\b/gi, fix: 'adalah', rule: "Hindari pleonasme 'adalah merupakan', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
+    { regex: /\b(agar\s+supaya)\b/gi, fix: 'agar', rule: "Hindari pleonasme 'agar supaya', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
+    { regex: /\b(demi\s+untuk)\b/gi, fix: 'demi', rule: "Hindari pleonasme 'demi untuk', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
+    { regex: /\b(sangat\s+indah\s+sekali)\b/gi, fix: 'sangat indah', rule: "Hindari pleonasme penguat ganda 'sangat ... sekali'", ref: 'docs/kaidah-kalimat-efektif.md' }
+  ];
+
+  pleonasmePatterns.forEach(pat => {
+    let match;
+    while ((match = pat.regex.exec(text)) !== null) {
+      errors.push({
+        type: 'PLEONASME',
+        original: match[0],
+        suggestion: pat.fix,
+        rule: pat.rule,
+        reference: pat.ref,
+        index: match.index
+      });
+    }
+  });
+
   // Urutkan kesalahan berdasarkan posisi teks
   errors.sort((a, b) => a.index - b.index);
 

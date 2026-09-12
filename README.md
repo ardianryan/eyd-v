@@ -47,6 +47,7 @@
   - [2. Mencari Kaidah & Pasal Resmi](#2-mencari-kaidah--pasal-resmi)
   - [3. Memasang Skill ke AI Agents (Installer)](#3-memasang-skill-ke-ai-agents-installer)
   - [4. Menjalankan MCP Server (Model Context Protocol)](#4-menjalankan-mcp-server-model-context-protocol)
+- [🌐 Web Playground Interaktif](#-web-playground-interaktif)
 - [💻 Penggunaan Programmatic (Node.js & TypeScript SDK)](#-penggunaan-programmatic-nodejs--typescript-sdk)
 - [🧠 AI Learning, Fine-Tuning & RAG Hub](#-ai-learning-fine-tuning--rag-hub)
   - [1. Fine-Tuning & Alignment (SFT & DPO)](#1-fine-tuning--alignment-sft--dpo)
@@ -137,6 +138,17 @@ npx eyd-v mcp
   }
 }
 ```
+
+---
+
+## 🌐 Web Playground Interaktif
+
+Ingin mencoba dan menguji linter EYD V tanpa membuka terminal atau menginstal paket apa pun? Repositori ini telah dilengkapi aplikasi **Web Playground mandiri** di [`demo/index.html`](demo/index.html):
+
+* 🖥️ **Buka Langsung di Browser**: Cukup buka berkas `demo/index.html` dengan peramban favorit Anda (Chrome, Safari, Firefox, Edge).
+* ✍️ **Deteksi Kesalahan Realtime**: Memeriksa teks naskah dan menampilkan perbaikan secara visual dengan penyorotan warna.
+* 📋 **Salin Teks Bersih 1-Klik**: Tombol salin instan untuk memindahkan teks yang sudah diperbaiki ke aplikasi kerja Anda.
+* ☁️ **Siap GitHub Pages**: Dapat langsung diaktifkan sebagai live demo berbasis web gratis.
 
 ---
 

@@ -1,0 +1,39 @@
+name: EYD V Grammar & Spelling Linter
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '**/*.txt'
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.md'
+      - '**/*.txt'
+
+jobs:
+  eyd-lint:
+    name: Lint Indonesian Text (EYD V)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run EYD V Linter on Changed Markdown Files
+        run: |
+          echo "🔍 Memeriksa ejaan EYD V pada berkas Markdown yang berubah..."
+          git diff --name-only origin/main...HEAD -- '*.md' | while read file; do
+            if [ -f "$file" ]; then
+              echo "Memeriksa: $file"
+              npx eyd-v check "$file" || exit 1
+            fi
+          done
