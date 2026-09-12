@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="60" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+
+  <!-- Ambient Glow -->
+  <circle cx="200" cy="150" r="180" fill="#38bdf8" opacity="0.15" filter="url(#glow)" />
+  <circle cx="1000" cy="450" r="220" fill="#818cf8" opacity="0.15" filter="url(#glow)" />
+
+  <!-- Border Frame -->
+  <rect x="24" y="24" width="1152" height="582" rx="24" fill="none" stroke="#334155" stroke-width="2" />
+
+  <!-- Pill Badge -->
+  <g transform="translate(80, 80)">
+    <rect width="360" height="38" rx="19" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="20" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#38bdf8" letter-spacing="1">
+      🇮🇩 KEMENDIKDASMEN RI • EYD V
+    </text>
+  </g>
+
+  <!-- Title -->
+  <text x="80" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="64" font-weight="900" fill="#ffffff" letter-spacing="-1">
+    EJAAN BAHASA INDONESIA
+  </text>
+  <text x="80" y="270" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="52" font-weight="800" fill="url(#accentGrad)" letter-spacing="-1">
+    YANG DISEMPURNAKAN (EDISI V)
+  </text>
+
+  <!-- Subtitle -->
+  <text x="80" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="400" fill="#94a3b8">
+    Universal AI Agent Skill, RAG Dataset, MCP Server &amp; Grammar Linter
+  </text>
+
+  <!-- Feature Grid -->
+  <g transform="translate(80, 410)">
+    <!-- Card 1: NPX -->
+    <g transform="translate(0, 0)">
+      <rect width="230" height="110" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+      <text x="20" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#ffffff">⚡ npx eyd-v</text>
+      <text x="20" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#94a3b8">Linter instan di terminal</text>
+      <text x="20" y="94" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#38bdf8">check • search • install</text>
+    </g>
+
+    <!-- Card 2: AI Agents -->
+    <g transform="translate(250, 0)">
+      <rect width="230" height="110" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+      <text x="20" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#ffffff">🤖 Agent Skill</text>
+      <text x="20" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#94a3b8">Antigravity, Claude, Cursor</text>
+      <text x="20" y="94" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#818cf8">SKILL.md standard</text>
+    </g>
+
+    <!-- Card 3: MCP & RAG -->
+    <g transform="translate(500, 0)">
+      <rect width="230" height="110" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+      <text x="20" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#ffffff">🔌 MCP &amp; RAG</text>
+      <text x="20" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#94a3b8">Model Context Protocol</text>
+      <text x="20" y="94" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#c084fc">246 semantic chunks</text>
+    </g>
+
+    <!-- Card 4: SFT & DPO -->
+    <g transform="translate(750, 0)">
+      <rect width="290" height="110" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+      <text x="20" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#ffffff">🧠 SFT &amp; DPO Dataset</text>
+      <text x="20" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#94a3b8">ChatML, Alpaca &amp; DPO pairs</text>
+      <text x="20" y="94" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#34d399">Fine-tuning ready</text>
+    </g>
+  </g>
+</svg>
