@@ -5,6 +5,10 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  schedule:
+    # Jalankan pengujian otomatis setiap hari Senin pukul 07.00 WIB (00.00 UTC)
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
 
 jobs:
   test:
