@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="assets/logo.png" width="160" alt="Logo Tut Wuri Handayani Kemendikdasmen RI">
+  <img src="assets/banner.png" alt="EYD V Banner" width="100%">
+</p>
+
+<p align="center">
+  <img src="assets/logo.png" width="140" alt="Logo Tut Wuri Handayani Kemendikdasmen RI">
 </p>
 
 <h1 align="center">EJAAN BAHASA INDONESIA YANG DISEMPURNAKAN (EYD V)</h1>
