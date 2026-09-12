@@ -33,10 +33,10 @@
     "indonesia"
   ],
   "author": "Ardian Ryan <me@ardianryan.com>",
-  "homepage": "https://github.com/ardianryan/eyd-v-skill",
+  "homepage": "https://github.com/ardianryan/eyd-v",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ardianryan/eyd-v-skill.git"
+    "url": "https://github.com/ardianryan/eyd-v.git"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
