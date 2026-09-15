@@ -5,6 +5,40 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
 
 ---
 
+## [5.1.1] - 2026-09-15
+
+### Ditambahkan
+* **Standar Global Metadata AI Agent (`llms.txt` & `llms-full.txt`)**:
+  * Berkas `llms.txt` dan `llms-full.txt` (88 KB teks murni) berstandar industri agar mesin pencari AI (Perplexity, Cursor, ChatGPT) dapat menelusuri seluruh pasal EYD V secara instan tanpa parsing HTML.
+* **Perintah CLI `prompt --copy` (Clipboard Integration)**:
+  * Memungkinkan pengguna menyalin seluruh System Prompt EYD V langsung ke Clipboard OS (`pbcopy`, `clip`, `xclip`) via `npx eyd-v prompt --copy` untuk langsung di-paste ke ChatGPT atau Claude.ai.
+* **Perintah CLI `repl` (Interactive Terminal Playground)**:
+  * Masuk ke sesi uji interaktif `npx eyd-v repl` untuk memeriksa kalimat berulang kali di terminal tanpa mengetik ulang perintah.
+* **Opsi CLI `--fix` (In-Place Auto-Fixing)**:
+  * Menuliskan perbaikan ejaan dan tanda baca langsung ke berkas target (`npx eyd-v check file.md --fix`) disertai pencadangan otomatis berkas `.bak`.
+* **Opsi CLI `--json`**:
+  * Keluaran berformat JSON terstruktur untuk integrasi bot, pipeline CI/CD, atau aplikasi pihak ketiga.
+* **Dukungan Unix Stdin / Pipe**:
+  * Kemampuan membaca masukan teks dari pipe terminal (`cat file.txt | npx eyd-v check` atau `git diff | npx eyd-v check`).
+* **Menu Pemasangan Interaktif (`npx eyd-v install`)**:
+  * Menu seleksi interaktif berbasis nomor untuk memilih IDE sasaran (Antigravity, Cursor, Windsurf, Claude Code, GitHub Copilot, Cline).
+* **Template Multi-IDE Lengkap**:
+  * `templates/windsurf/.windsurfrules` untuk Windsurf / Cascade.
+  * `templates/copilot/copilot-instructions.md` untuk GitHub Copilot.
+  * `templates/cline/.clinerules` untuk Cline / Roo Code.
+* **Prompt Terstruktur XML untuk Anthropic Claude** (`prompts/claude-system-prompt.xml`):
+  * Penggunaan tag XML resmi Anthropic untuk kedisiplinan nalar model Claude 3.5 Sonnet / Opus 4.5.
+* **Paket Bundel `dist/eyd-v.skill`**:
+  * Berkas bundel zip terverifikasi untuk dipasang via menu `Settings ➔ Skills` pada Claude.ai Web.
+* **Lencana Kepatuhan Komunitas (*Compliance Badge*)**:
+  * Berkas SVG `assets/badge-eyd-v.svg` dan cuplikan Markdown resmi untuk disematkan pada dokumentasi pihak ketiga.
+* **Panduan Custom GPT** (`docs/panduan-custom-gpt-setup.md`):
+  * Panduan membangun bot publik EYD V di OpenAI GPT Store.
+* **Otomasi GitHub Pages** (`.github/workflows/deploy-pages.yml`):
+  * Deployment otomatis web demo playground ke `https://ardianryan.github.io/eyd-v/`.
+
+---
+
 ## [5.1.0] - 2026-09-15
 
 ### Ditambahkan

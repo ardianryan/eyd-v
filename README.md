@@ -87,46 +87,56 @@ Tidak perlu instalasi rumit, cukup jalankan perintah berikut di terminal Anda:
 # Periksa kalimat langsung
 npx eyd-v check "Dimana kamu kuliah pasca sarjana?"
 
-# Periksa berkas Markdown / Teks
-npx eyd-v check README.md
+# Periksa berkas Markdown / Teks dan perbaiki langsung di tempat (--fix)
+npx eyd-v check artikel.md --fix
+
+# Dukungan Stdin / Pipeline Unix
+cat naskah.txt | npx eyd-v check
+git diff | npx eyd-v check
+
+# Keluaran JSON terstruktur untuk bot / script otomasi
+npx eyd-v check "Sistem analisa ini penting, karena baru." --json
 ```
 
-**Contoh Hasil Pemeriksaan:**
-```text
-⚠️ Ditemukan 2 potensi ketidaksesuaian EYD V:
-
-1. [PREPOSISI] "Dimana" ➔ "Di mana"
-   Kaidah : Kata Depan 'di' menyatakan tempat ditulis terpisah
-   Rujukan: https://ejaan.kemendikdasmen.go.id/eyd/penulisan-kata/kata-depan/#1
-
-2. [BENTUK_TERIKAT] "pasca sarjana" ➔ "pascasarjana"
-   Kaidah : Bentuk terikat 'pasca-' ditulis serangkai
-   Rujukan: https://ejaan.kemendikdasmen.go.id/eyd/penulisan-kata/kata-turunan/#bentuk-terikat
-
-Rekomendasi Teks Bersih:
-Di mana kamu kuliah pascasarjana?
+### 2. Mode Playground Interaktif di Terminal (REPL)
+Uji coba banyak kalimat secara instan tanpa perlu mengetik ulang perintah:
+```bash
+npx eyd-v repl
 ```
 
-### 2. Mencari Kaidah & Pasal Resmi
+### 3. Salin System Prompt Otomatis ke Clipboard (ChatGPT / Claude Web)
+Sangat praktis untuk pengguna ChatGPT Web, Claude.ai, atau Gemini Web:
+```bash
+# Salin teks System Prompt EYD V langsung ke Clipboard OS
+npx eyd-v prompt --copy
+```
+*Tinggal buka ChatGPT / Claude ➔ Tekan **Paste (Ctrl+V / Cmd+V)** di kolom Custom Instructions/Project.*
+
+### 4. Memasang Aturan ke AI IDE & Coding Agents (Installer)
+```bash
+# Menu interaktif (pilih platform via angka):
+npx eyd-v install
+
+# Atau pasang ke SEMUA platform sekaligus dalam 1 ketukan:
+npx eyd-v install --all
+
+# Pasang ke platform spesifik:
+npx eyd-v install --antigravity   # Google Antigravity (~/.gemini/config/skills/eyd-v/)
+npx eyd-v install --cursor        # Cursor IDE (.cursor/rules/ & .cursorrules)
+npx eyd-v install --windsurf      # Windsurf / Cascade (.windsurfrules)
+npx eyd-v install --claude        # Claude Code CLI (.claude/skills/eyd-v/ & CLAUDE.md)
+npx eyd-v install --copilot       # GitHub Copilot (.github/copilot-instructions.md)
+npx eyd-v install --cline         # Cline / Roo Code (.clinerules)
+```
+
+### 5. Mencari Kaidah & Pasal Resmi
 ```bash
 npx eyd-v search "tanda koma konjungsi"
 npx eyd-v search "huruf kapital jabatan"
 npx eyd-v search "bentuk terikat"
 ```
 
-### 3. Memasang Skill ke AI Agents (Installer)
-```bash
-# Pasang ke semua agen yang terdeteksi di sistem/proyek:
-npx eyd-v install --all
-
-# Atau pasang spesifik:
-npx eyd-v install --antigravity   # Pasang ke ~/.gemini/config/skills/eyd-v/
-npx eyd-v install --cursor        # Pasang ke .cursor/rules/eyd-v.mdc
-npx eyd-v install --claude        # Pasang ke .claude/skills/eyd-v/
-npx eyd-v install --target ./my-agent-folder
-```
-
-### 4. Menjalankan MCP Server (Model Context Protocol)
+### 6. Menjalankan MCP Server (Model Context Protocol)
 Untuk menghubungkan Claude Desktop, Cursor, atau Windsurf:
 ```bash
 npx eyd-v mcp
@@ -143,6 +153,21 @@ npx eyd-v mcp
   }
 }
 ```
+
+---
+
+## 🏅 Lencana Kepatuhan EYD V (*Compliance Badge*)
+
+Bagi pemilik repositori, pembuat konten, atau pengembang yang dokumentasinya telah diperiksa dan mematuhi kaidah baku **EYD Edisi Kelima**, Anda dapat menyematkan lencana resmi berikut pada `README.md` repositori Anda:
+
+<p align="center">
+  <img src="assets/badge-eyd-v.svg" alt="Bahasa Indonesia: EYD V Baku">
+</p>
+
+```markdown
+[![EYD V Compliant](https://img.shields.io/badge/Bahasa%20Indonesia-EYD%20V%20Baku-28a745.svg?style=flat-square&logo=readme)](https://github.com/ardianryan/eyd-v)
+```
+*Lencana ini membantu pembaca dan agen AI mengetahui bahwa naskah Anda terkurasi secara profesional menurut pedoman resmi Kemendikdasmen RI.*
 
 ---
 

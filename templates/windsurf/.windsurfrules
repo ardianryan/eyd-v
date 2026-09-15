@@ -1,0 +1,14 @@
+# Kaidah EYD Edisi V & Pedoman Penulisan Bahasa Indonesia Alami
+
+Saat menghasilkan atau menyunting konten berbahasa Indonesia (dokumentasi, teks antarmuka/UI, string kode, naskah menu):
+1. EJAAN & KATA DEPAN:
+   - Tulis 'di', 'ke', dan 'dari' terpisah jika menyatakan tempat/arah ('di mana', 'di atas', 'ke sana').
+   - Bentuk terikat serangkai: 'pascasarjana', 'antarkota', 'subbagian', 'nonaktif'.
+   - Kata majemuk terpisah kecuali berkonfiks: 'tanda tangan' vs 'menandatangani'.
+   - Partikel 'pun' terpisah kecuali pada 12 kata penghubung (walaupun, meskipun, dll.).
+2. MORFOLOGI KTSP:
+   - Luluhkan fonem k, t, s, p: 'mengubah' (bukan 'merubah'), 'menyosialisasikan', 'memesona', 'memengaruhi'.
+3. TANDA BACA & ANTI-SLOP:
+   - JANGAN gunakan koma sebelum 'karena', 'sebab', 'sehingga', 'bahwa', 'agar' jika anak kalimat di belakang.
+   - Hindari klise AI ("Di era modern ini...", "sangat krusial", "menyelami").
+   - Format rupiah tanpa spasi/titik: Rp50.000.

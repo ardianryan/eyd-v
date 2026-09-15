@@ -1,95 +1,144 @@
 #!/usr/bin/env node
 
+/**
+ * EYD V Command Line Interface (CLI)
+ * Universal tool for Indonesian spelling checking, rule searching, and Agent Skill installer
+ */
+
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const { checkEyd, searchRules, getRuleById, getAllRules } = require('../src/index');
+const readline = require('readline');
+const { execSync } = require('child_process');
+const { checkEyd, searchRules, getRuleById, listCategories } = require('../src/index');
 const { startMcpServer } = require('../src/mcp-server');
 
 const PKG = require('../package.json');
-
 const args = process.argv.slice(2);
-const command = args[0] || '--help';
+const command = args[0] ? args[0].toLowerCase() : null;
 
+// ANSI Colors
 const COLOR = {
-  reset: '\x1b[0m',
-  bold: '\x1b[1m',
-  dim: '\x1b[2m',
-  red: '\x1b[31m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  blue: '\x1b[34m',
-  cyan: '\x1b[36m'
+  reset: "\x1b[0m",
+  bold: "\x1b[1m",
+  dim: "\x1b[2m",
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  magenta: "\x1b[35m",
+  cyan: "\x1b[36m"
 };
 
 function printBanner() {
   console.log(`
-${COLOR.cyan}${COLOR.bold}=============================================================
-  EYD V - Pedoman Ejaan Bahasa Indonesia yang Disempurnakan
-  (Edisi Kelima - Kemendikdasmen RI) | v${PKG.version}
-=============================================================${COLOR.reset}
+${COLOR.cyan}${COLOR.bold}================================================================${COLOR.reset}
+${COLOR.bold}🇮🇩  EYD V: Ejaan Bahasa Indonesia yang Disempurnakan (Edisi V)${COLOR.reset}
+${COLOR.dim}    Kemendikdasmen RI | Universal AI Agent Skill, Dataset & Linter${COLOR.reset}
+${COLOR.dim}    Versi ${PKG.version} | Ardian Ryan <me@ardianryan.com>${COLOR.reset}
+${COLOR.cyan}================================================================${COLOR.reset}
 `);
 }
 
 function printHelp() {
   printBanner();
-  console.log(`
-${COLOR.bold}PENGGUNAAN:${COLOR.reset}
-  npx eyd-v <perintah> [opsi]
+  console.log(`${COLOR.bold}PENGGUNAAN:${COLOR.reset}
+  npx eyd-v <perintah> [opsi/argumen]
 
-${COLOR.bold}DAFTAR PERINTAH:${COLOR.reset}
-  ${COLOR.green}check <teks|file>${COLOR.reset}       Periksa kesalahan ejaan & tata bahasa EYD V pada teks atau berkas
-  ${COLOR.green}search <kata-kunci>${COLOR.reset}     Cari pasal dan kaidah resmi EYD V
-  ${COLOR.green}list${COLOR.reset}                    Tampilkan seluruh bab dan kategori aturan EYD V
-  ${COLOR.green}rule <id>${COLOR.reset}               Tampilkan detail pasal berdasarkan ID
-  ${COLOR.green}install [opsi]${COLOR.reset}          Pasang Agent Skill ke environment AI Anda
-  ${COLOR.green}mcp${COLOR.reset}                     Jalankan Model Context Protocol (MCP) Server via stdio
-  ${COLOR.green}init-hook${COLOR.reset}               Pasang git pre-commit hook untuk auto-lint EYD V
-  ${COLOR.green}--help, -h${COLOR.reset}              Tampilkan panduan bantuan ini
-  ${COLOR.green}--version, -v${COLOR.reset}           Tampilkan versi aplikasi
+${COLOR.bold}PERINTAH UTAMA:${COLOR.reset}
+  ${COLOR.green}check${COLOR.reset} <teks|berkas>      Periksa ejaan & tata bahasa EYD V (dapat di-pipe)
+  ${COLOR.green}repl${COLOR.reset}                     Jalankan playground interaktif di terminal
+  ${COLOR.green}prompt${COLOR.reset}                   Tampilkan / salin System Prompt optimal ke clipboard
+  ${COLOR.green}search${COLOR.reset} <kata kunci>      Cari pasal dan kaidah ejaan resmi
+  ${COLOR.green}list${COLOR.reset}                     Lihat daftar bab dan pasal EYD V
+  ${COLOR.green}rule${COLOR.reset} <id-pasal>          Tampilkan isi lengkap satu pasal
+  ${COLOR.green}install${COLOR.reset}                  Pasang Agent Skill ke IDE / AI coding agent
+  ${COLOR.green}mcp${COLOR.reset}                      Jalankan Model Context Protocol (MCP) server stdio
+  ${COLOR.green}init-hook${COLOR.reset}                Pasang Git pre-commit hook otomatis
 
-${COLOR.bold}OPSI INSTALL:${COLOR.reset}
-  --antigravity           Pasang ke Google Antigravity (~/.gemini/antigravity/skills/eyd-v)
-  --claude                Pasang ke Claude Code (.claude/skills/eyd-v/ & CLAUDE.md)
-  --cursor                Pasang ke Cursor IDE (.cursor/rules/eyd-v.mdc)
-  --all                   Pasang ke seluruh direktori AI Agent yang terdeteksi
-  --target <dir>          Tentukan direktori target instalasi secara manual
+${COLOR.bold}OPSI PERINTAH CHECK:${COLOR.reset}
+  --fix, -f                Terapkan perbaikan otomatis langsung ke berkas (in-place)
+  --json                   Keluarkan hasil pemeriksaan dalam format JSON mesin
 
-${COLOR.bold}CONTOH PENGGUNAAN:${COLOR.reset}
-  npx eyd-v check "Dimana kamu kuliah pasca sarjana?"
-  npx eyd-v check README.md
-  npx eyd-v search "huruf kapital nama jabatan"
+${COLOR.bold}OPSI PERINTAH PROMPT:${COLOR.reset}
+  --copy, -c               Salin naskah System Prompt langsung ke Clipboard OS
+
+${COLOR.bold}OPSI PERINTAH INSTALL:${COLOR.reset}
+  --all                    Pasang ke semua platform (Antigravity, Cursor, Windsurf, Claude, Copilot, Cline)
+  --antigravity            Pasang skill ke Google Antigravity (~/.gemini/config/skills/eyd-v)
+  --cursor                 Pasang rules ke Cursor IDE (.cursor/rules/eyd-v.mdc & .cursorrules)
+  --windsurf               Pasang rules ke Windsurf (.windsurfrules)
+  --claude                 Pasang skill ke Claude Code (.claude/skills/eyd-v/SKILL.md)
+  --copilot                Pasang instruksi ke GitHub Copilot (.github/copilot-instructions.md)
+  --cline                  Pasang rules ke Cline / Roo Code (.clinerules)
+  --target <dir>           Pasang berkas SKILL.md ke direktori kustom
+
+${COLOR.bold}CONTOH:${COLOR.reset}
+  npx eyd-v check "Dimana kamu pasca sarjana?"
+  npx eyd-v check artikel.md --fix
+  cat naskah.txt | npx eyd-v check
+  npx eyd-v prompt --copy
+  npx eyd-v repl
   npx eyd-v install --all
 `);
 }
 
 // 1. Perintah CHECK
 function handleCheck() {
-  const target = args.slice(1).join(' ').trim();
-  if (!target) {
+  const flags = args.filter(a => a.startsWith('-'));
+  const isFix = flags.includes('--fix') || flags.includes('-f');
+  const isJson = flags.includes('--json');
+  const rawTarget = args.slice(1).filter(a => !a.startsWith('-')).join(' ').trim();
+
+  // Cek apakah ada input via Stdin (pipe)
+  if (!rawTarget && !process.stdin.isTTY) {
+    let stdinData = '';
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', chunk => { stdinData += chunk; });
+    process.stdin.on('end', () => {
+      runCheckProcess(stdinData.trim(), false, isFix, isJson, null);
+    });
+    return;
+  }
+
+  if (!rawTarget) {
     console.error(`${COLOR.red}❌ Harap masukkan teks atau path berkas yang ingin diperiksa.${COLOR.reset}`);
-    console.log(`Contoh: npx eyd-v check "Dimana letak pasca sarjana?"`);
+    console.log(`Contoh: npx eyd-v check "Dimana letak pasca sarjana?" atau cat file.txt | npx eyd-v check`);
     process.exit(1);
   }
 
-  let textToCheck = target;
+  let textToCheck = rawTarget;
   let isFile = false;
+  let filePath = null;
 
-  if (fs.existsSync(target)) {
+  if (fs.existsSync(rawTarget)) {
     try {
-      textToCheck = fs.readFileSync(target, 'utf8');
+      textToCheck = fs.readFileSync(rawTarget, 'utf8');
       isFile = true;
-      console.log(`${COLOR.blue}📄 Memeriksa berkas:${COLOR.reset} ${target}`);
+      filePath = path.resolve(rawTarget);
     } catch (e) {
-      // Treat as plain text
+      // treat as plain text
     }
   }
 
+  runCheckProcess(textToCheck, isFile, isFix, isJson, filePath);
+}
+
+function runCheckProcess(textToCheck, isFile, isFix, isJson, filePath) {
   const result = checkEyd(textToCheck);
+
+  if (isJson) {
+    console.log(JSON.stringify(result, null, 2));
+    process.exit(result.valid ? 0 : 1);
+  }
 
   if (result.valid) {
     console.log(`\n${COLOR.green}✨ Sempurna! Tidak ditemukan pelanggaran EYD V pada teks ini.${COLOR.reset}\n`);
     process.exit(0);
+  }
+
+  if (isFile) {
+    console.log(`${COLOR.blue}📄 Memeriksa berkas:${COLOR.reset} ${filePath}`);
   }
 
   console.log(`\n${COLOR.yellow}${COLOR.bold}⚠️ Ditemukan ${result.errorCount} potensi ketidaksesuaian EYD V:${COLOR.reset}\n`);
@@ -103,16 +152,104 @@ function handleCheck() {
     console.log('');
   });
 
-  if (isFile) {
-    const backupFile = target + '.bak';
-    console.log(`${COLOR.dim}Untuk menerapkan perbaikan otomatis ke berkas, gunakan opsi penulisan ulang.${COLOR.reset}`);
+  if (isFile && isFix) {
+    const backupFile = filePath + '.bak';
+    fs.writeFileSync(backupFile, textToCheck, 'utf8');
+    fs.writeFileSync(filePath, result.correctedText, 'utf8');
+    console.log(`${COLOR.green}${COLOR.bold}✅ Berkas berhasil diperbaiki secara in-place:${COLOR.reset} ${filePath}`);
+    console.log(`${COLOR.dim}Cadangan berkas asli disimpan di:${COLOR.reset} ${backupFile}\n`);
+  } else if (isFile) {
+    console.log(`${COLOR.cyan}💡 Gunakan opsi --fix untuk menerapkan perbaikan otomatis langsung ke berkas:${COLOR.reset}`);
+    console.log(`   npx eyd-v check "${filePath}" --fix\n`);
   } else {
     console.log(`${COLOR.bold}${COLOR.cyan}Rekomendasi Teks Bersih:${COLOR.reset}`);
     console.log(`${COLOR.green}${result.correctedText}${COLOR.reset}\n`);
   }
+
+  process.exit(result.valid ? 0 : 1);
 }
 
-// 2. Perintah SEARCH
+// 2. Perintah PROMPT (Tampilkan / Salin System Prompt)
+function handlePrompt() {
+  const rootPkgDir = path.resolve(__dirname, '..');
+  const promptFile = path.join(rootPkgDir, 'prompts/system-prompt-indonesia.md');
+  const content = fs.readFileSync(promptFile, 'utf8');
+
+  // Ambil hanya isi markdown di dalam backticks bila ada
+  let promptText = content;
+  const match = content.match(/```markdown\n([\s\S]*?)\n```/);
+  if (match) {
+    promptText = match[1];
+  }
+
+  const isCopy = args.includes('--copy') || args.includes('-c');
+
+  if (isCopy) {
+    try {
+      const platform = os.platform();
+      if (platform === 'darwin') {
+        execSync('pbcopy', { input: promptText });
+      } else if (platform === 'win32') {
+        execSync('clip', { input: promptText });
+      } else {
+        execSync('xclip -selection clipboard || xsel -b', { input: promptText });
+      }
+      console.log(`\n${COLOR.green}${COLOR.bold}📋 Berhasil menyalin System Prompt EYD V ke Clipboard!${COLOR.reset}`);
+      console.log(`${COLOR.dim}Buka ChatGPT Web, Claude.ai, atau Gemini ➔ Tekan Paste (Ctrl+V / Cmd+V) di kolom Custom Instructions/System Prompt.${COLOR.reset}\n`);
+      return;
+    } catch (e) {
+      console.warn(`⚠️ Tidak dapat menyalin otomatis ke clipboard (${e.message}). Menampilkan teks di bawah:\n`);
+    }
+  }
+
+  console.log(`\n${COLOR.bold}${COLOR.cyan}=== SYSTEM PROMPT EYD V INDONESIA ===${COLOR.reset}\n`);
+  console.log(promptText);
+  console.log(`\n${COLOR.dim}Tip: Gunakan "npx eyd-v prompt --copy" untuk langsung menyalin ke clipboard OS.${COLOR.reset}\n`);
+}
+
+// 3. Perintah REPL (Interactive Terminal)
+function handleRepl() {
+  printBanner();
+  console.log(`${COLOR.bold}${COLOR.green}🎮 Memulai Playground Interaktif EYD V...${COLOR.reset}`);
+  console.log(`${COLOR.dim}Ketik teks bahasa Indonesia untuk langsung diuji. Ketik ".exit" atau tekan Ctrl+C untuk keluar.${COLOR.reset}\n`);
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    prompt: `${COLOR.cyan}eyd-v > ${COLOR.reset}`
+  });
+
+  rl.prompt();
+
+  rl.on('line', (line) => {
+    const input = line.trim();
+    if (!input) {
+      rl.prompt();
+      return;
+    }
+    if (input.toLowerCase() === '.exit' || input.toLowerCase() === 'exit') {
+      rl.close();
+      return;
+    }
+
+    const res = checkEyd(input);
+    if (res.valid) {
+      console.log(`${COLOR.green}✨ Sesuai EYD V! Tidak ada kesalahan ejaan.${COLOR.reset}\n`);
+    } else {
+      console.log(`${COLOR.yellow}⚠️  Ditemukan ${res.errorCount} kesalahan:${COLOR.reset}`);
+      res.errors.forEach(e => {
+        console.log(`   • ${COLOR.red}${e.original}${COLOR.reset} ➔ ${COLOR.green}${e.suggestion}${COLOR.reset} (${COLOR.dim}${e.rule}${COLOR.reset})`);
+      });
+      console.log(`${COLOR.cyan}Hasil Bersih:${COLOR.reset} ${res.correctedText}\n`);
+    }
+    rl.prompt();
+  }).on('close', () => {
+    console.log(`\n${COLOR.dim}Terima kasih telah menggunakan EYD V! Sampai jumpa.${COLOR.reset}\n`);
+    process.exit(0);
+  });
+}
+
+// 4. Perintah SEARCH
 function handleSearch() {
   const query = args.slice(1).join(' ').trim();
   if (!query) {
@@ -135,38 +272,32 @@ function handleSearch() {
     console.log(`   ${COLOR.dim}Kategori: ${r.category} | ID: ${r.id}${COLOR.reset}`);
     console.log(`   ${COLOR.dim}Tautan  : ${r.url}${COLOR.reset}\n`);
 
-    // Potongan isi
     const preview = r.content.split('\n').slice(0, 8).join('\n   ');
     console.log(`   ${preview}`);
-    if (r.content.split('\n').length > 8) {
-      console.log(`   ${COLOR.dim}... (baca selengkapnya via npx eyd-v rule ${r.id})${COLOR.reset}`);
-    }
-    console.log('\n------------------------------------------------------------\n');
+    console.log(`\n   ${COLOR.dim}Ketik "npx eyd-v rule ${r.id}" untuk membaca pasal lengkap.${COLOR.reset}\n`);
   });
 }
 
-// 3. Perintah LIST
+// 5. Perintah LIST
 function handleList() {
-  printBanner();
-  const allRules = getAllRules();
-  console.log(`${COLOR.bold}DAFTAR BAB & SUBBAB EYD EDISI KELIMA:${COLOR.reset}\n`);
+  console.log(`${COLOR.bold}${COLOR.cyan}📚 Daftar Bab & Subbab Resmi EYD Edisi Kelima:${COLOR.reset}\n`);
+  const categories = listCategories();
 
-  let currentCategory = '';
-  allRules.forEach(doc => {
-    if (doc.category !== currentCategory) {
-      currentCategory = doc.category;
-      console.log(`\n${COLOR.cyan}${COLOR.bold}📁 ${currentCategory.toUpperCase()}${COLOR.reset}`);
-    }
-    console.log(`   • ${COLOR.bold}${doc.title}${COLOR.reset} ${COLOR.dim}(${doc.rules.length} pasal)${COLOR.reset}`);
+  categories.forEach((cat, idx) => {
+    console.log(`${COLOR.bold}${idx + 1}. ${cat.title} (${cat.count} subbab)${COLOR.reset}`);
+    cat.documents.forEach(doc => {
+      console.log(`   • ${doc.title} ${COLOR.dim}(${doc.slug})${COLOR.reset}`);
+    });
+    console.log('');
   });
-  console.log(`\n${COLOR.dim}Gunakan 'npx eyd-v search <topik>' untuk mencari kaidah spesifik.${COLOR.reset}\n`);
 }
 
-// 4. Perintah RULE
+// 6. Perintah RULE
 function handleRule() {
   const id = args[1];
   if (!id) {
-    console.error(`${COLOR.red}❌ Masukkan ID pasal.${COLOR.reset} Contoh: npx eyd-v rule "huruf-kapital#1"`);
+    console.error(`${COLOR.red}❌ Masukkan ID pasal yang ingin dibaca.${COLOR.reset}`);
+    console.log(`Contoh: npx eyd-v rule "tanda-titik#1"`);
     process.exit(1);
   }
 
@@ -182,84 +313,167 @@ function handleRule() {
   console.log('');
 }
 
-// 5. Perintah INSTALL
+// 7. Perintah INSTALL
 function handleInstall() {
   printBanner();
-  console.log(`${COLOR.bold}📦 Menginstal EYD V Agent Skill...${COLOR.reset}\n`);
+  const hasFlag = (flag) => args.includes(flag);
+  const targetIndex = args.indexOf('--target');
+  const customTarget = targetIndex !== -1 ? args[targetIndex + 1] : null;
 
   const rootPkgDir = path.resolve(__dirname, '..');
   const skillSource = path.join(rootPkgDir, 'SKILL.md');
   const cursorSource = path.join(rootPkgDir, 'templates/cursor/eyd-v.mdc');
+  const cursorrulesSource = path.join(rootPkgDir, 'templates/.cursorrules');
   const claudeSource = path.join(rootPkgDir, 'templates/claude/CLAUDE.md');
-
-  let installedCount = 0;
-
-  const hasFlag = (flag) => args.includes(flag);
-  const targetIndex = args.indexOf('--target');
-  const customTarget = targetIndex !== -1 ? args[targetIndex + 1] : null;
+  const windsurfSource = path.join(rootPkgDir, 'templates/windsurf/.windsurfrules');
+  const copilotSource = path.join(rootPkgDir, 'templates/copilot/copilot-instructions.md');
+  const clineSource = path.join(rootPkgDir, 'templates/cline/.clinerules');
 
   if (customTarget) {
     const dest = path.resolve(customTarget);
     fs.mkdirSync(dest, { recursive: true });
     fs.copyFileSync(skillSource, path.join(dest, 'SKILL.md'));
     console.log(`✅ [Custom Target] Skill terpasang di: ${path.join(dest, 'SKILL.md')}`);
-    installedCount++;
     return;
   }
 
   const installAll = hasFlag('--all');
   const installAntigravity = hasFlag('--antigravity') || installAll;
-  const installClaude = hasFlag('--claude') || installAll;
   const installCursor = hasFlag('--cursor') || installAll;
+  const installWindsurf = hasFlag('--windsurf') || installAll;
+  const installClaude = hasFlag('--claude') || installAll;
+  const installCopilot = hasFlag('--copilot') || installAll;
+  const installCline = hasFlag('--cline') || installAll;
 
-  // Default jika tanpa flag: pasang ke direktori saat ini & direktori user antigravity
-  const isDefault = !hasFlag('--antigravity') && !hasFlag('--claude') && !hasFlag('--cursor') && !installAll;
+  // Jika tidak ada argumen sama sekali di terminal TTY, tampilkan prompt interaktif
+  const noFlags = !installAntigravity && !installCursor && !installWindsurf && !installClaude && !installCopilot && !installCline && !installAll;
 
-  // 1. Google Antigravity
-  if (installAntigravity || isDefault) {
-    const homeDir = os.homedir();
-    const antigravitySkillDir = path.join(homeDir, '.gemini/config/skills/eyd-v');
-    try {
-      fs.mkdirSync(antigravitySkillDir, { recursive: true });
-      fs.copyFileSync(skillSource, path.join(antigravitySkillDir, 'SKILL.md'));
-      console.log(`✅ [Google Antigravity] Terpasang di: ${path.join(antigravitySkillDir, 'SKILL.md')}`);
-      installedCount++;
-    } catch (e) {
-      console.warn(`⚠️ Tidak dapat menulis ke direktori Antigravity: ${e.message}`);
-    }
+  if (noFlags && process.stdin.isTTY) {
+    showInteractiveInstallMenu();
+    return;
   }
 
-  // 2. Cursor IDE
-  if (installCursor || isDefault) {
-    const cursorDir = path.resolve(process.cwd(), '.cursor/rules');
-    try {
-      fs.mkdirSync(cursorDir, { recursive: true });
-      fs.copyFileSync(cursorSource, path.join(cursorDir, 'eyd-v.mdc'));
-      console.log(`✅ [Cursor IDE] Rules terpasang di: ${path.join(cursorDir, 'eyd-v.mdc')}`);
-      installedCount++;
-    } catch (e) {
-      console.warn(`⚠️ Gagal memasang Cursor rule: ${e.message}`);
-    }
-  }
-
-  // 3. Claude Code
-  if (installClaude || isDefault) {
-    const claudeSkillDir = path.resolve(process.cwd(), '.claude/skills/eyd-v');
-    try {
-      fs.mkdirSync(claudeSkillDir, { recursive: true });
-      fs.copyFileSync(skillSource, path.join(claudeSkillDir, 'SKILL.md'));
-      console.log(`✅ [Claude Code] Skill terpasang di: ${path.join(claudeSkillDir, 'SKILL.md')}`);
-      installedCount++;
-    } catch (e) {
-      console.warn(`⚠️ Gagal memasang Claude skill: ${e.message}`);
-    }
-  }
-
-  console.log(`\n${COLOR.green}${COLOR.bold}🎉 Berhasil memasang ${installedCount} konfigurasi Agent Skill!${COLOR.reset}`);
-  console.log(`${COLOR.dim}Agent Anda kini otomatis menerapkan pedoman EYD V Kemendikdasmen RI.${COLOR.reset}\n`);
+  executeInstallation({
+    antigravity: installAntigravity || noFlags,
+    cursor: installCursor || noFlags,
+    windsurf: installWindsurf,
+    claude: installClaude || noFlags,
+    copilot: installCopilot,
+    cline: installCline
+  });
 }
 
-// 6. Perintah INIT-HOOK (Git Pre-Commit)
+function showInteractiveInstallMenu() {
+  console.log(`${COLOR.bold}Pilih platform yang ingin dipasangi aturan EYD V:${COLOR.reset}`);
+  console.log(`1. 🚀 Google Antigravity (~/.gemini/config/skills/eyd-v)`);
+  console.log(`2. 🖱️  Cursor IDE (.cursor/rules & .cursorrules)`);
+  console.log(`3. 🏄 Windsurf / Cascade (.windsurfrules)`);
+  console.log(`4. 🤖 Claude Code CLI (.claude/skills/eyd-v)`);
+  console.log(`5. 🐙 GitHub Copilot (.github/copilot-instructions.md)`);
+  console.log(`6. 🦾 Cline / Roo Code (.clinerules)`);
+  console.log(`7. 🌟 Pasang ke SEMUA Platform di atas (Recommended)`);
+  console.log(`0. Batal\n`);
+
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  rl.question(`${COLOR.cyan}Masukkan nomor pilihan (1-7, atau dipisah koma misal: 1,2,3): ${COLOR.reset}`, (answer) => {
+    rl.close();
+    const ans = answer.trim();
+    if (!ans || ans === '0') {
+      console.log(`Pemasangan dibatalkan.`);
+      return;
+    }
+
+    if (ans === '7') {
+      executeInstallation({ antigravity: true, cursor: true, windsurf: true, claude: true, copilot: true, cline: true });
+      return;
+    }
+
+    const choices = ans.split(',').map(s => s.trim());
+    executeInstallation({
+      antigravity: choices.includes('1'),
+      cursor: choices.includes('2'),
+      windsurf: choices.includes('3'),
+      claude: choices.includes('4'),
+      copilot: choices.includes('5'),
+      cline: choices.includes('6')
+    });
+  });
+}
+
+function executeInstallation(targets) {
+  const rootPkgDir = path.resolve(__dirname, '..');
+  const skillSource = path.join(rootPkgDir, 'SKILL.md');
+  const cursorSource = path.join(rootPkgDir, 'templates/cursor/eyd-v.mdc');
+  const cursorrulesSource = path.join(rootPkgDir, 'templates/.cursorrules');
+  const claudeSource = path.join(rootPkgDir, 'templates/claude/CLAUDE.md');
+  const windsurfSource = path.join(rootPkgDir, 'templates/windsurf/.windsurfrules');
+  const copilotSource = path.join(rootPkgDir, 'templates/copilot/copilot-instructions.md');
+  const clineSource = path.join(rootPkgDir, 'templates/cline/.clinerules');
+
+  let count = 0;
+
+  if (targets.antigravity) {
+    try {
+      const dir = path.join(os.homedir(), '.gemini/config/skills/eyd-v');
+      fs.mkdirSync(dir, { recursive: true });
+      fs.copyFileSync(skillSource, path.join(dir, 'SKILL.md'));
+      console.log(`✅ [Google Antigravity] Terpasang di: ${path.join(dir, 'SKILL.md')}`);
+      count++;
+    } catch (e) { console.warn(`⚠️ Antigravity error: ${e.message}`); }
+  }
+
+  if (targets.cursor) {
+    try {
+      const dir = path.resolve(process.cwd(), '.cursor/rules');
+      fs.mkdirSync(dir, { recursive: true });
+      fs.copyFileSync(cursorSource, path.join(dir, 'eyd-v.mdc'));
+      fs.copyFileSync(cursorrulesSource, path.resolve(process.cwd(), '.cursorrules'));
+      console.log(`✅ [Cursor IDE] Rules terpasang di: .cursor/rules/eyd-v.mdc & .cursorrules`);
+      count++;
+    } catch (e) { console.warn(`⚠️ Cursor error: ${e.message}`); }
+  }
+
+  if (targets.windsurf) {
+    try {
+      fs.copyFileSync(windsurfSource, path.resolve(process.cwd(), '.windsurfrules'));
+      console.log(`✅ [Windsurf] Rules terpasang di: .windsurfrules`);
+      count++;
+    } catch (e) { console.warn(`⚠️ Windsurf error: ${e.message}`); }
+  }
+
+  if (targets.claude) {
+    try {
+      const dir = path.resolve(process.cwd(), '.claude/skills/eyd-v');
+      fs.mkdirSync(dir, { recursive: true });
+      fs.copyFileSync(skillSource, path.join(dir, 'SKILL.md'));
+      fs.copyFileSync(claudeSource, path.join(dir, 'CLAUDE.md'));
+      console.log(`✅ [Claude Code] Skill terpasang di: .claude/skills/eyd-v/SKILL.md`);
+      count++;
+    } catch (e) { console.warn(`⚠️ Claude error: ${e.message}`); }
+  }
+
+  if (targets.copilot) {
+    try {
+      const dir = path.resolve(process.cwd(), '.github');
+      fs.mkdirSync(dir, { recursive: true });
+      fs.copyFileSync(copilotSource, path.join(dir, 'copilot-instructions.md'));
+      console.log(`✅ [GitHub Copilot] Instructions terpasang di: .github/copilot-instructions.md`);
+      count++;
+    } catch (e) { console.warn(`⚠️ Copilot error: ${e.message}`); }
+  }
+
+  if (targets.cline) {
+    try {
+      fs.copyFileSync(clineSource, path.resolve(process.cwd(), '.clinerules'));
+      console.log(`✅ [Cline / Roo Code] Rules terpasang di: .clinerules`);
+      count++;
+    } catch (e) { console.warn(`⚠️ Cline error: ${e.message}`); }
+  }
+
+  console.log(`\n${COLOR.green}${COLOR.bold}🎉 Selesai! Berhasil memasang ${count} konfigurasi Agent Skill.${COLOR.reset}\n`);
+}
+
+// 8. Perintah INIT-HOOK
 function handleInitHook() {
   const gitDir = path.resolve(process.cwd(), '.git');
   if (!fs.existsSync(gitDir)) {
@@ -290,6 +504,12 @@ done
 switch (command) {
   case 'check':
     handleCheck();
+    break;
+  case 'prompt':
+    handlePrompt();
+    break;
+  case 'repl':
+    handleRepl();
     break;
   case 'search':
     handleSearch();

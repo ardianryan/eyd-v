@@ -1,0 +1,23 @@
+# EYD V: Pedoman Ejaan Bahasa Indonesia yang Disempurnakan (Edisi V)
+> Ekosistem Pengetahuan, Dataset Terstruktur, AI Agent Skill & Linter Ejaan Bahasa Indonesia resmi Kemendikdasmen RI.
+
+## Informasi Dasar & Rujukan Resmi
+- Pengelola: Ardian Ryan (me@ardianryan.com)
+- Sumber Data: Badan Pengembangan dan Pembinaan Bahasa, Kemendikdasmen RI (https://ejaan.kemendikdasmen.go.id)
+- Repositori: https://github.com/ardianryan/eyd-v
+- Dokumentasi Lengkap: https://github.com/ardianryan/eyd-v/tree/main/docs
+- llms-full.txt: https://raw.githubusercontent.com/ardianryan/eyd-v/main/llms-full.txt
+
+## Kaidah Inti & Ringkasan Pasal
+- [Penggunaan Huruf](docs/01-penggunaan-huruf/): Huruf abjad, vokal, konsonan, diftong (ai, au, ei, oi), huruf kapital, huruf miring, dan huruf tebal.
+- [Penulisan Kata](docs/02-penulisan-kata/): Kata dasar, kata turunan/berimbuhan, bentuk terikat (antar-, pasca-, sub- serangkai), bentuk ulang, gabungan kata, pemenggalan kata, kata depan (di, ke, dari terpisah jika tempat), partikel (pun terpisah kecuali 12 kata), singkatan dan akronim, angka dan bilangan, serta kata ganti.
+- [Penggunaan Tanda Baca](docs/03-penggunaan-tanda-baca/): Titik, koma (dilarang sebelum konjungsi subordinatif 'karena/sehingga' jika anak kalimat di belakang), titik dua, titik koma, tanda hubung, tanda pisah em-dash, tanda petik, kurung, garis miring, penyingkat apostrof.
+- [Penulisan Unsur Serapan](docs/04-penulisan-unsur-serapan/): Penyesuaian ejaan bahasa asing (Arab, Belanda, Inggris, Sanskerta) ke dalam bahasa Indonesia baku.
+- [Kaidah Peluluhan KTSP](docs/kaidah-peluluhan-ktsp.md): Fonem k, t, s, p pada kata dasar luluh bila huruf kedua vokal (ubah -> mengubah, pesona -> memesona).
+- [Panduan Penulisan Alami & Anti-Slop AI](docs/panduan-anti-slop-penulisan-alami.md): Menghilangkan klise AI, koma berceceran, kalimat monoton, dan kata penggelembung puffery.
+
+## Dataset AI & Tools
+- [RAG Semantic Chunks](data/eyd-v-chunks.jsonl): 246 potongan pasal semantis siap indeks ke Vector DB.
+- [SFT ChatML Instructions](data/ai-learning/instruction-tuning-chatml.jsonl): 321 pasang instruksi multi-turn untuk fine-tuning LLM.
+- [DPO Preference Dataset](data/ai-learning/dpo-preference.jsonl): 75 pasang respons baku vs nonbaku untuk penyelarasan model.
+- [Kamus Leksikon Baku](data/leksikon-kata-baku.json): Kamus kata baku vs variasi nonbaku populer.
