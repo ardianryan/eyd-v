@@ -20,10 +20,11 @@ fs.copyFileSync(path.join(rootDir, 'SKILL.md'), path.join(tempDir, 'SKILL.md'));
 fs.copyFileSync(path.join(rootDir, 'README.md'), path.join(tempDir, 'README.md'));
 
 // Buat metadata skill
+const pkg = require(path.join(rootDir, 'package.json'));
 const manifest = {
   name: "eyd-v",
-  version: "5.1.1",
-  description: "Pedoman resmi EYD Edisi Kelima Kemendikdasmen RI & Panduan Penulisan Alami Bebas AI Slop",
+  version: pkg.version,
+  description: pkg.description || "Pedoman resmi EYD Edisi Kelima Kemendikdasmen RI & Panduan Penulisan Alami Bebas AI Slop",
   author: "Ardian Ryan",
   entrypoint: "SKILL.md"
 };
