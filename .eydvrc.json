@@ -1,0 +1,16 @@
+{
+  "mode": "general",
+  "preferredPronoun": "Anda",
+  "ignoreWords": [
+    "commit",
+    "deploy",
+    "pipeline",
+    "payload",
+    "cache",
+    "webhook",
+    "backend",
+    "frontend"
+  ],
+  "maxHeadingLength": 60,
+  "strictPunctuation": true
+}

@@ -5,6 +5,43 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
 
 ---
 
+## [5.2.0] - 2026-09-15
+
+### Ditambahkan
+* **4 Domain Penulisan Profesional & Sub-Skill Spesialis**:
+  * **UX Writing & Antarmuka Produk** (`skills/eyd-v-ux/`, `docs/profesional/01-ux-writing-dan-produk.md`): Pedoman mikro-kopi, pesan galat konstruktif, CTA, konsistensi sapaan (*Anda* vs *kamu*), dan konvensi waktu/mata uang.
+  * **Copywriting & Komunikasi Pemasaran** (`skills/eyd-v-marketing/`, `docs/profesional/02-copywriting-dan-pemasaran.md`): Penegakan etika pariwara (EPI), pencegahan klaim superlatif berlebihan, dan formula copywriting teruji.
+  * **Penulisan SEO Organik** (`skills/eyd-v-seo/`, `docs/profesional/03-penulisan-seo-organik.md`): Struktur artikel bernalar, batasan judul (50–60 karakter) & deskripsi meta, pencegahan kanibalisasi kata kunci.
+  * **Karya Tulis Ilmiah & Akademik** (`skills/eyd-v-academic/`, `docs/profesional/04-karya-ilmiah-dan-akademik.md`): Tata cara perujukan (APA/IEEE), struktur IMRaD, kepatuhan register baku, dan eliminasi bahasa percakapan.
+* **Glosarium Istilah Teknologi, AI, & Komputasi Awan**:
+  * Dataset `data/glosarium-istilah-teknologi.json` (115+ entri istilah resmi beserta padanan baku bahasa Indonesia, definisi singkat, dan contoh penggunaan).
+  * Panduan penulisan alih kode (*code-switching*) dan diksi asing (`docs/profesional/00-prinsip-diksi-dan-padanan-asing.md`, `docs/profesional/05-glosarium-istilah-teknologi-dan-ai.md`).
+* **Dataset Pembelajaran AI Tingkat Lanjut**:
+  * `data/ai-learning/ux-microcopy-chatml.jsonl` (50 set data format ChatML untuk penyelarasan nada mikro-kopi UX).
+  * `data/ai-learning/marketing-copy-dpo.jsonl` (50 pasang data DPO untuk pelatihan preferensi iklan etis vs bombastis).
+  * `data/ai-learning/academic-writing-eval.jsonl` (50 pengujian evaluasi register ilmiah formal).
+* **Ekosistem Server REST API, Kontainer, & Cloud Native**:
+  * Server REST API bawaan (`src/server.js`) bebas dependensi eksternal: endpoint `/health`, `POST /api/check`, `GET /api/kata`, `GET /api/istilah`, `GET /api/rules`, `GET /api/rule/:id`.
+  * `Dockerfile` multi-stage berbasis Node Alpine ultra-ringan dan `docker-compose.yml`.
+  * Endpoint Cloudflare Workers teroptimasi (`workers/worker.js`).
+  * GitHub Composite Action resmi (`action.yml`) untuk integrasi instan CI/CD linter.
+* **Peningkatan DevEx & Fitur CLI Lengkap**:
+  * Seleksi ranah penulisan via `--mode=<ux|marketing|seo|academic>`.
+  * Analisis keterbacaan teks via `--score` (Flesch Reading Ease adaptasi Indonesia, estimasi waktu baca, jumlah suku kata).
+  * Pemeriksaan berkas staging git via `--staged` dan installer git pre-commit hook otomatis via `npx eyd-v hook`.
+  * Format anotasi CI GitHub Actions via `--format=github`.
+  * Perintah pencarian cepat `npx eyd-v kata <kata>` dan `npx eyd-v istilah <query>`.
+  * Mode pemantau berkas otomatis `npx eyd-v watch <target>`.
+  * Pembaca konfigurasi proyek `.eydvrc.json` otomatis dan parser nilai file i18n JSON (`locales/*.json`).
+* **PWA Offline & Web Demo Playground**:
+  * Progressive Web App offline support (`demo/manifest.json`, `demo/sw.js`).
+  * Selektor ranah profesional dan panel skor keterbacaan langsung pada web demo.
+* **Pembersihan AI Slop & Pembaruan Tata Kelola Proyek**:
+  * Audit dan eliminasi seluruh frasa klise robotik di seluruh berkas proyek (`SECURITY.md`, `SUPPORT.md`, `CONTRIBUTING.md`, `README.md`).
+  * Standardisasi tautan repositori resmi ke `ardianryan/eyd-v`.
+
+---
+
 ## [5.1.1] - 2026-09-15
 
 ### Ditambahkan

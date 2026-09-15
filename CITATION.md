@@ -11,9 +11,9 @@ Bila Anda menggunakan dataset, repositori, atau perkakas **EYD V** dalam publika
   author       = {Ryan, Ardian},
   title        = {EYD V: Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar},
   year         = {2026},
-  version      = {5.0.0},
+  version      = {5.2.0},
   publisher    = {GitHub},
-  url          = {https://github.com/ardianryan/eyd-v-skill},
+  url          = {https://github.com/ardianryan/eyd-v},
   contact      = {me@ardianryan.com}
 }
 ```
@@ -22,7 +22,7 @@ Bila Anda menggunakan dataset, repositori, atau perkakas **EYD V** dalam publika
 
 ## Format APA (Edisi ke-7)
 
-> Ryan, A. (2026). *EYD V: Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar* (Versi 5.0.0) [Perangkat Lunak]. GitHub. https://github.com/ardianryan/eyd-v-skill
+> Ryan, A. (2026). *EYD V: Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar* (Versi 5.2.0) [Perangkat Lunak]. GitHub. https://github.com/ardianryan/eyd-v
 
 ---
 

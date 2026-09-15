@@ -39,6 +39,8 @@ jobs:
     - name: Verify CLI Commands
       run: |
         node bin/cli.js --version
-        node bin/cli.js check "Di mana kamu kuliah pascasarjana?"
+        node bin/cli.js check "Di mana kamu kuliah pascasarjana?" --mode=ux --score
+        node bin/cli.js kata antri
+        node bin/cli.js istilah cache
         node bin/cli.js search "tanda titik dua"
         node bin/cli.js prompt

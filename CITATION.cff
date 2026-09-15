@@ -5,9 +5,9 @@ authors:
     given-names: "Ardian"
     email: "me@ardianryan.com"
 title: "EYD V: Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar"
-version: 5.0.0
-date-released: 2026-09-12
-url: "https://github.com/ardianryan/eyd-v-skill"
+version: 5.2.0
+date-released: 2026-09-15
+url: "https://github.com/ardianryan/eyd-v"
 keywords:
   - indonesian
   - grammar
@@ -15,3 +15,4 @@ keywords:
   - natural-language-processing
   - ai-agents
   - mcp
+

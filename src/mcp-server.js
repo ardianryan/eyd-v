@@ -41,13 +41,18 @@ const TOOLS = [
   },
   {
     name: 'check_spelling',
-    description: 'Memeriksa teks bahasa Indonesia terhadap kaidah resmi EYD V (kata depan di/ke, bentuk terikat, partikel pun, peluluhan KTSP, tanda baca koma, kata baku vs nonbaku).',
+    description: 'Memeriksa teks bahasa Indonesia terhadap kaidah resmi EYD V dan etika penulisan ranah profesional (UX writing, marketing, SEO, akademik).',
     inputSchema: {
       type: 'object',
       properties: {
         text: {
           type: 'string',
           description: 'Teks kalimat atau paragraf bahasa Indonesia yang akan diperiksa'
+        },
+        domain: {
+          type: 'string',
+          enum: ['general', 'ux', 'marketing', 'seo', 'academic'],
+          description: 'Ranah penulisan profesional (general, ux, marketing, seo, academic). Default: general'
         }
       },
       required: ['text']
@@ -66,10 +71,25 @@ const TOOLS = [
       },
       required: ['word']
     }
+  },
+  {
+    name: 'lookup_tech_term',
+    description: 'Mencari padanan baku bahasa Indonesia resmi untuk istilah teknologi, rekayasa perangkat lunak, cloud, dan kecerdasan buatan (AI).',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: {
+          type: 'string',
+          description: 'Istilah teknologi dalam bahasa Inggris atau Indonesia (misal: cache, prompt, backend, fine-tuning)'
+        }
+      },
+      required: ['query']
+    }
   }
 ];
 
 function handleToolCall(name, args) {
+  const { lookupTechTerm, checkSingleWord } = require('./index');
   switch (name) {
     case 'search_eyd': {
       const results = searchRules(args.query, { limit: args.limit || 5 });
@@ -93,34 +113,17 @@ function handleToolCall(name, args) {
       return rule;
     }
     case 'check_spelling': {
-      return checkEyd(args.text);
+      return checkEyd(args.text, { mode: args.domain || 'general' });
     }
     case 'lookup_word': {
-      const w = (args.word || '').toLowerCase().trim();
-      const leksikon = getLeksikon();
-      if (leksikon.kata_baku_map && leksikon.kata_baku_map[w]) {
-        return {
-          word: w,
-          isStandard: true,
-          standardForm: w,
-          variants: leksikon.kata_baku_map[w]
-        };
-      }
-      // Periksa apakah kata ini ada di daftar bentuk tidak baku
-      for (const [baku, nonbakuList] of Object.entries(leksikon.kata_baku_map || {})) {
-        if (nonbakuList.includes(w)) {
-          return {
-            word: w,
-            isStandard: false,
-            standardForm: baku,
-            note: `'${w}' tidak baku, bentuk bakunya adalah '${baku}'.`
-          };
-        }
-      }
+      return checkSingleWord(args.word);
+    }
+    case 'lookup_tech_term': {
+      const results = lookupTechTerm(args.query);
       return {
-        word: w,
-        isStandard: true,
-        note: `Kata '${w}' tidak tercatat sebagai bentuk keliru umum.`
+        query: args.query,
+        total: results.length,
+        terms: results
       };
     }
     default:

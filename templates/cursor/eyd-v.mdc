@@ -23,3 +23,8 @@ Saat menulis teks, dokumentasi, commit message, atau respons dalam bahasa Indone
    - `mengubah` (bukan *merubah*), `menyosialisasikan` (bukan *mensosialisasikan*), `memesona` (bukan *mempesona*), `memproduksi` (gugus *pr* tidak luluh).
 6. **Kata Baku**:
    - `analisis` (bukan *analisa*), `praktik` (bukan *praktek*), `risiko` (bukan *resiko*), `antre` (bukan *antri*), `izin` (bukan *ijin*), `jadwal` (bukan *jadual*).
+7. **Istilah Teknologi & Domain Penulisan**:
+   - Utamakan padanan baku: `unduh` (download), `unggah` (upload), `rekayasa prompt` (prompt engineering), `basis data` (database).
+   - Cetak miring istilah asing bila belum ada padanan mapan.
+   - Pada teks antarmuka (UX), gunakan kalimat ringkas dan konsisten pronomina (`Anda` atau `kamu`).
+

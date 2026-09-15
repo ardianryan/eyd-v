@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="description" content="Pemeriksa Ejaan & Kaidah Bahasa Indonesia EYD Edisi Kelima Resmi Kemendikdasmen RI">
   <title>EYD V Playground — Pemeriksa Ejaan & Kaidah Resmi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,6 +61,22 @@
       
       <!-- Input Panel -->
       <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+        <div class="mb-3.5 flex flex-wrap items-center justify-between gap-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+          <div class="flex items-center space-x-2">
+            <span class="text-xs font-semibold text-slate-600">Ranah:</span>
+            <select id="domainMode" class="text-xs font-semibold bg-white border border-slate-300 rounded-md px-2.5 py-1 text-slate-700 outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="general">Umum (Default)</option>
+              <option value="ux">UX Writing & Produk</option>
+              <option value="marketing">Pemasaran & Medsos</option>
+              <option value="seo">Artikel SEO Organik</option>
+              <option value="academic">Karya Ilmiah & Akademik</option>
+            </select>
+          </div>
+          <div class="text-[11px] font-medium text-emerald-600 flex items-center space-x-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+            <span>Siap Luring (PWA)</span>
+          </div>
+        </div>
         <div class="flex items-center justify-between mb-3">
           <label for="inputText" class="font-bold text-sm text-slate-800 flex items-center space-x-1.5">
             <span>✍️</span>
@@ -100,6 +119,25 @@
 
         <div id="correctedOutput" class="w-full min-h-[14rem] p-4 rounded-lg bg-slate-50 border border-slate-200 text-sm leading-relaxed text-slate-800 whitespace-pre-wrap">
           <p class="text-slate-400 italic">Hasil perbaikan otomatis sesuai kaidah EYD V akan ditampilkan di sini...</p>
+        </div>
+
+        <!-- Readability Metrics Panel -->
+        <div id="readabilityPanel" class="mb-4 p-3 rounded-lg bg-indigo-50/70 border border-indigo-100 hidden">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold text-indigo-900 flex items-center space-x-1">
+              <span>📊</span>
+              <span>Skor Keterbacaan Naskah</span>
+            </span>
+            <span id="readabilityScore" class="text-xs font-extrabold text-indigo-600">--/100</span>
+          </div>
+          <p id="readabilityGrade" class="text-xs text-indigo-700 font-medium">Analisis keterbacaan...</p>
+          <div class="mt-2 flex space-x-3 text-[11px] text-slate-500 border-t border-indigo-100 pt-1.5">
+            <span id="statWords">0 kata</span>
+            <span>•</span>
+            <span id="statSentences">0 kalimat</span>
+            <span>•</span>
+            <span id="statAvg">0 kata/kalimat</span>
+          </div>
         </div>
 
         <!-- Error Summary Box -->
@@ -214,7 +252,7 @@
       "zaman": ["jaman"]
     };
 
-    function checkEydText(text) {
+    function checkEydText(text, mode = "general") {
       if (!text) return { valid: true, errorCount: 0, errors: [], correctedText: "" };
       const errors = [];
       let corrected = text;
@@ -362,6 +400,50 @@
         }
       });
 
+      
+      // Waktu titik
+      const waktuPatterns = [
+        { regex: /\b(pukul|jam)\s+([01]?\d|2[0-3]):([0-5]\d)\b/gi, fix: (m, p1, p2, p3) => `${p1} ${p2}.${p3}` },
+        { regex: /\b([01]?\d|2[0-3]):([0-5]\d)(\s+(?:WIB|WITA|WIT))\b/gi, fix: (m, p1, p2, p3) => `${p1}.${p2}${p3}` }
+      ];
+      waktuPatterns.forEach(pat => {
+        let m;
+        while ((m = pat.regex.exec(text)) !== null) {
+          errors.push({ type: 'TANDA_BACA_WAKTU', original: m[0], suggestion: pat.fix(...m), rule: "Tanda titik digunakan untuk memisahkan angka jam dan menit", index: m.index });
+        }
+      });
+
+      // Rentang tanggal en dash
+      const rentangRegex = /\b(\d{1,2})\s*-\s*(\d{1,2})\s+(Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\b/gi;
+      let rMatch;
+      while ((rMatch = rentangRegex.exec(text)) !== null) {
+        errors.push({ type: 'TANDA_PISAH_RENTANG', original: rMatch[0], suggestion: `${rMatch[1]}–${rMatch[2]} ${rMatch[3]}`, rule: "Tanda pisah en dash (–) digunakan pada rentang tanggal", index: rMatch.index });
+      }
+
+      // Domain Checks
+      if (mode === 'ux') {
+        if (/\bAnda\b/.test(text) && /\b(kamu|mu)\b/i.test(text)) {
+          errors.push({ type: 'KONSISTENSI_PRONOMINA', original: 'Anda & kamu', suggestion: 'Pilih konsisten: "Anda" atau "kamu"', rule: 'Hindari mencampuradukkan kata ganti sapaan Anda dan kamu dalam satu antarmuka', index: 0 });
+        }
+      } else if (mode === 'marketing') {
+        const sup = /\b(terbaik di dunia|nomor 1 di indonesia|paling ampuh|termurah se-indonesia)\b/gi;
+        let sm;
+        while ((sm = sup.exec(text)) !== null) {
+          errors.push({ type: 'ETIKA_PARIWARA', original: sm[0], suggestion: 'Sertakan data riset pembuktian', rule: 'Klaim superlatif wajib berlandaskan data verifikasi (EPI)', index: sm.index });
+        }
+      } else if (mode === 'seo') {
+        const tMatch = text.match(/^#\s+(.+)$/m);
+        if (tMatch && tMatch[1].length > 60) {
+          errors.push({ type: 'SEO_TITLE_LENGTH', original: tMatch[1], suggestion: tMatch[1].substring(0, 57) + '...', rule: `Panjang Title Tag (${tMatch[1].length} karakter) melebihi batas ideal 60 karakter di SERP`, index: tMatch.index });
+        }
+      } else if (mode === 'academic') {
+        const acaP = /\b(aku|kita)\b/gi;
+        let am;
+        while ((am = acaP.exec(text)) !== null) {
+          errors.push({ type: 'RAGAM_AKADEMIK', original: am[0], suggestion: 'peneliti / gunakan kalimat pasif', rule: `Hindari kata ganti informal '${am[0]}' dalam karya tulis ilmiah`, index: am.index });
+        }
+      }
+
       errors.sort((a, b) => a.index - b.index);
 
       // Replace from back to front
@@ -372,7 +454,10 @@
         if (visited.has(err.index)) continue;
         visited.add(err.index);
         unique.unshift(err);
-        corrected = corrected.substring(0, err.index) + err.suggestion + corrected.substring(err.index + err.original.length);
+        const isGuidance = ['KONSISTENSI_PRONOMINA', 'ETIKA_PARIWARA', 'SEO_TITLE_LENGTH', 'RAGAM_AKADEMIK'].includes(err.type);
+        if (!isGuidance && err.suggestion) {
+          corrected = corrected.substring(0, err.index) + err.suggestion + corrected.substring(err.index + err.original.length);
+        }
       }
 
       return { valid: unique.length === 0, errorCount: unique.length, errors: unique, correctedText: corrected };
@@ -402,7 +487,31 @@
         return;
       }
 
-      const res = checkEydText(text);
+      const mode = document.getElementById('domainMode').value;
+      const res = checkEydText(text, mode);
+
+      // Readability Calculation
+      const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+      const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+      const wordCount = words.length;
+      const sentenceCount = sentences.length || 1;
+      const avgWords = Math.round((wordCount / sentenceCount) * 10) / 10;
+      let score = 100 - Math.abs(avgWords - 13) * 3;
+      if (score < 30) score = 30;
+      if (score > 100) score = 100;
+      score = Math.round(score);
+
+      const rPanel = document.getElementById('readabilityPanel');
+      if (text.trim().length > 0) {
+        rPanel.classList.remove('hidden');
+        document.getElementById('readabilityScore').innerText = `${score}/100`;
+        document.getElementById('readabilityGrade').innerText = score >= 80 ? 'Sangat Mudah Dipahami' : score >= 60 ? 'Cukup Mudah Dipahami' : 'Kompleks / Akademik';
+        document.getElementById('statWords').innerText = `${wordCount} kata`;
+        document.getElementById('statSentences').innerText = `${sentenceCount} kalimat`;
+        document.getElementById('statAvg').innerText = `${avgWords} kata/kalimat`;
+      } else {
+        rPanel.classList.add('hidden');
+      }
 
       if (res.valid) {
         outputEl.innerText = res.correctedText;
@@ -424,6 +533,14 @@
           </div>
         `).join('');
       }
+    }
+
+    document.getElementById('domainMode').addEventListener('change', performCheck);
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
     }
 
     btnCheck.addEventListener('click', performCheck);

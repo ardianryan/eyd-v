@@ -1,0 +1,692 @@
+[
+  {
+    "term": "API (Application Programming Interface)",
+    "padanan": "antarmuka pemrograman aplikasi",
+    "kategori": "Software",
+    "keterangan": "Boleh disingkat API."
+  },
+  {
+    "term": "backend",
+    "padanan": "sisi belakang / punggung sistem",
+    "kategori": "Software",
+    "keterangan": "Dalam konteks teknis boleh menggunakan backend dengan monospace."
+  },
+  {
+    "term": "backup",
+    "padanan": "cadangan / pencadangan",
+    "kategori": "General",
+    "keterangan": "Melakukan pencadangan data."
+  },
+  {
+    "term": "bandwidth",
+    "padanan": "lebar pita",
+    "kategori": "Jaringan",
+    "keterangan": "Kapasitas transfer data jaringan."
+  },
+  {
+    "term": "benchmark",
+    "padanan": "tolok ukur / uji patok",
+    "kategori": "Software",
+    "keterangan": "Standar pengujian performa."
+  },
+  {
+    "term": "browser",
+    "padanan": "peramban",
+    "kategori": "Web",
+    "keterangan": "Wajib padanan Indonesia: peramban."
+  },
+  {
+    "term": "bug",
+    "padanan": "kutu / galat teknis",
+    "kategori": "Software",
+    "keterangan": "Kesalahan logika dalam kode."
+  },
+  {
+    "term": "cache / caching",
+    "padanan": "tembolok / penembolokan",
+    "kategori": "Software",
+    "keterangan": "Penyimpanan sementara berkecepatan tinggi."
+  },
+  {
+    "term": "cloud computing",
+    "padanan": "komputasi awan",
+    "kategori": "Cloud",
+    "keterangan": "Layanan komputasi berbasis internet."
+  },
+  {
+    "term": "codebase",
+    "padanan": "basis kode",
+    "kategori": "Software",
+    "keterangan": "Kumpulan seluruh kode sumber proyek."
+  },
+  {
+    "term": "command line interface (CLI)",
+    "padanan": "antarmuka baris perintah",
+    "kategori": "Software",
+    "keterangan": "Boleh disingkat CLI."
+  },
+  {
+    "term": "commit",
+    "padanan": "komit / mencatat perubahan",
+    "kategori": "Git",
+    "keterangan": "Boleh menggunakan istilah commit (monospace)."
+  },
+  {
+    "term": "compiler",
+    "padanan": "kompilator",
+    "kategori": "Software",
+    "keterangan": "Penerjemah kode sumber ke kode mesin."
+  },
+  {
+    "term": "dashboard",
+    "padanan": "dasbor",
+    "kategori": "UI/UX",
+    "keterangan": "Halaman ringkasan panel kendali."
+  },
+  {
+    "term": "database",
+    "padanan": "basis data",
+    "kategori": "Data",
+    "keterangan": "Wajib padanan Indonesia: basis data."
+  },
+  {
+    "term": "debugging",
+    "padanan": "penelusuran galat / pengawakutuan",
+    "kategori": "Software",
+    "keterangan": "Proses mencari dan membasmi galat."
+  },
+  {
+    "term": "default",
+    "padanan": "bawaan / baku",
+    "kategori": "Software",
+    "keterangan": "Nilai atau setelan awal."
+  },
+  {
+    "term": "deploy / deployment",
+    "padanan": "terapkan / penerapan / peluncuran",
+    "kategori": "DevOps",
+    "keterangan": "Penerapan sistem ke lingkungan produksi."
+  },
+  {
+    "term": "deprecated",
+    "padanan": "usang / tidak lagi didukung",
+    "kategori": "Software",
+    "keterangan": "Fitur yang akan dihapus di versi mendatang."
+  },
+  {
+    "term": "direct preference optimization (DPO)",
+    "padanan": "optimasi preferensi langsung",
+    "kategori": "AI",
+    "keterangan": "Metode penyelarasan model AI."
+  },
+  {
+    "term": "download",
+    "padanan": "unduh",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: mengunduh."
+  },
+  {
+    "term": "dropdown",
+    "padanan": "menu tarik-turun",
+    "kategori": "UI/UX",
+    "keterangan": "Komponen daftar pilihan antarmuka."
+  },
+  {
+    "term": "endpoint",
+    "padanan": "titik akhir",
+    "kategori": "Web/API",
+    "keterangan": "URL alamat tujuan panggilan API."
+  },
+  {
+    "term": "error",
+    "padanan": "galat",
+    "kategori": "Software",
+    "keterangan": "Wajib padanan Indonesia: galat (bukan eror)."
+  },
+  {
+    "term": "feature",
+    "padanan": "fitur",
+    "kategori": "Software",
+    "keterangan": "Kemampuan khusus perangkat lunak."
+  },
+  {
+    "term": "file",
+    "padanan": "berkas",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: berkas (bukan file)."
+  },
+  {
+    "term": "fine-tuning",
+    "padanan": "penalaan halus",
+    "kategori": "AI",
+    "keterangan": "Pelatihan lanjutan model pada dataset khusus."
+  },
+  {
+    "term": "firewall",
+    "padanan": "dinding api",
+    "kategori": "Security",
+    "keterangan": "Sistem penyaring lalu lintas jaringan."
+  },
+  {
+    "term": "folder",
+    "padanan": "direktori / map",
+    "kategori": "General",
+    "keterangan": "Wadah penyimpanan berkas."
+  },
+  {
+    "term": "frontend",
+    "padanan": "sisi depan / muka sistem",
+    "kategori": "Software",
+    "keterangan": "Antarmuka yang berhadapan langsung dengan pengguna."
+  },
+  {
+    "term": "framework",
+    "padanan": "kerangka kerja",
+    "kategori": "Software",
+    "keterangan": "Fondasi struktur perangkat lunak."
+  },
+  {
+    "term": "function calling",
+    "padanan": "pemanggilan fungsi",
+    "kategori": "AI",
+    "keterangan": "Kemampuan LLM mengeksekusi fungsi/tool."
+  },
+  {
+    "term": "gateway",
+    "padanan": "gerbang jaringan",
+    "kategori": "Jaringan",
+    "keterangan": "Titik masuk lalu lintas sistem."
+  },
+  {
+    "term": "generative AI",
+    "padanan": "kecerdasan buatan generatif",
+    "kategori": "AI",
+    "keterangan": "Model AI yang memproduksi teks/gambar/kode."
+  },
+  {
+    "term": "ground truth",
+    "padanan": "kebenaran dasar / data acuan",
+    "kategori": "AI",
+    "keterangan": "Data referensi standar evaluasi."
+  },
+  {
+    "term": "hallucination",
+    "padanan": "halusinasi",
+    "kategori": "AI",
+    "keterangan": "Kondisi model AI mengarang fakta fiktif."
+  },
+  {
+    "term": "hardware",
+    "padanan": "perangkat keras",
+    "kategori": "General",
+    "keterangan": "Komponen fisik komputer."
+  },
+  {
+    "term": "heading",
+    "padanan": "tajuk",
+    "kategori": "SEO/Writing",
+    "keterangan": "Judul bab atau bagian bertingkat."
+  },
+  {
+    "term": "hook",
+    "padanan": "pengait / pemikat perhatian",
+    "kategori": "Marketing",
+    "keterangan": "Kalimat pembuka yang menarik minat."
+  },
+  {
+    "term": "host / hosting",
+    "padanan": "inang / penenangan / penyewaan peladen",
+    "kategori": "Cloud",
+    "keterangan": "Penyedia server aplikasi."
+  },
+  {
+    "term": "hyperlink",
+    "padanan": "tautan",
+    "kategori": "Web",
+    "keterangan": "Wajib padanan Indonesia: tautan (bukan link)."
+  },
+  {
+    "term": "inference",
+    "padanan": "inferensi",
+    "kategori": "AI",
+    "keterangan": "Proses eksekusi model menghasilkan prediksi."
+  },
+  {
+    "term": "injection",
+    "padanan": "injeksi / penyusupan kode",
+    "kategori": "Security",
+    "keterangan": "Eksploitasi keamanan memasukkan kode liar."
+  },
+  {
+    "term": "input",
+    "padanan": "masukan",
+    "kategori": "General",
+    "keterangan": "Data yang dimasukkan ke sistem."
+  },
+  {
+    "term": "install / installation",
+    "padanan": "pasang / pemasangan",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: pasang."
+  },
+  {
+    "term": "instance",
+    "padanan": "instansi / wujud instansiasi",
+    "kategori": "Cloud/Software",
+    "keterangan": "Unit mesin virtual yang berjalan."
+  },
+  {
+    "term": "interface",
+    "padanan": "antarmuka",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: antarmuka."
+  },
+  {
+    "term": "keyword",
+    "padanan": "kata kunci",
+    "kategori": "SEO",
+    "keterangan": "Frasa penelusuran target."
+  },
+  {
+    "term": "latency",
+    "padanan": "latensi / jeda waktu respon",
+    "kategori": "Jaringan",
+    "keterangan": "Waktu tempuh transmisi paket data."
+  },
+  {
+    "term": "library",
+    "padanan": "pustaka",
+    "kategori": "Software",
+    "keterangan": "Wajib padanan Indonesia: pustaka (bukan librari)."
+  },
+  {
+    "term": "load balancer",
+    "padanan": "penyeimbang beban",
+    "kategori": "Cloud",
+    "keterangan": "Penyalur lalu lintas ke beberapa server."
+  },
+  {
+    "term": "login / sign in",
+    "padanan": "masuk",
+    "kategori": "UI/UX",
+    "keterangan": "Wajib padanan Indonesia: masuk (bukan log in)."
+  },
+  {
+    "term": "logout / sign out",
+    "padanan": "keluar",
+    "kategori": "UI/UX",
+    "keterangan": "Wajib padanan Indonesia: keluar."
+  },
+  {
+    "term": "markup",
+    "padanan": "penanda",
+    "kategori": "Web",
+    "keterangan": "Bahasa penanda seperti HTML/XML."
+  },
+  {
+    "term": "merge",
+    "padanan": "gabung / penggabungan ranting",
+    "kategori": "Git",
+    "keterangan": "Menggabungkan branch ke cabang utama."
+  },
+  {
+    "term": "message",
+    "padanan": "pesan",
+    "kategori": "General",
+    "keterangan": "Komunikasi teks antar komponen."
+  },
+  {
+    "term": "microcopy",
+    "padanan": "teks mikro antarmuka",
+    "kategori": "UX",
+    "keterangan": "Label kecil, placeholder, tooltip pada UI."
+  },
+  {
+    "term": "middleware",
+    "padanan": "peranti perantara",
+    "kategori": "Software",
+    "keterangan": "Lapisan penghubung antarkomponen perangkat lunak."
+  },
+  {
+    "term": "modal",
+    "padanan": "jendela sembulan / modal",
+    "kategori": "UI/UX",
+    "keterangan": "Kotak dialog yang memblokir layar utama."
+  },
+  {
+    "term": "monitoring",
+    "padanan": "pemantauan",
+    "kategori": "DevOps",
+    "keterangan": "Pengawasan status sistem secara aktif."
+  },
+  {
+    "term": "native",
+    "padanan": "asli / bawaan platform",
+    "kategori": "Software",
+    "keterangan": "Aplikasi yang dibangun spesifik untuk OS terkait."
+  },
+  {
+    "term": "network",
+    "padanan": "jaringan",
+    "kategori": "Jaringan",
+    "keterangan": "Sistem interkoneksi perangkat."
+  },
+  {
+    "term": "newsletter",
+    "padanan": "nawala",
+    "kategori": "Marketing",
+    "keterangan": "Wajib padanan Indonesia: nawala."
+  },
+  {
+    "term": "offline",
+    "padanan": "luring (luar jaringan)",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: luring."
+  },
+  {
+    "term": "online",
+    "padanan": "daring (dalam jaringan)",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: daring."
+  },
+  {
+    "term": "open source",
+    "padanan": "sumber terbuka",
+    "kategori": "Software",
+    "keterangan": "Perangkat lunak dengan kode publik bebas."
+  },
+  {
+    "term": "output",
+    "padanan": "keluaran",
+    "kategori": "General",
+    "keterangan": "Hasil proses komputasi."
+  },
+  {
+    "term": "package",
+    "padanan": "paket",
+    "kategori": "Software",
+    "keterangan": "Kumpulan kode pustaka yang didistribusikan."
+  },
+  {
+    "term": "patch",
+    "padanan": "tambalan",
+    "kategori": "Software",
+    "keterangan": "Perbaikan kecil pada kode."
+  },
+  {
+    "term": "payload",
+    "padanan": "muatan data",
+    "kategori": "Web/API",
+    "keterangan": "Isi pesan data utama dalam transmisi."
+  },
+  {
+    "term": "pipeline",
+    "padanan": "alur pipa / alur kerja",
+    "kategori": "DevOps",
+    "keterangan": "Tahapan eksekusi otomatis build dan tes."
+  },
+  {
+    "term": "placeholder",
+    "padanan": "teks pemegang tempat",
+    "kategori": "UI/UX",
+    "keterangan": "Petunjuk isian di dalam kolom formulir."
+  },
+  {
+    "term": "platform",
+    "padanan": "peron / wadah sistem",
+    "kategori": "Software",
+    "keterangan": "Lingkungan tempat aplikasi dijalankan."
+  },
+  {
+    "term": "plugin",
+    "padanan": "colokan / pengaya",
+    "kategori": "Software",
+    "keterangan": "Modul tambahan fungsionalitas."
+  },
+  {
+    "term": "preview",
+    "padanan": "pratinjau",
+    "kategori": "UI/UX",
+    "keterangan": "Melihat tampilan sebelum disimpan/dipublikasi."
+  },
+  {
+    "term": "prompt",
+    "padanan": "perintah pemantik / permintaan",
+    "kategori": "AI",
+    "keterangan": "Instruksi yang diberikan ke model AI."
+  },
+  {
+    "term": "pull request (PR)",
+    "padanan": "permintaan tarik",
+    "kategori": "Git",
+    "keterangan": "Usulan perubahan kode ke repositori utama."
+  },
+  {
+    "term": "query",
+    "padanan": "kueri / permintaan data",
+    "kategori": "Data",
+    "keterangan": "Perintah penelusuran ke basis data."
+  },
+  {
+    "term": "rate limit",
+    "padanan": "batas laju panggilan",
+    "kategori": "Web/API",
+    "keterangan": "Pembatasan jumlah permintaan API per detik."
+  },
+  {
+    "term": "real-time",
+    "padanan": "waktu nyata",
+    "kategori": "General",
+    "keterangan": "Proses seketika saat peristiwa terjadi."
+  },
+  {
+    "term": "refactor",
+    "padanan": "faktorkan ulang",
+    "kategori": "Software",
+    "keterangan": "Merestrukturisasi kode tanpa mengubah perilaku."
+  },
+  {
+    "term": "release",
+    "padanan": "rilis / peluncuran versi",
+    "kategori": "Software",
+    "keterangan": "Penerbitan versi baru aplikasi."
+  },
+  {
+    "term": "render",
+    "padanan": "render / cetak tampilan",
+    "kategori": "Frontend",
+    "keterangan": "Memproses data visual ke layar."
+  },
+  {
+    "term": "repository",
+    "padanan": "repositori",
+    "kategori": "Git/Software",
+    "keterangan": "Tempat penyimpanan kode dan riwayat proyek."
+  },
+  {
+    "term": "request",
+    "padanan": "permintaan",
+    "kategori": "Web/API",
+    "keterangan": "Pesan kiriman dari klien ke server."
+  },
+  {
+    "term": "response",
+    "padanan": "tanggapan",
+    "kategori": "Web/API",
+    "keterangan": "Jawaban balasan dari server ke klien."
+  },
+  {
+    "term": "retrieval-augmented generation (RAG)",
+    "padanan": "generasi berdasar temu kembali informasi",
+    "kategori": "AI",
+    "keterangan": "Arsitektur pencarian dokumen sebelum inferensi LLM."
+  },
+  {
+    "term": "runtime",
+    "padanan": "lingkungan waktu eksekusi",
+    "kategori": "Software",
+    "keterangan": "Lingkungan tempat kode dijalankan (Node/Bun/V8)."
+  },
+  {
+    "term": "schema",
+    "padanan": "skema",
+    "kategori": "Data",
+    "keterangan": "Struktur definisi format data."
+  },
+  {
+    "term": "screenshot",
+    "padanan": "tangkapan layar",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: tangkapan layar."
+  },
+  {
+    "term": "search engine",
+    "padanan": "mesin pencari",
+    "kategori": "Web",
+    "keterangan": "Wajib padanan Indonesia: mesin pencari."
+  },
+  {
+    "term": "server",
+    "padanan": "peladen",
+    "kategori": "Jaringan/Cloud",
+    "keterangan": "Dalam konteks teknis koding boleh menggunakan server monospace."
+  },
+  {
+    "term": "service worker",
+    "padanan": "pekerja layanan latar belakang",
+    "kategori": "Web/PWA",
+    "keterangan": "Skrip peramban pengendali cache & offline."
+  },
+  {
+    "term": "setting / configuration",
+    "padanan": "pengaturan / konfigurasi",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: pengaturan."
+  },
+  {
+    "term": "slug",
+    "padanan": "nama panggil URL / rumbing",
+    "kategori": "SEO/Web",
+    "keterangan": "Bagian akhir URL ramah mesin pencari."
+  },
+  {
+    "term": "software",
+    "padanan": "perangkat lunak",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: perangkat lunak."
+  },
+  {
+    "term": "source code",
+    "padanan": "kode sumber",
+    "kategori": "Software",
+    "keterangan": "Teks instruksi pemrograman asli."
+  },
+  {
+    "term": "staging",
+    "padanan": "lingkungan uji coba pra-produksi",
+    "kategori": "DevOps",
+    "keterangan": "Server pengujian sebelum rilis ke publik."
+  },
+  {
+    "term": "stream / streaming",
+    "padanan": "aliran data / pengaliran",
+    "kategori": "Web/AI",
+    "keterangan": "Pengiriman data bertahap per token/paket."
+  },
+  {
+    "term": "supervised fine-tuning (SFT)",
+    "padanan": "penalaan halus terawasi",
+    "kategori": "AI",
+    "keterangan": "Pelatihan model AI dengan data berlabel."
+  },
+  {
+    "term": "tag / hashtag",
+    "padanan": "tagar / tanda pagar",
+    "kategori": "Marketing",
+    "keterangan": "Tanda topik di media sosial."
+  },
+  {
+    "term": "template",
+    "padanan": "templat / pola acuan",
+    "kategori": "General",
+    "keterangan": "Format baku yang dapat diisi ulang."
+  },
+  {
+    "term": "thread",
+    "padanan": "utasan",
+    "kategori": "Social/Forum",
+    "keterangan": "Rangkaian pesan bersambung di medsos."
+  },
+  {
+    "term": "token",
+    "padanan": "token",
+    "kategori": "AI/Security",
+    "keterangan": "Unit potongan kata pada model AI atau tanda pengenal sesi."
+  },
+  {
+    "term": "tooltip",
+    "padanan": "petunjuk alat / balon petunjuk",
+    "kategori": "UI/UX",
+    "keterangan": "Teks bantuan singkat saat kursor melayang."
+  },
+  {
+    "term": "traffic",
+    "padanan": "lalu lintas jaringan",
+    "kategori": "Web",
+    "keterangan": "Volume pengunjung atau perpindahan data."
+  },
+  {
+    "term": "upload",
+    "padanan": "unggah",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: mengunggah."
+  },
+  {
+    "term": "upstream",
+    "padanan": "hulu sistem",
+    "kategori": "Git/DevOps",
+    "keterangan": "Repositori atau server sumber utama."
+  },
+  {
+    "term": "user",
+    "padanan": "pengguna",
+    "kategori": "General",
+    "keterangan": "Wajib padanan Indonesia: pengguna."
+  },
+  {
+    "term": "user journey",
+    "padanan": "perjalanan pengguna",
+    "kategori": "UI/UX",
+    "keterangan": "Rangkaian langkah pengguna saat memakai aplikasi."
+  },
+  {
+    "term": "validation",
+    "padanan": "validasi / pengesahan",
+    "kategori": "Software",
+    "keterangan": "Pemeriksaan keabsahan masukan data."
+  },
+  {
+    "term": "vector database",
+    "padanan": "basis data vektor",
+    "kategori": "AI",
+    "keterangan": "Basis data khusus penyimpanan representasi embedding."
+  },
+  {
+    "term": "viewport",
+    "padanan": "bidang pandang layar",
+    "kategori": "Frontend",
+    "keterangan": "Area layar peramban yang terlihat."
+  },
+  {
+    "term": "webhook",
+    "padanan": "kait web",
+    "kategori": "Web/API",
+    "keterangan": "Pemberitahuan HTTP otomatis saat terjadi peristiwa."
+  },
+  {
+    "term": "workflow",
+    "padanan": "alur kerja",
+    "kategori": "General",
+    "keterangan": "Rangkaian proses kerja yang terstruktur."
+  }
+]

@@ -7,3 +7,5 @@ Setiap kali mengusulkan kode, teks antarmuka, pesan komit, atau dokumentasi dala
 - Peluluhan KTSP: 'mengubah' (bukan 'merubah'), 'memesona' (bukan 'mempesona').
 - Dilarang membubuhkan tanda koma sebelum konjungsi subordinatif 'karena' dan 'sehingga' di tengah kalimat.
 - Hindari kata klise AI dan gaya bahasa kaku terjemahan harfiah.
+- Gunakan padanan istilah teknologi baku ('unduh', 'unggah', 'basis data') atau cetak miring kata asing jika belum mapan.
+

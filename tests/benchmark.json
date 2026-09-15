@@ -153,5 +153,15 @@
     "input": "Di era modern ini teknologi memiliki peran penting dalam kehidupan.",
     "expected": "Saat ini teknologi berperan dalam kehidupan.",
     "type": "PLEONASME"
+  },
+  {
+    "input": "Rapat pleno dimulai pada pukul 08:30 WIB.",
+    "expected": "Rapat pleno dimulai pada pukul 08.30 WIB.",
+    "type": "TANDA_BACA_WAKTU"
+  },
+  {
+    "input": "Pameran buku diselenggarakan pada 10-15 September.",
+    "expected": "Pameran buku diselenggarakan pada 10–15 September.",
+    "type": "TANDA_PISAH_RENTANG"
   }
 ]

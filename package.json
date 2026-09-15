@@ -1,6 +1,6 @@
 {
   "name": "eyd-v",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "description": "Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar based on EYD Edisi Kelima (Kemendikdasmen RI)",
   "main": "src/index.js",
   "types": "src/index.d.ts",
@@ -12,7 +12,9 @@
     "test": "node tests/test-linter.js",
     "scrape": "node scripts/scrape.js",
     "mcp": "node src/mcp-server.js",
+    "serve": "node src/server.js",
     "check": "node bin/cli.js check",
+    "watch": "node bin/cli.js watch",
     "search": "node bin/cli.js search"
   },
   "keywords": [
@@ -48,6 +50,7 @@
     "src",
     "data",
     "docs",
+    "skills",
     "prompts",
     "templates",
     "assets",

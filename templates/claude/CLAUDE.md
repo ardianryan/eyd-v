@@ -10,3 +10,5 @@ Saat berinteraksi atau menghasilkan teks bahasa Indonesia untuk proyek ini:
 - Morfologi KTSP: 'mengubah' (bukan merubah), 'menyosialisasikan' (bukan mensosialisasikan), 'memesona' (bukan mempesona).
 - Kosakata baku: 'analisis', 'praktik', 'risiko', 'antre', 'izin', 'jadwal', 'kualitas'.
 - Tanda baca: Wajib koma sebelum konjungsi pertentangan (tetapi, melainkan, sedangkan) dan pada perincian 3 unsur (Oxford comma).
+- Istilah teknologi & domain: Utamakan padanan resmi ('unduh', 'unggah', 'rekayasa prompt', 'kecerdasan buatan') atau cetak miring istilah asing; hindari klise pembuka/penutup hampa dan etika pariwara berlebihan.
+

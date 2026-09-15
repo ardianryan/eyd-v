@@ -1,0 +1,48 @@
+name: "Validasi Ejaan Bahasa Indonesia (EYD V)"
+description: "Linter otomatis kaidah EYD Edisi Kelima dan etika penulisan profesional untuk file markdown dan teks."
+author: "Ardian Ryan <me@ardianryan.com>"
+branding:
+  icon: "check-circle"
+  color: "green"
+
+inputs:
+  path:
+    description: "Path berkas atau pola berkas yang akan diperiksa (misal: 'README.md' atau 'docs/**/*.md')"
+    required: false
+    default: "README.md"
+  mode:
+    description: "Ranah penulisan profesional ('general', 'ux', 'marketing', 'seo', 'academic')"
+    required: false
+    default: "general"
+  score:
+    description: "Tampilkan indeks dan skor keterbacaan naskah (true/false)"
+    required: false
+    default: "true"
+  fix:
+    description: "Terapkan perbaikan otomatis in-place pada berkas (true/false)"
+    required: false
+    default: "false"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Pasang Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Jalankan EYD V Linter
+      shell: bash
+      run: |
+        SCORE_FLAG=""
+        if [ "${{ inputs.score }}" = "true" ]; then
+          SCORE_FLAG="--score"
+        fi
+
+        FIX_FLAG=""
+        if [ "${{ inputs.fix }}" = "true" ]; then
+          FIX_FLAG="--fix"
+        fi
+
+        echo "🔍 Menjalankan EYD V Linter pada ${{ inputs.path }}..."
+        npx --yes eyd-v check "${{ inputs.path }}" --mode="${{ inputs.mode }}" --format=github $SCORE_FLAG $FIX_FLAG

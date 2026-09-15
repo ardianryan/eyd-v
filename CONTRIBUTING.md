@@ -1,8 +1,8 @@
 # Panduan Kontribusi (Contributing Guide)
 
-Terima kasih atas minat Anda untuk berkontribusi pada proyek **EYD V**! Proyek ini bertujuan untuk membangun ekosistem pengetahuan, dataset, dan perkakas kebahasaan Indonesia berstandar resmi **EYD Edisi Kelima** yang dapat digunakan oleh seluruh AI Agent, peneliti, pengembang perangkat lunak, dan masyarakat luas.
+Proyek **EYD V** terbuka untuk kontribusi berupa penambahan aturan linter, penyempurnaan leksikon kata baku, pengayaan dataset AI, maupun perbaikan dokumentasi teknis.
 
-Untuk menjaga integritas data kebahasaan dan kualitas kode, seluruh kontributor diharapkan mengikuti panduan di bawah ini.
+Untuk menjaga akurasi ortografi dan kualitas kode, setiap kontributor diharapkan mengikuti pedoman berikut.
 
 ---
 
@@ -22,8 +22,8 @@ Pastikan Anda telah memasang **Node.js (versi 18 ke atas)**:
 
 ```bash
 # 1. Fork repositori ini ke akun GitHub Anda, lalu lakukan kloning:
-git clone https://github.com/<username-anda>/eyd-v-skill.git
-cd eyd-v-skill
+git clone https://github.com/<username-anda>/eyd-v.git
+cd eyd-v
 
 # 2. Pasang seluruh dependensi pengembangan:
 npm install

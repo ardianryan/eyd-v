@@ -182,3 +182,26 @@ Ketika pengguna meminta memeriksa teks naskah:
 5. **Pemeriksaan Tanda Baca**: Telusuri tanda koma, titik dua, tanda petik langsung, dan tanda pisah.
 6. **Pemeriksaan Kata Baku**: Gunakan leksikon kata baku untuk menggantikan variasi fonetis tidak baku.
 7. **Penyajian Rekomendasi**: Tampilkan perbaikan dengan nada sopan, profesional, dan cantumkan rujukan pasal EYD V yang relevan.
+
+---
+
+## 5. Panduan Domain Profesional & Istilah Teknologi (v5.2.0)
+
+Untuk kebutuhan penulisan profesional spesifik, rujuk panduan dan sub-skill berikut:
+
+1. **UX Writing & Antarmuka Produk** (`skills/eyd-v-ux/` | `docs/profesional/01-ux-writing-dan-produk.md`):
+   - Prioritaskan keringkasan, kejelasan instruksi, dan pesan kesalahan konstruktif.
+   - Jaga konsistensi sapaan pengguna: pilih antara *Anda* (sopan formal) atau *kamu* (santai ramah) di seluruh aplikasi.
+2. **Copywriting & Komunikasi Pemasaran** (`skills/eyd-v-marketing/` | `docs/profesional/02-copywriting-dan-pemasaran.md`):
+   - Patuhi Etika Pariwara Indonesia (EPI): hindari klaim superlatif tanpa data ("terbaik di dunia", "nomor 1").
+   - Formulasikan CTA lugas dan bernilai manfaat nyata.
+3. **Penulisan SEO Organik** (`skills/eyd-v-seo/` | `docs/profesional/03-penulisan-seo-organik.md`):
+   - Optimalkan panjang judul (50–60 karakter) dan deskripsi meta (120–155 karakter).
+   - Terapkan hierarki judul (H1, H2, H3) secara terstruktur tanpa penumpukan kata kunci (*keyword stuffing*).
+4. **Karya Ilmiah & Akademik** (`skills/eyd-v-academic/` | `docs/profesional/04-karya-ilmiah-dan-akademik.md`):
+   - Nada objektif, formal, lugas, dan bebas dari bahasa ragam lisan.
+   - Format sitasi dan rujukan bibliografi sesuai standar ilmiah (APA edisi ke-7 / IEEE).
+5. **Glosarium Istilah Teknologi & AI** (`data/glosarium-istilah-teknologi.json` | `docs/profesional/05-glosarium-istilah-teknologi-dan-ai.md`):
+   - Utamakan padanan baku terverifikasi (*rekayasa prompt*, *pembelajaran mesin*, *komputasi awan*, *basis data*, *tangkapan layar*, *antarmuka*).
+   - Cetak miring istilah asing yang belum memiliki padanan baku mapan.
+

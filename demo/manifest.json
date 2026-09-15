@@ -1,0 +1,16 @@
+{
+  "name": "EYD V Playground",
+  "short_name": "EYD V",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#4f46e5",
+  "description": "Pemeriksa Ejaan & Kaidah Bahasa Indonesia EYD Edisi Kelima",
+  "icons": [
+    {
+      "src": "../assets/logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    }
+  ]
+}

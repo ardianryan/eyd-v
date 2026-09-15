@@ -25,3 +25,16 @@ updates:
     labels:
       - "github-actions"
       - "security"
+
+  # Pantau update citra dasar Dockerfile
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Asia/Jakarta"
+    open-pull-requests-limit: 10
+    labels:
+      - "docker"
+      - "security"

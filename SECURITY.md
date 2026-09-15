@@ -1,46 +1,44 @@
 # Kebijakan Keamanan (Security Policy)
 
-Keamanan informasi, integritas data, dan kenyamanan pengguna adalah prioritas utama bagi kami. Dokumen ini menjelaskan kebijakan keamanan dan prosedur pelaporan kerentanan untuk ekosistem **EYD V**.
+Dokumen ini memuat kebijakan keamanan dan tata cara pelaporan celah kerentanan untuk paket serta ekosistem **EYD V**.
 
 ---
 
 ## 🛡️ Versi yang Didukung
 
-Pembaruan keamanan dan perbaikan celah kritis diberikan secara aktif untuk versi-versi berikut:
+Pembaruan keamanan dan perbaikan celah kritis diberikan secara aktif untuk versi rilis berikut:
 
 | Versi Paket | Status Dukungan |
 |:---:|:---:|
 | **5.x.x** | ✅ Didukung Penuh (Rilis Utama Aktif) |
 | < 5.0.0 | ❌ Tidak Didukung |
 
-Kami sangat menyarankan pengguna dan pengembang untuk selalu memperbarui dependensi ke versi rilis terbaru menggunakan perintah:
+Pengguna disarankan memperbarui paket ke versi stabil terbaru menggunakan perintah:
 ```bash
 npm update eyd-v
 ```
 
 ---
 
-## 🚨 Melaporkan Kerentanan Keamanan (Responsible Disclosure)
+## 🚨 Pelaporan Celah Kerentanan (Responsible Disclosure)
 
-Jika Anda menemukan potensi kerentanan keamanan (seperti masalah injeksi perintah pada CLI, eksploitasi deserialisasi data, ketergantungan paket berbahaya, atau celah pada server MCP), **MOHON UNTUK TIDAK MELAPORKANNYA MELALUI TIKET PUBLIK (GITHUB ISSUES)**.
+Jika Anda menemukan potensi kerentanan keamanan (seperti injeksi perintah pada CLI, eksploitasi deserialisasi data, ketergantungan paket berbahaya, atau celah pada server MCP), **harap jangan melaporkannya melalui tiket publik (GitHub Issues)**.
 
-Langkah pelaporan yang aman:
+Kirimkan laporan rinci langsung ke:
+📧 **me@ardianryan.com**
 
-1. Kirimkan laporan rinci Anda melalui surel ke:
-   📧 **me@ardianryan.com**
-2. Cantumkan subjek surel: `[SECURITY] Laporan Kerentanan EYD V - <Nama Masalah>`
-3. Sertakan informasi berikut dalam surel Anda:
-   * Deskripsi rinci mengenai sifat kerentanan.
-   * Langkah-langkah reproduksi masalah (kode contoh atau skenario eksploitasi sederhana).
-   * Dampak potensial jika celah tersebut dieksploitasi.
-   * Saran perbaikan atau mitigasi (jika ada).
+Sertakan informasi berikut:
+1. Subjek surel: `[SECURITY] Laporan Kerentanan EYD V - <Nama Masalah>`
+2. Deskripsi rinci mengenai sifat kerentanan dan potensi dampaknya.
+3. Langkah reproduksi masalah (skrip contoh atau skenario eksploitasi sederhana).
+4. Usulan perbaikan atau mitigasi teknis (jika ada).
 
 ---
 
-## ⏱️ Komitmen & Waktu Tanggap
+## ⏱️ Waktu Tanggap & Penanganan
 
-* **Konfirmasi Penerimaan**: Tim kami akan membalas dan mengonfirmasi penerimaan laporan Anda dalam waktu **1 x 24 jam**.
-* **Investigasi & Verifikasi**: Penilaian tingkat risiko dan verifikasi celah akan diselesaikan dalam waktu maksimal **72 jam**.
-* **Penyelesaian & Rilis Tambalan**: Perbaikan darurat (*security patch*) akan diterbitkan sesegera mungkin tergantung tingkat keparahan risiko.
+* **Konfirmasi Penerimaan**: Laporan akan dikonfirmasi penerimaannya dalam waktu maksimal **1 x 24 jam**.
+* **Investigasi & Verifikasi**: Penilaian tingkat risiko dan replikasi masalah diselesaikan dalam waktu **72 jam**.
+* **Rilis Tambalan**: Perbaikan darurat (*security patch*) akan diterbitkan ke npm sesegera mungkin.
 
-Setelah tambalan keamanan resmi dirilis ke npm, kami akan memberikan atribusi ucapan terima kasih kepada pelapor atas kontribusinya dalam menjaga keamanan ekosistem ini (kecuali jika pelapor meminta untuk tetap anonim).
+Setelah perbaikan resmi diterbitkan, nama pelapor akan dicantumkan pada catatan rilis sebagai bentuk apresiasi (kecuali jika pelapor meminta tetap anonim).

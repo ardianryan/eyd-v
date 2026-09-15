@@ -88,11 +88,40 @@ function getRuleById(id) {
   return chunks.find(c => c.id === id) || null;
 }
 
+/**
+ * Mengambil daftar kategori aturan EYD V
+ * @returns {Array<string>}
+ */
+function listCategories() {
+  const chunks = getRAGChunks();
+  const cats = new Set(chunks.map(c => c.category).filter(Boolean));
+  return Array.from(cats);
+}
+
+function startServer(port = 3000) {
+  const { createEydServer } = require('./server');
+  const server = createEydServer();
+  return new Promise((resolve, reject) => {
+    server.listen(port, () => {
+      console.log(`🚀 EYD V REST API Server berjalan di http://localhost:${port}`);
+      resolve(server);
+    });
+    server.on('error', reject);
+  });
+}
+
+const { checkSingleWord, getTechTerms, lookupTechTerm } = require('./linter');
+
 module.exports = {
   checkEyd,
+  checkSingleWord,
   getLeksikon,
   getAllRules,
   getRAGChunks,
   searchRules,
-  getRuleById
+  getRuleById,
+  listCategories,
+  getTechTerms,
+  lookupTechTerm,
+  startServer
 };

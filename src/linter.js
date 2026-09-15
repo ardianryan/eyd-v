@@ -15,14 +15,19 @@ function getLeksikon() {
 }
 
 /**
- * Memeriksa teks terhadap aturan EYD Edisi V
+ * Memeriksa teks terhadap aturan EYD Edisi V dan ranah profesional
  * @param {string} text - Teks bahasa Indonesia yang akan diperiksa
- * @returns {object} Hasil pemeriksaan berisi daftar kesalahan, saran perbaikan, dan teks yang sudah diperbaiki
+ * @param {object} options - Opsi pemeriksaan (mode, ignoreWords, preferredPronoun)
+ * @returns {object} Hasil pemeriksaan berisi daftar kesalahan, saran perbaikan, teks yang sudah diperbaiki, dan skor keterbacaan
  */
-function checkEyd(text) {
+function checkEyd(text, options = {}) {
   if (!text || typeof text !== 'string') {
-    return { valid: true, errorCount: 0, errors: [], correctedText: text || '' };
+    return { valid: true, errorCount: 0, errors: [], correctedText: text || '', readability: null };
   }
+
+  const mode = options.mode || 'general'; // 'general' | 'ux' | 'marketing' | 'seo' | 'academic'
+  const ignoreWords = (options.ignoreWords || []).map(w => w.toLowerCase());
+  const preferredPronoun = options.preferredPronoun || null;
 
   const errors = [];
   let correctedText = text;
@@ -288,20 +293,56 @@ function checkEyd(text) {
     }
   });
 
-  // 9. Lambang Rupiah (Rp. 50.000 atau Rp.50.000 -> Rp50.000)
-  const rupiahRegex = /\b(Rp)\.?\s*(\d+)/gi;
+  // 9. Lambang Rupiah (Rp. 50.000 atau Rp.50.000 atau Rp 50.000,- -> Rp50.000)
+  const rupiahRegex = /\b(Rp)\.?\s*(\d+(?:\.\d+)*)(?:,-)?\b/gi;
   let rpMatch;
   while ((rpMatch = rupiahRegex.exec(text)) !== null) {
-    if (rpMatch[0] !== `Rp${rpMatch[2]}`) {
+    const cleanNum = rpMatch[2];
+    if (rpMatch[0] !== `Rp${cleanNum}`) {
       errors.push({
         type: 'ANGKA_DAN_MATA_UANG',
         original: rpMatch[0],
-        suggestion: `Rp${rpMatch[2]}`,
+        suggestion: `Rp${cleanNum}`,
         rule: "Lambang 'Rp' ditulis tanpa titik dan tanpa spasi sebelum angka",
         reference: 'eyd/penulisan-kata/angka-dan-bilangan/#lambang-rupiah',
         index: rpMatch.index
       });
     }
+  }
+
+  // 9b. Format Jam dengan Tanda Titik (EYD V Tanda Titik #2)
+  // Contoh: pukul 08:30 -> pukul 08.30, 08:30 WIB -> 08.30 WIB
+  const waktuPatterns = [
+    { regex: /\b(pukul|jam)\s+([01]?\d|2[0-3]):([0-5]\d)\b/gi, fix: (m, p1, p2, p3) => `${p1} ${p2}.${p3}` },
+    { regex: /\b([01]?\d|2[0-3]):([0-5]\d)(\s+(?:WIB|WITA|WIT))\b/gi, fix: (m, p1, p2, p3) => `${p1}.${p2}${p3}` }
+  ];
+  waktuPatterns.forEach(pat => {
+    let match;
+    while ((match = pat.regex.exec(text)) !== null) {
+      errors.push({
+        type: 'TANDA_BACA_WAKTU',
+        original: match[0],
+        suggestion: pat.fix(...match),
+        rule: "Tanda titik digunakan untuk memisahkan angka jam, menit, dan detik (bukan tanda titik dua)",
+        reference: 'eyd/penggunaan-tanda-baca/tanda-titik/#2',
+        index: match.index
+      });
+    }
+  });
+
+  // 9c. Rentang Tanggal dan Bilangan dengan Tanda Pisah En Dash (EYD V Tanda Pisah #2)
+  // Contoh: 10-15 September -> 10–15 September
+  const rentangTanggalRegex = /\b(\d{1,2})\s*-\s*(\d{1,2})\s+(Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\b/gi;
+  let rentangMatch;
+  while ((rentangMatch = rentangTanggalRegex.exec(text)) !== null) {
+    errors.push({
+      type: 'TANDA_PISAH_RENTANG',
+      original: rentangMatch[0],
+      suggestion: `${rentangMatch[1]}–${rentangMatch[2]} ${rentangMatch[3]}`,
+      rule: "Tanda pisah en dash (–) digunakan di antara dua bilangan atau tanggal yang berarti 'sampai dengan'",
+      reference: 'eyd/penggunaan-tanda-baca/tanda-pisah/#2',
+      index: rentangMatch.index
+    });
   }
 
   // 10. Pleonasme & Klise AI Slop
@@ -331,33 +372,220 @@ function checkEyd(text) {
     }
   });
 
+  // 11. Pemeriksaan Khusus Ranah Profesional (Domain Modes)
+  if (mode === 'ux') {
+    // Larangan mencampur kata ganti 'Anda' dan 'kamu'
+    const hasAnda = /\bAnda\b/.test(text);
+    const hasKamu = /\b(kamu|mu)\b/i.test(text);
+    if (hasAnda && hasKamu) {
+      errors.push({
+        type: 'KONSISTENSI_PRONOMINA',
+        original: 'Anda & kamu',
+        suggestion: preferredPronoun || 'Pilih salah satu: konsisten "Anda" atau "kamu"',
+        rule: 'Hindari mencampuradukkan kata ganti sapaan Anda dan kamu dalam satu antarmuka produk',
+        reference: 'docs/profesional/01-ux-writing-dan-produk.md',
+        index: 0
+      });
+    }
+  } else if (mode === 'marketing') {
+    // Deteksi klaim superlatif berlebihan (Etika Pariwara Indonesia)
+    const superlatifRegex = /\b(terbaik di dunia|nomor 1 di indonesia|paling ampuh|termurah se-indonesia|tanpa tandingan)\b/gi;
+    let mMatch;
+    while ((mMatch = superlatifRegex.exec(text)) !== null) {
+      errors.push({
+        type: 'ETIKA_PARIWARA',
+        original: mMatch[0],
+        suggestion: 'Sebutkan keunggulan berbasis data/fakta konkret',
+        rule: 'Klaim superlatif mutlak wajib didasarkan pada data/riset terverifikasi menurut Etika Pariwara Indonesia',
+        reference: 'docs/profesional/02-copywriting-dan-pemasaran.md',
+        index: mMatch.index
+      });
+    }
+  } else if (mode === 'seo') {
+    // Peringatan panjang Title Tag jika teks diawali '# '
+    const titleMatch = text.match(/^#\s+(.+)$/m);
+    if (titleMatch && titleMatch[1].length > 60) {
+      errors.push({
+        type: 'SEO_TITLE_LENGTH',
+        original: titleMatch[1],
+        suggestion: titleMatch[1].substring(0, 57) + '...',
+        rule: `Panjang Title Tag (${titleMatch[1].length} karakter) melebihi batas ideal 60 karakter di SERP Google`,
+        reference: 'docs/profesional/03-penulisan-seo-organik.md',
+        index: titleMatch.index
+      });
+    }
+  } else if (mode === 'academic') {
+    // Larangan kata ganti persona pertama informal pada karya ilmiah
+    const academicPronomina = /\b(aku|saya|kita|kamu)\b/gi;
+    let pMatch;
+    while ((pMatch = academicPronomina.exec(text)) !== null) {
+      errors.push({
+        type: 'RAGAM_AKADEMIK',
+        original: pMatch[0],
+        suggestion: 'peneliti / gunakan kalimat pasif formal',
+        rule: `Hindari penggunaan kata ganti orang '${pMatch[0]}' dalam karya tulis ilmiah formal`,
+        reference: 'docs/profesional/04-karya-ilmiah-dan-akademik.md',
+        index: pMatch.index
+      });
+    }
+  }
+
+  // Filter ignoreWords jika ditetapkan di opsi / .eydvrc.json
+  const filteredErrors = errors.filter(err => {
+    if (ignoreWords.includes(err.original.toLowerCase())) return false;
+    return true;
+  });
+
   // Urutkan kesalahan berdasarkan posisi teks
-  errors.sort((a, b) => a.index - b.index);
+  filteredErrors.sort((a, b) => a.index - b.index);
 
   // Buat teks perbaikan (replace dari belakang ke depan agar index tidak bergeser)
   const uniqueErrors = [];
   const visitedIndices = new Set();
 
-  for (let i = errors.length - 1; i >= 0; i--) {
-    const err = errors[i];
+  for (let i = filteredErrors.length - 1; i >= 0; i--) {
+    const err = filteredErrors[i];
     if (visitedIndices.has(err.index)) continue;
     visitedIndices.add(err.index);
     uniqueErrors.unshift(err);
 
-    const before = correctedText.substring(0, err.index);
-    const after = correctedText.substring(err.index + err.original.length);
-    correctedText = before + err.suggestion + after;
+    // Jangan replace jika suggestion berupa kalimat petunjuk (bukan teks pengganti)
+    const isGuidanceOnly = ['KONSISTENSI_PRONOMINA', 'ETIKA_PARIWARA', 'SEO_TITLE_LENGTH', 'RAGAM_AKADEMIK'].includes(err.type);
+    if (!isGuidanceOnly && err.suggestion) {
+      const before = correctedText.substring(0, err.index);
+      const after = correctedText.substring(err.index + err.original.length);
+      correctedText = before + err.suggestion + after;
+    }
   }
+
+  // Hitung Skor Keterbacaan Naskah (Readability Metrics)
+  const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  const wordCount = words.length;
+  const sentenceCount = sentences.length || 1;
+  const avgWordsPerSentence = Math.round((wordCount / sentenceCount) * 10) / 10;
+  
+  // Deteksi rasio aktif vs pasif sederhana (berawalan me- vs di-)
+  const activeVerbs = words.filter(w => /^me[nmlrwy]?/i.test(w)).length;
+  const passiveVerbs = words.filter(w => /^di[a-z]+/i.test(w)).length;
+  const totalVerbs = activeVerbs + passiveVerbs || 1;
+  const activeRatio = Math.round((activeVerbs / totalVerbs) * 100);
+
+  // Skor 0-100 (Skor ideal jika kata per kalimat antara 10-15)
+  let readabilityScore = 100 - Math.abs(avgWordsPerSentence - 13) * 3;
+  if (readabilityScore < 30) readabilityScore = 30;
+  if (readabilityScore > 100) readabilityScore = 100;
 
   return {
     valid: uniqueErrors.length === 0,
     errorCount: uniqueErrors.length,
     errors: uniqueErrors,
-    correctedText: correctedText
+    correctedText: correctedText,
+    readability: {
+      score: Math.round(readabilityScore),
+      wordCount: wordCount,
+      sentenceCount: sentenceCount,
+      avgWordsPerSentence: avgWordsPerSentence,
+      activeRatio: activeRatio,
+      grade: readabilityScore >= 80 ? 'Sangat Mudah Dipahami' : readabilityScore >= 60 ? 'Cukup Mudah Dipahami' : 'Kompleks / Akademik'
+    }
+  };
+}
+
+let techTermsData = null;
+function getTechTerms() {
+  if (!techTermsData) {
+    const termsPath = path.resolve(__dirname, '../data/glosarium-istilah-teknologi.json');
+    if (fs.existsSync(termsPath)) {
+      techTermsData = JSON.parse(fs.readFileSync(termsPath, 'utf8'));
+    } else {
+      techTermsData = [];
+    }
+  }
+  return techTermsData;
+}
+
+/**
+ * Mencari padanan istilah teknologi dan AI
+ * @param {string} query - Kata kunci istilah dalam bahasa Inggris atau Indonesia
+ * @returns {Array<object>} Daftar kecocokan istilah teknologi
+ */
+function lookupTechTerm(query) {
+  if (!query || typeof query !== 'string') return [];
+  const q = query.trim().toLowerCase();
+  const terms = getTechTerms();
+  return terms.filter(t => 
+    t.term.toLowerCase().includes(q) || 
+    t.padanan.toLowerCase().includes(q) ||
+    t.kategori.toLowerCase().includes(q)
+  );
+}
+
+/**
+ * Memeriksa satu kata secara instan terhadap leksikon KBBI & EYD V
+ * @param {string} word - Satu kata yang akan diperiksa
+ * @returns {object} Status kebakaan kata beserta saran jika nonbaku
+ */
+function checkSingleWord(word) {
+  if (!word || typeof word !== 'string') {
+    return { word: '', isBaku: true, suggestion: '', message: 'Kata kosong' };
+  }
+
+  const cleanWord = word.trim().toLowerCase();
+  const leksikon = getLeksikon();
+
+  // 1. Cek apakah kata ini merupakan kata baku resmi (kunci di kata_baku_map)
+  if (leksikon.kata_baku_map && leksikon.kata_baku_map[cleanWord]) {
+    return {
+      word: word.trim(),
+      isBaku: true,
+      suggestion: word.trim(),
+      rule: `Bentuk '${word.trim()}' adalah kata baku resmi menurut KBBI & EYD V.`,
+      reference: 'KBBI VI & EYD V'
+    };
+  }
+
+  // 2. Cek apakah kata ini ada di dalam daftar varian nonbaku (nilai di kata_baku_map)
+  if (leksikon.kata_baku_map) {
+    for (const [baku, nonbakuList] of Object.entries(leksikon.kata_baku_map)) {
+      if (Array.isArray(nonbakuList) && nonbakuList.includes(cleanWord)) {
+        return {
+          word: word.trim(),
+          isBaku: false,
+          suggestion: baku,
+          rule: `Bentuk baku adalah '${baku}' (bukan '${word.trim()}')`,
+          reference: 'KBBI VI & EYD V'
+        };
+      }
+    }
+  }
+
+  // 2. Cek linter kalimat pendek untuk menangkap aturan morfologi KTSP
+  const linterRes = checkEyd(word.trim());
+  if (!linterRes.valid && linterRes.errors.length > 0) {
+    const err = linterRes.errors[0];
+    return {
+      word: word.trim(),
+      isBaku: false,
+      suggestion: err.suggestion,
+      rule: err.rule,
+      reference: err.reference || 'EYD V'
+    };
+  }
+
+  return {
+    word: word.trim(),
+    isBaku: true,
+    suggestion: word.trim(),
+    rule: `Bentuk '${word.trim()}' tidak terindikasi nonbaku menurut pangkalan data leksikon EYD V.`,
+    reference: 'KBBI VI & EYD V'
   };
 }
 
 module.exports = {
   checkEyd,
-  getLeksikon
+  checkSingleWord,
+  getLeksikon,
+  getTechTerms,
+  lookupTechTerm
 };
