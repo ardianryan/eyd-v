@@ -5,6 +5,27 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
 
 ---
 
+## [5.1.0] - 2026-09-15
+
+### Ditambahkan
+* **Panduan Penulisan Alami & Anti-Slop AI** ([`docs/panduan-anti-slop-penulisan-alami.md`](docs/panduan-anti-slop-penulisan-alami.md)):
+  * Penjelasan 3 tingkat register bahasa: Tier 1 (Formal & Akademis), Tier 2 (Fungsional & Semi-Formal: Menu, UI Copy, Info Publik), Tier 3 (Komunikatif & Lugas).
+  * Katalog kosakata klise dan penggelembung (*AI slop & puffery*) beserta alternatif konkret to-the-point.
+  * Formula ritme kalimat (*Sentence DNA / Cadence*) untuk memecah kebosanan kalimat AI yang seragam.
+  * Panduan penulisan menu kuliner dan teks pengumuman/antarmuka (UI/UX) bebas halusinasi ejaan.
+* **Deteksi Koma Subordinatif pada Linter** (`src/linter.js`):
+  * Penegakan kaidah EYD V Tanda Koma #4: Penghapusan otomatis tanda koma yang salah diletakkan sebelum konjungsi subordinatif (`karena`, `sebab`, `sehingga`, `bahwa`, `agar`, `supaya`) ketika anak kalimat mengiringi induk kalimat.
+* **Deteksi Klise Pembuka & Kosakata AI Slop pada Linter**:
+  * Koreksi otomatis terhadap pembuka klise seperti *"di era modern ini"* menjadi *"saat ini"*, *"sangat krusial"* menjadi *"sangat penting"*, dan *"memiliki peran penting dalam"* menjadi *"berperan dalam"*.
+* **Kasus Uji Benchmark Baru** (`tests/benchmark.json`):
+  * Penambahan pengujian benchmark untuk koma subordinatif dan reduksi slop AI, mempertahankan skor 100% kelulusan (31 pengujian).
+
+### Diubah
+* **Penyempurnaan Universal Skill (`SKILL.md`) & System Prompt**:
+  * Mengintegrasikan larangan koma subordinatif dan prinsip kepenulisan manusia yang alami pada `SKILL.md` dan `prompts/system-prompt-indonesia.md`.
+
+---
+
 ## [5.0.0] - 2026-09-12
 
 ### Ditambahkan

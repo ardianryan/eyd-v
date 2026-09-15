@@ -245,6 +245,24 @@ function checkEyd(text) {
     }
   });
 
+  // 7b. Tanda Koma Keliru Sebelum Konjungsi Subordinatif (Anti-AI Slop)
+  // EYD V Tanda Koma #4: Tanda koma TIDAK digunakan jika anak kalimat mengiringi induk kalimat
+  const konjungsiSubordinatif = ['karena', 'sebab', 'sehingga', 'bahwa', 'agar', 'supaya'];
+  konjungsiSubordinatif.forEach(konj => {
+    const reg = new RegExp(`(\\w+)(,\\s+)(${konj})\\b`, 'gi');
+    let match;
+    while ((match = reg.exec(text)) !== null) {
+      errors.push({
+        type: 'TANDA_BACA_SUBORDINATIF',
+        original: match[0],
+        suggestion: `${match[1]} ${match[3]}`,
+        rule: `Tanda koma tidak digunakan sebelum konjungsi subordinatif '${match[3]}' jika anak kalimat berada di belakang induk kalimat`,
+        reference: 'eyd/penggunaan-tanda-baca/tanda-koma/#4',
+        index: match.index
+      });
+    }
+  });
+
   // 8. Singkatan Nonbaku dengan Garis Miring (s/d, a/n, d/a, u/p)
   const singkatanPatterns = [
     { regex: /\b(s\/d)\b/gi, fix: 's.d.', rule: "Singkatan 'sampai dengan' ditulis 's.d.' (bukan 's/d')", ref: 'eyd/penulisan-kata/singkatan-dan-akronim/#1' },
@@ -286,21 +304,26 @@ function checkEyd(text) {
     }
   }
 
-  // 10. Pleonasme (Pemborosan Kata)
+  // 10. Pleonasme & Klise AI Slop
   const pleonasmePatterns = [
     { regex: /\b(adalah\s+merupakan)\b/gi, fix: 'adalah', rule: "Hindari pleonasme 'adalah merupakan', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
     { regex: /\b(agar\s+supaya)\b/gi, fix: 'agar', rule: "Hindari pleonasme 'agar supaya', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
     { regex: /\b(demi\s+untuk)\b/gi, fix: 'demi', rule: "Hindari pleonasme 'demi untuk', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
-    { regex: /\b(sangat\s+indah\s+sekali)\b/gi, fix: 'sangat indah', rule: "Hindari pleonasme penguat ganda 'sangat ... sekali'", ref: 'docs/kaidah-kalimat-efektif.md' }
+    { regex: /\b(sangat\s+indah\s+sekali)\b/gi, fix: 'sangat indah', rule: "Hindari pleonasme penguat ganda 'sangat ... sekali'", ref: 'docs/kaidah-kalimat-efektif.md' },
+    { regex: /\b(di\s+era\s+modern\s+ini)\b/gi, fix: 'saat ini', rule: "Hindari klise pembuka AI 'di era modern ini', ganti dengan ungkapan langsung atau sebutkan konteksnya", ref: 'docs/panduan-anti-slop-penulisan-alami.md' },
+    { regex: /\b(sangat\s+krusial)\b/gi, fix: 'sangat penting', rule: "Hindari kata penggelembung AI 'sangat krusial', sebutkan dampak nyatanya secara spesifik", ref: 'docs/panduan-anti-slop-penulisan-alami.md' },
+    { regex: /\b(memiliki\s+peran\s+penting\s+dalam)\b/gi, fix: 'berperan dalam', rule: "Gunakan bentuk aktif yang lebih ringkas dan alami daripada 'memiliki peran penting dalam'", ref: 'docs/panduan-anti-slop-penulisan-alami.md' }
   ];
 
   pleonasmePatterns.forEach(pat => {
     let match;
     while ((match = pat.regex.exec(text)) !== null) {
+      const isCapitalized = match[0][0] === match[0][0].toUpperCase();
+      const suggested = isCapitalized ? pat.fix.charAt(0).toUpperCase() + pat.fix.slice(1) : pat.fix;
       errors.push({
         type: 'PLEONASME',
         original: match[0],
-        suggestion: pat.fix,
+        suggestion: suggested,
         rule: pat.rule,
         reference: pat.ref,
         index: match.index

@@ -1,6 +1,6 @@
 {
   "name": "eyd-v",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar based on EYD Edisi Kelima (Kemendikdasmen RI)",
   "main": "src/index.js",
   "types": "src/index.d.ts",

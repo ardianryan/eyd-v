@@ -72,7 +72,8 @@
 * ⚡ **Model Context Protocol (MCP Server)**: Dilengkapi server MCP bawaan (`npx eyd-v mcp`) agar agen dapat menelusuri aturan dan memeriksa ejaan secara dinamis via tool-call.
 * 📚 **RAG-Ready Vector Chunks**: Format `data/eyd-v-chunks.jsonl` (246 semantis chunks) dan contoh ingestion skrip Python/Node.js siap diindeks ke Pinecone, Chroma, Qdrant, Cloudflare Vectorize, atau pgvector.
 * 🦙 **Ollama Modelfile**: Berkas `prompts/Modelfile` siap pakai untuk menjalankan model spesialis EYD V lokal dengan satu perintah (`ollama create eyd-v -f prompts/Modelfile`).
-* 🔎 **CLI & Linter Cepat**: Alat pemeriksa ejaan di terminal (`npx eyd-v check`) untuk mendeteksi kesalahan umum (preposisi, partikel *pun*, bentuk terikat, peluluhan KTSP, tanda koma, dan kata nonbaku).
+* 🔎 **CLI & Linter Cepat & Anti-AI Slop**: Alat pemeriksa ejaan di terminal (`npx eyd-v check`) untuk mendeteksi kesalahan umum (preposisi, partikel *pun*, bentuk terikat, peluluhan KTSP, penghapusan koma berceceran sebelum *karena/sehingga*, eliminasi klise AI, dan kata nonbaku).
+* ✍️ **Panduan Penulisan Alami (*Natural Human Writing*)**: Menghilangkan tanda-tanda klise tulisan robot/mesin (*cadence uniformity*, *puffery*, *em-dash overuse*) agar teks naskah, menu produk, dan informasi UI/UX mengalir lugas dan bernyawa ([`docs/panduan-anti-slop-penulisan-alami.md`](docs/panduan-anti-slop-penulisan-alami.md)).
 * 📖 **Leksikon Kata Baku & Morfologi KTSP**: Kamus kata baku vs nonbaku populer serta panduan peluluhan fonem K, T, S, P yang sering membingungkan LLM.
 
 ---

@@ -138,5 +138,20 @@
     "input": "Pendidikan adalah merupakan hak asasi setiap warga negara.",
     "expected": "Pendidikan adalah hak asasi setiap warga negara.",
     "type": "PLEONASME"
+  },
+  {
+    "input": "Menu ini sangat lezat, karena dibuat dengan bahan segar.",
+    "expected": "Menu ini sangat lezat karena dibuat dengan bahan segar.",
+    "type": "TANDA_BACA_SUBORDINATIF"
+  },
+  {
+    "input": "Sistem dimatikan, sehingga server tidak kelebihan beban.",
+    "expected": "Sistem dimatikan sehingga server tidak kelebihan beban.",
+    "type": "TANDA_BACA_SUBORDINATIF"
+  },
+  {
+    "input": "Di era modern ini teknologi memiliki peran penting dalam kehidupan.",
+    "expected": "Saat ini teknologi berperan dalam kehidupan.",
+    "type": "PLEONASME"
   }
 ]

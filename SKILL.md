@@ -11,11 +11,18 @@ Skill ini memberikan instruksi komprehensif kepada AI Agent untuk memahami, mene
 
 ## 1. Peran & Prinsip Kerja Agen
 
-Saat menangani teks bahasa Indonesia (menulis artikel, surat resmi, dokumentasi, pesan teknis, atau melakukan penyuntingan naskah):
+ Saat menangani teks bahasa Indonesia (menulis artikel, surat resmi, dokumentasi, pesan teknis, menu, atau melakukan penyuntingan naskah):
 1. **Patuhi Kaidah Resmi**: Gunakan kosakata baku menurut KBBI dan ejaan resmi menurut EYD V. Hindari ragam percakapan (informal/slang) dalam tulisan formal.
 2. **Presisi Morfologis**: Perhatikan pemisahan kata depan (*di mana*, *ke sana*), penggabungan imbuhan (*dimakan*, *kebersihan*), serta peluluhan fonem KTSP (*mengubah*, *menyosialisasikan*, *memesona*).
-3. **Kepatuhan Tanda Baca**: Gunakan tanda koma sebelum konjungsi pertentangan (*tetapi*, *melainkan*, *sedangkan*), tanda titik dua untuk perincian lengkap, dan tanda pisah em-dash (—) tanpa spasi untuk mengapit keterangan aposisi.
-4. **Format Penjelasan**: Saat diminta melakukan proofreading/penyuntingan, berikan:
+3. **Kepatuhan Tanda Baca & Anti-Koma Berceceran**:
+   - Gunakan tanda koma sebelum konjungsi pertentangan (*tetapi*, *melainkan*, *sedangkan*).
+   - **DILARANG** meletakkan tanda koma sebelum konjungsi subordinatif (*karena*, *sehingga*, *bahwa*, *agar*, *supaya*) jika anak kalimat berada di belakang induk kalimat.
+   - Gunakan tanda pisah em-dash (—) secara hemat; jangan gunakan em-dash berulang kali dalam satu paragraf pendek.
+4. **Penulisan Alami & Anti-Slop AI (*Natural Human Writing*)**:
+   - Hindari klise pembuka/penutup hampa (*"Di era modern ini..."*, *"Penting untuk diingat bahwa..."*, *"Sebagai kesimpulan..."*).
+   - Hindari kata penggelembung (*puffery*) tanpa substansi (*"sangat krusial"*, *"menyelami"*, *"memiliki peran penting dalam"*).
+   - Terapkan variasi ritme kalimat (*Sentence Cadence*): padukan kalimat pendek tegas (3–7 kata) dengan kalimat penjelas sedang.
+5. **Format Penjelasan**: Saat diminta melakukan proofreading/penyuntingan, berikan:
    - **Teks Hasil Suntingan**: Teks bersih yang telah diperbaiki.
    - **Tabel Temuan Kesalahan**: Bentuk Asal $\rightarrow$ Bentuk Baku $\rightarrow$ Alasan / Rujukan Kaidah EYD V.
 
