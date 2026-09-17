@@ -33,7 +33,7 @@ function checkEyd(text, options = {}) {
   let correctedText = text;
   const leksikon = getLeksikon();
 
-  // 1. Pemeriksaan Preposisi (Kata Depan di & ke yang keliru dirangkai)
+  // Preposisi penunjuk tempat atau arah (EYD V Bab II.D)
   const preposisiDiPatterns = [
     { regex: /\b(dimana)\b/gi, fix: 'di mana', rule: "Kata Depan 'di' menyatakan tempat ditulis terpisah", ref: "eyd/penulisan-kata/kata-depan/#1" },
     { regex: /\b(disana)\b/gi, fix: 'di sana', rule: "Kata Depan 'di' menyatakan tempat ditulis terpisah", ref: "eyd/penulisan-kata/kata-depan/#1" },
@@ -83,7 +83,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 2. Bentuk Terikat yang keliru dipisah
+  // Bentuk terikat (EYD V Bab II.B)
   const bentukTerikatPatterns = [
     { regex: /\b(pasca\s+sarjana)\b/gi, fix: 'pascasarjana', rule: "Bentuk terikat 'pasca-' ditulis serangkai", ref: "eyd/penulisan-kata/kata-turunan/#bentuk-terikat" },
     { regex: /\b(pasca\s+panen)\b/gi, fix: 'pascapanen', rule: "Bentuk terikat 'pasca-' ditulis serangkai", ref: "eyd/penulisan-kata/kata-turunan/#bentuk-terikat" },
@@ -114,7 +114,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 3. Gabungan Kata (Kata Majemuk yang keliru disambung / dipisah)
+  // Gabungan kata atau kata majemuk (EYD V Bab II.C)
   const gabunganKataPatterns = [
     { regex: /\b(tandatangan)\b/gi, fix: 'tanda tangan', rule: "Gabungan kata dasar tanpa konfiks ditulis terpisah", ref: "eyd/penulisan-kata/kata-turunan/#gabungan-kata" },
     { regex: /\b(tanggungjawab)\b/gi, fix: 'tanggung jawab', rule: "Gabungan kata dasar tanpa konfiks ditulis terpisah", ref: "eyd/penulisan-kata/kata-turunan/#gabungan-kata" },
@@ -146,7 +146,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 4. Partikel 'pun'
+  // Partikel 'pun' terpisah vs 12 konjungsi serangkai (EYD V Bab II.E)
   const partikelPunPatterns = [
     { regex: /\b(apapun)\b/gi, fix: 'apa pun', rule: "Partikel 'pun' ditulis terpisah dari kata yang mendahuluinya", ref: "eyd/penulisan-kata/partikel/#pun" },
     { regex: /\b(siapapun)\b/gi, fix: 'siapa pun', rule: "Partikel 'pun' ditulis terpisah dari kata yang mendahuluinya", ref: "eyd/penulisan-kata/partikel/#pun" },
@@ -174,7 +174,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 5. Kesalahan Peluluhan KTSP
+  // Peluluhan fonem k, t, s, p dengan awalan meN- / peN-
   const ktspPatterns = [
     { regex: /\b(merubah)\b/gi, fix: 'mengubah', rule: "Kata dasar 'ubah' mendapat awalan meN- menjadi 'mengubah'", ref: "eyd/penulisan-kata/kata-turunan/#afiksasi" },
     { regex: /\b(merubahnya)\b/gi, fix: 'mengubahnya', rule: "Kata dasar 'ubah' mendapat awalan meN- menjadi 'mengubahnya'", ref: "eyd/penulisan-kata/kata-turunan/#afiksasi" },
@@ -201,7 +201,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 6. Kata Nonbaku dari Leksikon
+  // Penyelarasan kata baku berbasis leksikon KBBI VI
   if (leksikon.kata_baku_map) {
     for (const [baku, nonbakuList] of Object.entries(leksikon.kata_baku_map)) {
       for (const nonbaku of nonbakuList) {
@@ -229,7 +229,7 @@ function checkEyd(text, options = {}) {
     }
   }
 
-  // 7. Tanda Baca (Koma sebelum konjungsi pertentangan)
+  // Tanda koma sebelum konjungsi pertentangan (EYD V Bab III.B)
   const konjungsiPertentangan = ['tetapi', 'melainkan', 'sedangkan', 'padahal'];
   konjungsiPertentangan.forEach(konj => {
     const reg = new RegExp(`(\\S+)\\s+(${konj})\\b`, 'gi');
@@ -250,7 +250,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 7b. Tanda Koma Keliru Sebelum Konjungsi Subordinatif (Anti-AI Slop)
+  // Pencegahan tanda koma sebelum konjungsi subordinatif (EYD V Bab III.B #4)
   // EYD V Tanda Koma #4: Tanda koma TIDAK digunakan jika anak kalimat mengiringi induk kalimat
   const konjungsiSubordinatif = ['karena', 'sebab', 'sehingga', 'bahwa', 'agar', 'supaya'];
   konjungsiSubordinatif.forEach(konj => {
@@ -268,7 +268,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 8. Singkatan Nonbaku dengan Garis Miring (s/d, a/n, d/a, u/p)
+  // Singkatan umum tiga huruf bertitik tanpa garis miring (EYD V Bab II.F)
   const singkatanPatterns = [
     { regex: /\b(s\/d)\b/gi, fix: 's.d.', rule: "Singkatan 'sampai dengan' ditulis 's.d.' (bukan 's/d')", ref: 'eyd/penulisan-kata/singkatan-dan-akronim/#1' },
     { regex: /\b(a\/n)\b/gi, fix: 'a.n.', rule: "Singkatan 'atas nama' ditulis 'a.n.' (bukan 'a/n')", ref: 'eyd/penulisan-kata/singkatan-dan-akronim/#1' },
@@ -293,7 +293,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 9. Lambang Rupiah (Rp. 50.000 atau Rp.50.000 atau Rp 50.000,- -> Rp50.000)
+  // Format lambang rupiah tanpa titik atau spasi (EYD V Bab II.G)
   const rupiahRegex = /\b(Rp)\.?\s*(\d+(?:\.\d+)*)(?:,-)?\b/gi;
   let rpMatch;
   while ((rpMatch = rupiahRegex.exec(text)) !== null) {
@@ -310,7 +310,7 @@ function checkEyd(text, options = {}) {
     }
   }
 
-  // 9b. Format Jam dengan Tanda Titik (EYD V Tanda Titik #2)
+  // Pemisah waktu menggunakan tanda titik (EYD V Bab III.A #2)
   // Contoh: pukul 08:30 -> pukul 08.30, 08:30 WIB -> 08.30 WIB
   const waktuPatterns = [
     { regex: /\b(pukul|jam)\s+([01]?\d|2[0-3]):([0-5]\d)\b/gi, fix: (m, p1, p2, p3) => `${p1} ${p2}.${p3}` },
@@ -330,7 +330,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 9c. Rentang Tanggal dan Bilangan dengan Tanda Pisah En Dash (EYD V Tanda Pisah #2)
+  // Rentang bilangan dan tanggal menggunakan tanda pisah en dash (EYD V Bab III.F)
   // Contoh: 10-15 September -> 10–15 September
   const rentangTanggalRegex = /\b(\d{1,2})\s*-\s*(\d{1,2})\s+(Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\b/gi;
   let rentangMatch;
@@ -345,7 +345,7 @@ function checkEyd(text, options = {}) {
     });
   }
 
-  // 10. Pleonasme & Klise AI Slop
+  // Eliminasi klise dan frasa penggelembung tanpa substansi
   const pleonasmePatterns = [
     { regex: /\b(adalah\s+merupakan)\b/gi, fix: 'adalah', rule: "Hindari pleonasme 'adalah merupakan', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
     { regex: /\b(agar\s+supaya)\b/gi, fix: 'agar', rule: "Hindari pleonasme 'agar supaya', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
@@ -372,7 +372,7 @@ function checkEyd(text, options = {}) {
     }
   });
 
-  // 11. Pemeriksaan Khusus Ranah Profesional (Domain Modes)
+  // Validasi ranah penulisan profesional spesifik
   if (mode === 'ux') {
     // Larangan mencampur kata ganti 'Anda' dan 'kamu'
     const hasAnda = /\bAnda\b/.test(text);

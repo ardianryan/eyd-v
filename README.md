@@ -48,7 +48,7 @@
 - [🌟 Keunggulan Utama](#-keunggulan-utama)
 - [🎯 Domain Penulisan Profesional & Sub-Skill](#-domain-penulisan-profesional--sub-skill)
 - [📖 Glosarium Istilah Teknologi, AI & Komputasi Awan](#-glosarium-istilah-teknologi-ai--komputasi-awan)
-- [🚀 Penggunaan Instan via NPX](#-penggunaan-instan-via-npx)
+- [Penggunaan Instan via NPX](#penggunaan-instan-via-npx)
   - [1. Memeriksa Teks atau Berkas Dokumen (Linter)](#1-memeriksa-teks-atau-berkas-dokumen-linter)
   - [2. Cek Cepat Kata Baku & Padanan Istilah](#2-cek-cepat-kata-baku--padanan-istilah)
   - [3. Mode Pemantau Berkas Otomatis (Watch Mode)](#3-mode-pemantau-berkas-otomatis-watch-mode)
@@ -83,7 +83,7 @@
 * 📖 **Glosarium Istilah Teknologi & AI (115+ Kata)**: Padanan baku resmi istilah komputasi awan, AI, dan rekayasa perangkat lunak beserta panduan alih kode (*code-switching*).
 * 🤖 **Universal Agent Skill (`SKILL.md`) & Sub-Skills**: Siap dipasang ke Google Antigravity, Claude Code, Cursor IDE, Windsurf, Copilot, Cline, dan agen AI lainnya.
 * ⚡ **Model Context Protocol (MCP Server)**: Dilengkapi server MCP bawaan (`npx eyd-v mcp`) dengan tool `check_spelling`, `search_rules`, `lookup_word`, dan `lookup_tech_term`.
-* 🚀 **Server REST API & Cloud Native**: REST API mandiri tanpa dependensi luar (`npx eyd-v serve`), Dockerfile multi-stage, docker-compose, Cloudflare Workers endpoint, dan GitHub Actions runner.
+* **Server REST API & Cloud Native**: REST API mandiri tanpa dependensi luar (`npx eyd-v serve`), Dockerfile multi-stage, docker-compose, Cloudflare Workers endpoint, dan GitHub Actions runner.
 * 📊 **Indeks Keterbacaan & DevEx**: Fitur skor kemudahan membaca (`--score`), linting git staged (`--staged`), pemantau berkas (`watch`), pre-commit hook (`hook`), dan parser nilai file i18n JSON.
 * ✍️ **Panduan Penulisan Alami & Anti-Slop AI**: Mengeliminasi klise robotik (*"di era modern ini"*, *"sangat krusial"*, *"menyelami"*) serta koma subordinatif liar sebelum kata *karena/sehingga*.
 * 🧠 **AI Fine-Tuning & Alignment Ready**: Dilengkapi dataset SFT (ChatML, Alpaca), DPO (Direct Preference Optimization), UX microcopy, marketing copy, dan evaluasi penulisan ilmiah.
@@ -118,7 +118,7 @@ Beberapa contoh padanan umum:
 
 ---
 
-## 🚀 Penggunaan Instan via NPX
+## Penggunaan Instan via NPX
 
 Tidak memerlukan instalasi global, cukup jalankan perintah berikut di terminal:
 
@@ -439,7 +439,7 @@ Hasil pengujian:
 ========================================
 Hasil Uji Benchmark: 33 Lulus, 0 Gagal (100% Sukses)
 ========================================
-🎉 Seluruh 40 Pengujian Linter & Fitur Lanjutan Lulus 100%!
+Seluruh 40 Pengujian Linter & Fitur Lanjutan Lulus 100%!
 ```
 
 ---

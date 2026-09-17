@@ -110,7 +110,7 @@ function runBenchmark() {
     process.exit(1);
   }
 
-  console.log(`\n🎉 Seluruh 40 Pengujian Linter & Fitur Lanjutan Lulus 100%!`);
+  console.log(`\nSeluruh 40 Pengujian Linter & Fitur Lanjutan Lulus 100%!`);
 }
 
 runBenchmark();

@@ -43,14 +43,14 @@ def ingest_eyd_to_chroma():
                 "tags": ",".join(item.get("tags", []))
             })
 
-    print(f"🚀 Menyimpan {len(documents)} pasal EYD V ke koleksi Chroma...")
+    print(f"Menyimpan {len(documents)} pasal EYD V ke koleksi Chroma...")
     collection.add(
         ids=ids,
         documents=documents,
         metadatas=metadatas
     )
 
-    print("✅ Ingest selesai! Menguji query pencarian semantik...")
+    print("Ingest selesai. Menguji query pencarian semantik...")
     query_text = "kapan tanda koma digunakan sebelum kata tetapi?"
     results = collection.query(query_texts=[query_text], n_results=2)
 

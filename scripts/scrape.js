@@ -84,7 +84,7 @@ function fetchUrl(url) {
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function main() {
-  console.log('🚀 Memulai proses scraping EYD Edisi V dari https://ejaan.kemendikdasmen.go.id ...');
+  console.log('Memulai proses scraping EYD Edisi V dari https://ejaan.kemendikdasmen.go.id ...');
 
   const rootDir = path.resolve(__dirname, '..');
   const docsDir = path.join(rootDir, 'docs');
@@ -266,7 +266,7 @@ edition: "EYD Edisi V (2022-sekarang)"
   const jsonlLines = ragChunks.map(c => JSON.stringify(c)).join('\n');
   fs.writeFileSync(path.join(dataDir, 'eyd-v-chunks.jsonl'), jsonlLines, 'utf8');
 
-  console.log(`\n🎉 SELESAI! Berhasil memproses ${allRulesStructured.length} dokumen, menghasilkan ${ragChunks.length} chunks aturan RAG terstruktur.`);
+  console.log(`\nSelesai: Berhasil memproses ${allRulesStructured.length} dokumen, menghasilkan ${ragChunks.length} chunks aturan RAG terstruktur.`);
 }
 
 main().catch(err => {

@@ -4,7 +4,6 @@ const { checkEyd, searchRules, getRuleById, listCategories, checkSingleWord, loo
 
 function createEydServer() {
   return http.createServer((req, res) => {
-    // Set CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -18,14 +17,12 @@ function createEydServer() {
     const reqUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
     const pathname = reqUrl.pathname;
 
-    // Health check
     if (pathname === '/health' || pathname === '/') {
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ status: 'ok', service: 'eyd-v', version: '5.2.0' }));
+      res.end(JSON.stringify({ status: 'ok', service: 'eyd-v', version: '5.2.1' }));
       return;
     }
 
-    // POST /api/check
     if (pathname === '/api/check' && req.method === 'POST') {
       let body = '';
       req.on('data', chunk => { body += chunk; });
@@ -50,7 +47,6 @@ function createEydServer() {
       return;
     }
 
-    // GET /api/kata?word=kata atau ?w=kata
     if (pathname === '/api/kata' && req.method === 'GET') {
       const w = reqUrl.searchParams.get('word') || reqUrl.searchParams.get('w');
       if (!w) {
@@ -64,7 +60,6 @@ function createEydServer() {
       return;
     }
 
-    // GET /api/istilah?q=istilah atau ?query=istilah
     if (pathname === '/api/istilah' && req.method === 'GET') {
       const q = reqUrl.searchParams.get('q') || reqUrl.searchParams.get('query');
       const results = q ? lookupTechTerm(q) : getTechTerms();
@@ -73,7 +68,6 @@ function createEydServer() {
       return;
     }
 
-    // GET /api/rules
     if (pathname === '/api/rules' && req.method === 'GET') {
       const q = reqUrl.searchParams.get('q');
       if (q) {
@@ -89,7 +83,6 @@ function createEydServer() {
       return;
     }
 
-    // GET /api/rule/:id
     if (pathname.startsWith('/api/rule/') && req.method === 'GET') {
       const id = pathname.replace('/api/rule/', '');
       const rule = getRuleById(id);
@@ -114,6 +107,6 @@ if (require.main === module) {
   const port = process.env.PORT || 3000;
   const server = createEydServer();
   server.listen(port, () => {
-    console.log(`🚀 EYD V REST API Microservice berjalan di http://localhost:${port}`);
+    console.log(`EYD V REST API server berjalan di http://localhost:${port}`);
   });
 }

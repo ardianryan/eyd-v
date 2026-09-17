@@ -72,7 +72,7 @@ git commit -m "fix(linter): perbaiki peluluhan fonem s pada kata menyosialisasik
 
 ---
 
-## 🚀 Mengajukan Permintaan Tarik (*Pull Request*)
+## Mengajukan Permintaan Tarik (*Pull Request*)
 
 1. Dorong (*push*) ranting kerja Anda ke repositori fork:
    ```bash

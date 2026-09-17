@@ -5,6 +5,17 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
 
 ---
 
+## [5.2.1] - 2026-09-17
+
+### Diperbaiki
+* **Audit Kebersihan Kode & Eliminasi AI Slop**:
+  * Menghapus narasi komentar mekanis dan komentar duplikatif di seluruh basis kode (`src/linter.js`, `src/server.js`, `src/index.js`, `bin/cli.js`, `workers/worker.js`) mengacu pada pedoman kebersihan komentar kode.
+  * Mengeliminasi dekorasi emotikon berlebih (`✨`, `🎉`, `🚀`, `💡`, `📋`, dll.) pada keluaran CLI dan log peladen, menggantikannya dengan indikator teks bersih berstandar alat bantu pengembang Unix (`[OK]`, `[PERINGATAN]`, `[GALAT]`).
+  * Menyelaraskan teks antarmuka web peraga (`demo/index.html`) agar terbebas dari klaim sepihak yang keliru serta menghapus dekorasi visual buatan.
+  * Memperbarui versi paket dan endpoint Cloudflare Workers ke `5.2.1`.
+
+---
+
 ## [5.2.0] - 2026-09-15
 
 ### Ditambahkan

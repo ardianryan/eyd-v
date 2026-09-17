@@ -1,6 +1,6 @@
 /**
  * EYD V Serverless API for Cloudflare Workers
- * Latensi sub-10ms, edge deployment global
+ * Edge deployment global
  */
 
 import { checkEyd } from "../src/linter.js";
@@ -22,7 +22,7 @@ export default {
     }
 
     if (pathname === "/health" || pathname === "/") {
-      return Response.json({ status: "ok", service: "eyd-v-worker", version: "5.2.0" }, { headers: corsHeaders });
+      return Response.json({ status: "ok", service: "eyd-v-worker", version: "5.2.1" }, { headers: corsHeaders });
     }
 
     if (pathname === "/api/check" && request.method === "POST") {

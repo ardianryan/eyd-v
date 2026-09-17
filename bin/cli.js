@@ -38,7 +38,7 @@ function loadConfig() {
       try {
         return JSON.parse(fs.readFileSync(full, 'utf8'));
       } catch (e) {
-        console.warn(`${COLOR.yellow}⚠️ Gagal membaca berkas konfigurasi ${f}: ${e.message}${COLOR.reset}`);
+        console.warn(`${COLOR.yellow}[PERINGATAN] Gagal membaca berkas konfigurasi ${f}: ${e.message}${COLOR.reset}`);
       }
     }
   }
@@ -143,7 +143,6 @@ function checkI18nJson(content, options = {}) {
   };
 }
 
-// 1. Perintah CHECK
 function handleCheck() {
   const flags = args.filter(a => a.startsWith('-'));
   const isFix = flags.includes('--fix') || flags.includes('-f');
@@ -152,10 +151,8 @@ function handleCheck() {
   const isScore = flags.includes('--score');
   const isStaged = flags.includes('--staged');
 
-  // Baca konfigurasi lokal jika ada
   const config = loadConfig();
 
-  // Mode pemeriksaan
   let mode = config.mode || 'general';
   const modeFlag = flags.find(f => f.startsWith('--mode='));
   if (modeFlag) {
@@ -168,7 +165,6 @@ function handleCheck() {
     preferredPronoun: config.preferredPronoun || null
   };
 
-  // Jika --staged dipilih
   if (isStaged) {
     try {
       const output = execSync('git diff --cached --name-only --diff-filter=ACMR', { encoding: 'utf8' });
@@ -177,11 +173,11 @@ function handleCheck() {
         .filter(f => f && /\.(md|txt|json)$/i.test(f));
 
       if (stagedFiles.length === 0) {
-        console.log(`${COLOR.green}✨ Tidak ada berkas teks/markdown/json yang di-stage di git.${COLOR.reset}`);
+        console.log(`${COLOR.green}Tidak ada berkas teks/markdown/json yang di-stage di git.${COLOR.reset}`);
         process.exit(0);
       }
 
-      console.log(`\n${COLOR.cyan}🔍 Memeriksa ${stagedFiles.length} berkas staged di git:${COLOR.reset}\n`);
+      console.log(`\n${COLOR.cyan}Memeriksa ${stagedFiles.length} berkas staged di git:${COLOR.reset}\n`);
       let hasError = false;
 
       for (const f of stagedFiles) {
@@ -193,7 +189,7 @@ function handleCheck() {
 
           if (!result.valid) {
             hasError = true;
-            console.log(`${COLOR.yellow}⚠️ ${f}: ${result.errorCount} potensi ketidaksesuaian EYD V${COLOR.reset}`);
+            console.log(`${COLOR.yellow}[PERINGATAN] ${f}: ${result.errorCount} potensi ketidaksesuaian EYD V${COLOR.reset}`);
             result.errors.forEach((err, idx) => {
               if (isGithub) {
                 console.log(`::warning file=${f},line=1,col=1::[${err.type}] ${err.original} -> ${err.suggestion}. ${err.rule}`);
@@ -203,27 +199,26 @@ function handleCheck() {
             });
             console.log('');
           } else {
-            console.log(`${COLOR.green}✅ ${f}: Sesuai kaidah${COLOR.reset}`);
+            console.log(`${COLOR.green}[OK] ${f}: Sesuai kaidah${COLOR.reset}`);
           }
         }
       }
 
       if (hasError) {
-        console.log(`\n${COLOR.red}❌ Terdapat pelanggaran ejaan pada berkas staged.${COLOR.reset}`);
+        console.log(`\n${COLOR.red}[GALAT] Terdapat pelanggaran ejaan pada berkas staged.${COLOR.reset}`);
         process.exit(1);
       } else {
-        console.log(`\n${COLOR.green}🎉 Seluruh berkas staged lulus validasi EYD V!${COLOR.reset}\n`);
+        console.log(`\n${COLOR.green}Seluruh berkas staged lulus validasi EYD V.${COLOR.reset}\n`);
         process.exit(0);
       }
     } catch (e) {
-      console.error(`${COLOR.red}❌ Gagal menjalankan git diff: ${e.message}${COLOR.reset}`);
+      console.error(`${COLOR.red}[GALAT] Gagal menjalankan git diff: ${e.message}${COLOR.reset}`);
       process.exit(1);
     }
   }
 
   const rawTarget = args.slice(1).filter(a => !a.startsWith('-')).join(' ').trim();
 
-  // Cek apakah ada input via Stdin (pipe)
   if (!rawTarget && !process.stdin.isTTY) {
     let stdinData = '';
     process.stdin.setEncoding('utf8');
@@ -235,7 +230,7 @@ function handleCheck() {
   }
 
   if (!rawTarget) {
-    console.error(`${COLOR.red}❌ Harap masukkan teks atau path berkas yang ingin diperiksa.${COLOR.reset}`);
+    console.error(`${COLOR.red}[GALAT] Harap masukkan teks atau path berkas yang ingin diperiksa.${COLOR.reset}`);
     console.log(`Contoh: npx eyd-v check "Dimana letak pasca sarjana?" atau npx eyd-v check artikel.md --mode=seo`);
     process.exit(1);
   }
@@ -250,7 +245,6 @@ function handleCheck() {
       isFile = true;
       filePath = path.resolve(rawTarget);
     } catch (e) {
-      // treat as plain text
     }
   }
 
@@ -277,7 +271,7 @@ function runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isScore, 
   }
 
   if (result.valid) {
-    console.log(`\n${COLOR.green}✨ Sempurna! Tidak ditemukan pelanggaran EYD V pada teks ini.${COLOR.reset}`);
+    console.log(`\n${COLOR.green}Sesuai kaidah. Tidak ditemukan pelanggaran EYD V pada teks ini.${COLOR.reset}`);
     if (isScore && result.readability) {
       printReadability(result.readability);
     }
@@ -286,10 +280,10 @@ function runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isScore, 
   }
 
   if (isFile) {
-    console.log(`${COLOR.blue}📄 Memeriksa berkas:${COLOR.reset} ${filePath} ${options.mode !== 'general' ? `[Mode: ${options.mode}]` : ''}`);
+    console.log(`${COLOR.blue}Memeriksa berkas:${COLOR.reset} ${filePath} ${options.mode !== 'general' ? `[Mode: ${options.mode}]` : ''}`);
   }
 
-  console.log(`\n${COLOR.yellow}${COLOR.bold}⚠️ Ditemukan ${result.errorCount} potensi ketidaksesuaian EYD V:${COLOR.reset}\n`);
+  console.log(`\n${COLOR.yellow}${COLOR.bold}Ditemukan ${result.errorCount} potensi ketidaksesuaian EYD V:${COLOR.reset}\n`);
 
   result.errors.forEach((err, idx) => {
     const loc = err.jsonPath ? ` [Kunci: ${err.jsonPath}]` : '';
@@ -309,10 +303,10 @@ function runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isScore, 
     const backupFile = filePath + '.bak';
     fs.writeFileSync(backupFile, textToCheck, 'utf8');
     fs.writeFileSync(filePath, result.correctedText, 'utf8');
-    console.log(`${COLOR.green}${COLOR.bold}✅ Berkas berhasil diperbaiki secara in-place:${COLOR.reset} ${filePath}`);
+    console.log(`${COLOR.green}${COLOR.bold}Berkas berhasil diperbaiki secara in-place:${COLOR.reset} ${filePath}`);
     console.log(`${COLOR.dim}Cadangan berkas asli disimpan di:${COLOR.reset} ${backupFile}\n`);
   } else if (isFile) {
-    console.log(`${COLOR.cyan}💡 Gunakan opsi --fix untuk menerapkan perbaikan otomatis langsung ke berkas:${COLOR.reset}`);
+    console.log(`${COLOR.cyan}Gunakan opsi --fix untuk menerapkan perbaikan otomatis langsung ke berkas:${COLOR.reset}`);
     console.log(`   npx eyd-v check "${filePath}" --fix\n`);
   } else {
     console.log(`${COLOR.bold}${COLOR.cyan}Rekomendasi Teks Bersih:${COLOR.reset}`);
@@ -323,7 +317,7 @@ function runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isScore, 
 }
 
 function printReadability(readability) {
-  console.log(`${COLOR.bold}${COLOR.cyan}📊 Skor Keterbacaan Naskah (Readability Score):${COLOR.reset}`);
+  console.log(`${COLOR.bold}${COLOR.cyan}Skor Keterbacaan Naskah (Readability Score):${COLOR.reset}`);
   console.log(`   ${COLOR.bold}Indeks Keterbacaan :${COLOR.reset} ${COLOR.green}${readability.score}/100${COLOR.reset} (${readability.grade})`);
   console.log(`   ${COLOR.bold}Jumlah Kata        :${COLOR.reset} ${readability.wordCount} kata`);
   console.log(`   ${COLOR.bold}Jumlah Kalimat     :${COLOR.reset} ${readability.sentenceCount} kalimat`);
@@ -331,13 +325,11 @@ function printReadability(readability) {
   console.log(`   ${COLOR.bold}Rasio Verba Aktif  :${COLOR.reset} ${readability.activeRatio}% aktif\n`);
 }
 
-// 2. Perintah PROMPT (Tampilkan / Salin System Prompt)
 function handlePrompt() {
   const rootPkgDir = path.resolve(__dirname, '..');
   const promptFile = path.join(rootPkgDir, 'prompts/system-prompt-indonesia.md');
   const content = fs.readFileSync(promptFile, 'utf8');
 
-  // Ambil hanya isi markdown di dalam backticks bila ada
   let promptText = content;
   const match = content.match(/```markdown\n([\s\S]*?)\n```/);
   if (match) {
@@ -356,11 +348,11 @@ function handlePrompt() {
       } else {
         execSync('xclip -selection clipboard || xsel -b', { input: promptText });
       }
-      console.log(`\n${COLOR.green}${COLOR.bold}📋 Berhasil menyalin System Prompt EYD V ke Clipboard!${COLOR.reset}`);
+      console.log(`\n${COLOR.green}${COLOR.bold}System Prompt EYD V berhasil disalin ke clipboard.${COLOR.reset}`);
       console.log(`${COLOR.dim}Buka ChatGPT Web, Claude.ai, atau Gemini ➔ Tekan Paste (Ctrl+V / Cmd+V) di kolom Custom Instructions/System Prompt.${COLOR.reset}\n`);
       return;
     } catch (e) {
-      console.warn(`⚠️ Tidak dapat menyalin otomatis ke clipboard (${e.message}). Menampilkan teks di bawah:\n`);
+      console.warn(`Tidak dapat menyalin otomatis ke clipboard (${e.message}). Menampilkan teks di bawah:\n`);
     }
   }
 
@@ -369,10 +361,9 @@ function handlePrompt() {
   console.log(`\n${COLOR.dim}Tip: Gunakan "npx eyd-v prompt --copy" untuk langsung menyalin ke clipboard OS.${COLOR.reset}\n`);
 }
 
-// 3. Perintah REPL (Interactive Terminal)
 function handleRepl() {
   printBanner();
-  console.log(`${COLOR.bold}${COLOR.green}🎮 Memulai Playground Interaktif EYD V...${COLOR.reset}`);
+  console.log(`${COLOR.bold}${COLOR.green}Playground Interaktif EYD V (Ketik 'exit' untuk keluar)...${COLOR.reset}`);
   console.log(`${COLOR.dim}Ketik teks bahasa Indonesia untuk langsung diuji. Ketik ".exit" atau tekan Ctrl+C untuk keluar.${COLOR.reset}\n`);
 
   const rl = readline.createInterface({
@@ -396,9 +387,9 @@ function handleRepl() {
 
     const res = checkEyd(input);
     if (res.valid) {
-      console.log(`${COLOR.green}✨ Sesuai EYD V! Tidak ada kesalahan ejaan.${COLOR.reset}\n`);
+      console.log(`${COLOR.green}Sesuai EYD V. Tidak ada kesalahan ejaan.${COLOR.reset}\n`);
     } else {
-      console.log(`${COLOR.yellow}⚠️  Ditemukan ${res.errorCount} kesalahan:${COLOR.reset}`);
+      console.log(`${COLOR.yellow}Ditemukan ${res.errorCount} kesalahan:${COLOR.reset}`);
       res.errors.forEach(e => {
         console.log(`   • ${COLOR.red}${e.original}${COLOR.reset} ➔ ${COLOR.green}${e.suggestion}${COLOR.reset} (${COLOR.dim}${e.rule}${COLOR.reset})`);
       });
@@ -411,16 +402,15 @@ function handleRepl() {
   });
 }
 
-// 4. Perintah SEARCH
 function handleSearch() {
   const query = args.slice(1).join(' ').trim();
   if (!query) {
-    console.error(`${COLOR.red}❌ Harap masukkan kata kunci pencarian.${COLOR.reset}`);
+    console.error(`${COLOR.red}[GALAT] Harap masukkan kata kunci pencarian.${COLOR.reset}`);
     console.log(`Contoh: npx eyd-v search "tanda koma"`);
     process.exit(1);
   }
 
-  console.log(`${COLOR.cyan}🔍 Menelusuri aturan EYD V untuk:${COLOR.reset} "${query}"...\n`);
+  console.log(`${COLOR.cyan}Menelusuri aturan EYD V untuk:${COLOR.reset} "${query}"...\n`);
   const results = searchRules(query, { limit: 5 });
 
   if (results.length === 0) {
@@ -440,9 +430,8 @@ function handleSearch() {
   });
 }
 
-// 5. Perintah LIST
 function handleList() {
-  console.log(`${COLOR.bold}${COLOR.cyan}📚 Daftar Bab & Subbab Resmi EYD Edisi Kelima:${COLOR.reset}\n`);
+  console.log(`${COLOR.bold}${COLOR.cyan}Daftar Bab & Subbab Resmi EYD Edisi Kelima:${COLOR.reset}\n`);
   const categories = listCategories();
 
   categories.forEach((cat, idx) => {
@@ -454,18 +443,17 @@ function handleList() {
   });
 }
 
-// 6. Perintah RULE
 function handleRule() {
   const id = args[1];
   if (!id) {
-    console.error(`${COLOR.red}❌ Masukkan ID pasal yang ingin dibaca.${COLOR.reset}`);
+    console.error(`${COLOR.red}[GALAT] Masukkan ID pasal yang ingin dibaca.${COLOR.reset}`);
     console.log(`Contoh: npx eyd-v rule "tanda-titik#1"`);
     process.exit(1);
   }
 
   const rule = getRuleById(id);
   if (!rule) {
-    console.error(`${COLOR.red}❌ Pasal dengan ID '${id}' tidak ditemukan.${COLOR.reset}`);
+    console.error(`${COLOR.red}[GALAT] Pasal dengan ID '${id}' tidak ditemukan.${COLOR.reset}`);
     process.exit(1);
   }
 
@@ -475,7 +463,6 @@ function handleRule() {
   console.log('');
 }
 
-// 7. Perintah INSTALL
 function handleInstall() {
   printBanner();
   const hasFlag = (flag) => args.includes(flag);
@@ -495,7 +482,7 @@ function handleInstall() {
     const dest = path.resolve(customTarget);
     fs.mkdirSync(dest, { recursive: true });
     fs.copyFileSync(skillSource, path.join(dest, 'SKILL.md'));
-    console.log(`✅ [Custom Target] Skill terpasang di: ${path.join(dest, 'SKILL.md')}`);
+    console.log(`[OK] [Custom Target] Skill terpasang di: ${path.join(dest, 'SKILL.md')}`);
     return;
   }
 
@@ -507,7 +494,6 @@ function handleInstall() {
   const installCopilot = hasFlag('--copilot') || installAll;
   const installCline = hasFlag('--cline') || installAll;
 
-  // Jika tidak ada argumen sama sekali di terminal TTY, tampilkan prompt interaktif
   const noFlags = !installAntigravity && !installCursor && !installWindsurf && !installClaude && !installCopilot && !installCline && !installAll;
 
   if (noFlags && process.stdin.isTTY) {
@@ -527,13 +513,13 @@ function handleInstall() {
 
 function showInteractiveInstallMenu() {
   console.log(`${COLOR.bold}Pilih platform yang ingin dipasangi aturan EYD V:${COLOR.reset}`);
-  console.log(`1. 🚀 Google Antigravity (~/.gemini/config/skills/eyd-v)`);
-  console.log(`2. 🖱️  Cursor IDE (.cursor/rules & .cursorrules)`);
-  console.log(`3. 🏄 Windsurf / Cascade (.windsurfrules)`);
-  console.log(`4. 🤖 Claude Code CLI (.claude/skills/eyd-v)`);
-  console.log(`5. 🐙 GitHub Copilot (.github/copilot-instructions.md)`);
-  console.log(`6. 🦾 Cline / Roo Code (.clinerules)`);
-  console.log(`7. 🌟 Pasang ke SEMUA Platform di atas (Recommended)`);
+  console.log(`1. Google Antigravity (~/.gemini/config/skills/eyd-v)`);
+  console.log(`2. Cursor IDE (.cursor/rules & .cursorrules)`);
+  console.log(`3. Windsurf / Cascade (.windsurfrules)`);
+  console.log(`4. Claude Code CLI (.claude/skills/eyd-v)`);
+  console.log(`5. GitHub Copilot (.github/copilot-instructions.md)`);
+  console.log(`6. Cline / Roo Code (.clinerules)`);
+  console.log(`7. Pasang ke semua platform di atas`);
   console.log(`0. Batal\n`);
 
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -579,7 +565,7 @@ function executeInstallation(targets) {
       const dir = path.join(os.homedir(), '.gemini/config/skills/eyd-v');
       fs.mkdirSync(dir, { recursive: true });
       fs.copyFileSync(skillSource, path.join(dir, 'SKILL.md'));
-      console.log(`✅ [Google Antigravity] Terpasang di: ${path.join(dir, 'SKILL.md')}`);
+      console.log(`[OK] [Google Antigravity] Terpasang di: ${path.join(dir, 'SKILL.md')}`);
       count++;
     } catch (e) { console.warn(`⚠️ Antigravity error: ${e.message}`); }
   }
@@ -590,7 +576,7 @@ function executeInstallation(targets) {
       fs.mkdirSync(dir, { recursive: true });
       fs.copyFileSync(cursorSource, path.join(dir, 'eyd-v.mdc'));
       fs.copyFileSync(cursorrulesSource, path.resolve(process.cwd(), '.cursorrules'));
-      console.log(`✅ [Cursor IDE] Rules terpasang di: .cursor/rules/eyd-v.mdc & .cursorrules`);
+      console.log(`[OK] [Cursor IDE] Rules terpasang di: .cursor/rules/eyd-v.mdc & .cursorrules`);
       count++;
     } catch (e) { console.warn(`⚠️ Cursor error: ${e.message}`); }
   }
@@ -598,7 +584,7 @@ function executeInstallation(targets) {
   if (targets.windsurf) {
     try {
       fs.copyFileSync(windsurfSource, path.resolve(process.cwd(), '.windsurfrules'));
-      console.log(`✅ [Windsurf] Rules terpasang di: .windsurfrules`);
+      console.log(`[OK] [Windsurf] Rules terpasang di: .windsurfrules`);
       count++;
     } catch (e) { console.warn(`⚠️ Windsurf error: ${e.message}`); }
   }
@@ -609,7 +595,7 @@ function executeInstallation(targets) {
       fs.mkdirSync(dir, { recursive: true });
       fs.copyFileSync(skillSource, path.join(dir, 'SKILL.md'));
       fs.copyFileSync(claudeSource, path.join(dir, 'CLAUDE.md'));
-      console.log(`✅ [Claude Code] Skill terpasang di: .claude/skills/eyd-v/SKILL.md`);
+      console.log(`[OK] [Claude Code] Skill terpasang di: .claude/skills/eyd-v/SKILL.md`);
       count++;
     } catch (e) { console.warn(`⚠️ Claude error: ${e.message}`); }
   }
@@ -619,7 +605,7 @@ function executeInstallation(targets) {
       const dir = path.resolve(process.cwd(), '.github');
       fs.mkdirSync(dir, { recursive: true });
       fs.copyFileSync(copilotSource, path.join(dir, 'copilot-instructions.md'));
-      console.log(`✅ [GitHub Copilot] Instructions terpasang di: .github/copilot-instructions.md`);
+      console.log(`[OK] [GitHub Copilot] Instructions terpasang di: .github/copilot-instructions.md`);
       count++;
     } catch (e) { console.warn(`⚠️ Copilot error: ${e.message}`); }
   }
@@ -627,19 +613,18 @@ function executeInstallation(targets) {
   if (targets.cline) {
     try {
       fs.copyFileSync(clineSource, path.resolve(process.cwd(), '.clinerules'));
-      console.log(`✅ [Cline / Roo Code] Rules terpasang di: .clinerules`);
+      console.log(`[OK] [Cline / Roo Code] Rules terpasang di: .clinerules`);
       count++;
     } catch (e) { console.warn(`⚠️ Cline error: ${e.message}`); }
   }
 
-  console.log(`\n${COLOR.green}${COLOR.bold}🎉 Selesai! Berhasil memasang ${count} konfigurasi Agent Skill.${COLOR.reset}\n`);
+  console.log(`\n${COLOR.green}${COLOR.bold}Selesai. Berhasil memasang ${count} konfigurasi Agent Skill.${COLOR.reset}\n`);
 }
 
-// 8. Perintah INIT-HOOK / HOOK
 function handleInitHook() {
   const gitDir = path.resolve(process.cwd(), '.git');
   if (!fs.existsSync(gitDir)) {
-    console.error(`${COLOR.red}❌ Direktori .git tidak ditemukan di lokasi ini.${COLOR.reset}`);
+    console.error(`${COLOR.red}[GALAT] Direktori .git tidak ditemukan di lokasi ini.${COLOR.reset}`);
     process.exit(1);
   }
 
@@ -649,48 +634,46 @@ function handleInitHook() {
   const hookFile = path.join(hooksDir, 'pre-commit');
   const hookScript = `#!/bin/sh
 # EYD V Pre-commit Linter
-echo "🔍 Menjalankan pemeriksaan EYD V sebelum commit..."
+echo "Menjalankan pemeriksaan EYD V sebelum commit..."
 npx eyd-v check --staged || exit 1
 `;
 
   fs.writeFileSync(hookFile, hookScript, { mode: 0o755 });
-  console.log(`${COLOR.green}✅ Pre-commit hook berhasil dipasang di: ${hookFile}${COLOR.reset}`);
+  console.log(`${COLOR.green}[OK] Pre-commit hook berhasil dipasang di: ${hookFile}${COLOR.reset}`);
   console.log(`Setiap commit berkas naskah akan otomatis divalidasi dengan aturan EYD V (--staged).`);
 }
 
-// 9. Perintah KATA (Cek satu kata cepat)
 function handleKata() {
   const word = args[1];
   if (!word) {
-    console.error(`${COLOR.red}❌ Harap masukkan satu kata yang ingin diperiksa.${COLOR.reset}`);
+    console.error(`${COLOR.red}[GALAT] Harap masukkan satu kata yang ingin diperiksa.${COLOR.reset}`);
     console.log(`Contoh: npx eyd-v kata antri`);
     process.exit(1);
   }
 
   const res = checkSingleWord(word);
-  console.log(`\n🔍 ${COLOR.bold}Pemeriksaan Kata:${COLOR.reset} "${COLOR.cyan}${res.word}${COLOR.reset}"`);
+  console.log(`\n${COLOR.bold}Pemeriksaan Kata:${COLOR.reset} "${COLOR.cyan}${res.word}${COLOR.reset}"`);
   if (res.isBaku) {
-    console.log(`✅ Status      : ${COLOR.green}${COLOR.bold}BAKU${COLOR.reset}`);
-    console.log(`📖 Keterangan  : ${COLOR.dim}${res.rule}${COLOR.reset}\n`);
+    console.log(`Status         : ${COLOR.green}${COLOR.bold}BAKU${COLOR.reset}`);
+    console.log(`Keterangan     : ${COLOR.dim}${res.rule}${COLOR.reset}\n`);
   } else {
-    console.log(`❌ Status      : ${COLOR.red}${COLOR.bold}TIDAK BAKU${COLOR.reset}`);
-    console.log(`✨ Bentuk Baku : ${COLOR.green}${COLOR.bold}${res.suggestion}${COLOR.reset}`);
-    console.log(`📚 Rujukan     : ${res.reference}`);
-    console.log(`📖 Keterangan  : ${COLOR.dim}${res.rule}${COLOR.reset}\n`);
+    console.log(`Status         : ${COLOR.red}${COLOR.bold}TIDAK BAKU${COLOR.reset}`);
+    console.log(`Bentuk Baku    : ${COLOR.green}${COLOR.bold}${res.suggestion}${COLOR.reset}`);
+    console.log(`Rujukan        : ${res.reference}`);
+    console.log(`Keterangan     : ${COLOR.dim}${res.rule}${COLOR.reset}\n`);
   }
 }
 
-// 10. Perintah ISTILAH (Glosarium Teknologi & AI)
 function handleIstilah() {
   const query = args.slice(1).join(' ').trim();
   if (!query) {
-    console.error(`${COLOR.red}❌ Harap masukkan istilah teknologi yang dicari.${COLOR.reset}`);
+    console.error(`${COLOR.red}[GALAT] Harap masukkan istilah teknologi yang dicari.${COLOR.reset}`);
     console.log(`Contoh: npx eyd-v istilah cache atau npx eyd-v istilah prompt`);
     process.exit(1);
   }
 
   const results = lookupTechTerm(query);
-  console.log(`\n📚 ${COLOR.bold}Glosarium Istilah Teknologi & AI (Hasil untuk "${query}"):${COLOR.reset}\n`);
+  console.log(`\n${COLOR.bold}Glosarium Istilah Teknologi & AI (Hasil untuk "${query}"):${COLOR.reset}\n`);
   if (results.length === 0) {
     console.log(`${COLOR.yellow}Tidak ditemukan padanan langsung untuk "${query}".${COLOR.reset}`);
     console.log(`Panduan lengkap: docs/profesional/05-glosarium-istilah-teknologi-dan-ai.md\n`);
@@ -706,7 +689,6 @@ function handleIstilah() {
   }
 }
 
-// 11. Perintah SERVE (REST API Microservice)
 function handleServe() {
   let port = 3000;
   const portIndex = args.indexOf('--port');
@@ -716,15 +698,14 @@ function handleServe() {
   startServer(port);
 }
 
-// 12. Perintah WATCH (Realtime File Watcher)
 function handleWatch() {
   const targetDir = path.resolve(process.cwd(), args[1] || '.');
   if (!fs.existsSync(targetDir)) {
-    console.error(`${COLOR.red}❌ Direktori ${targetDir} tidak ditemukan.${COLOR.reset}`);
+    console.error(`${COLOR.red}[GALAT] Direktori ${targetDir} tidak ditemukan.${COLOR.reset}`);
     process.exit(1);
   }
 
-  console.log(`\n${COLOR.cyan}${COLOR.bold}👀 Mode Pengawas (Watcher) Aktif:${COLOR.reset} ${targetDir}`);
+  console.log(`\n${COLOR.cyan}${COLOR.bold}Mode Pengawas (Watcher) Aktif:${COLOR.reset} ${targetDir}`);
   console.log(`${COLOR.dim}Memantau perubahan berkas .md, .txt, dan .json. Tekan Ctrl+C untuk berhenti.${COLOR.reset}\n`);
 
   let debounceTimer = null;
@@ -736,13 +717,13 @@ function handleWatch() {
     debounceTimer = setTimeout(() => {
       const full = path.join(targetDir, filename);
       if (fs.existsSync(full)) {
-        console.log(`\n${COLOR.blue}🔄 Berkas berubah:${COLOR.reset} ${filename}`);
+        console.log(`\n${COLOR.blue}Berkas berubah:${COLOR.reset} ${filename}`);
         const content = fs.readFileSync(full, 'utf8');
         const res = checkEyd(content, loadConfig());
         if (res.valid) {
-          console.log(`   ${COLOR.green}✅ EYD V: 0 Galat${COLOR.reset}`);
+          console.log(`   ${COLOR.green}[OK] EYD V: 0 galat${COLOR.reset}`);
         } else {
-          console.log(`   ${COLOR.yellow}⚠️ EYD V: ${res.errorCount} Potensi Galat${COLOR.reset}`);
+          console.log(`   ${COLOR.yellow}[PERINGATAN] EYD V: ${res.errorCount} potensi galat${COLOR.reset}`);
           res.errors.forEach(e => {
             console.log(`     • "${COLOR.red}${e.original}${COLOR.reset}" ➔ "${COLOR.green}${e.suggestion}${COLOR.reset}" (${e.rule})`);
           });
@@ -752,7 +733,6 @@ function handleWatch() {
   });
 }
 
-// Route command
 switch (command) {
   case 'check':
     handleCheck();

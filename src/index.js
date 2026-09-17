@@ -103,7 +103,7 @@ function startServer(port = 3000) {
   const server = createEydServer();
   return new Promise((resolve, reject) => {
     server.listen(port, () => {
-      console.log(`🚀 EYD V REST API Server berjalan di http://localhost:${port}`);
+      console.log(`EYD V REST API server berjalan di http://localhost:${port}`);
       resolve(server);
     });
     server.on('error', reject);
