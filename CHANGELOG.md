@@ -5,6 +5,33 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
 
 ---
 
+## [5.3.0] - 2026-10-01
+
+### Ditambahkan
+* **Peningkatan Mesin Linguistik Inti (EYD V Bab I & II)**:
+  * **Kapitalisasi Nama Geografi**: Deteksi nama geografi umum yang diikuti nama diri (*selat sunda* ➔ *Selat Sunda*, *pulau jawa* ➔ *Pulau Jawa*).
+  * **Pembedaan Nama Jenis (Huruf Kecil)**: Memastikan nama jenis dari nama geografi ditulis dengan huruf kecil (*kunci inggris*, *jeruk bali*, *petai cina*, *pisang ambon*, *bika ambon*, *gula jawa*, *garam inggris*).
+  * **Kapitalisasi Nama Bangsa & Bahasa**: Menegakkan kapitalisasi nama bangsa, suku bangsa, dan bahasa (*bahasa Inggris*, *suku Jawa*, *bangsa Indonesia*).
+  * **Penulisan Lambang Bilangan**: Penulisan bilangan tingkat berangka (*ke-5*), bilangan berakhiran *-an* (*tahun 80-an*), dan deteksi larangan angka pada awal kalimat.
+* **Ranah Penulisan Hukum (*Legal*) & Finansial (*Finance*)**:
+  * Dataset baru `data/glosarium-istilah-hukum-finansial.json` (padanan resmi istilah hukum, perundang-undangan, akuntansi, dan pasar modal).
+  * Mode domain baru linter: `--mode=legal` dan `--mode=finance`.
+  * Sub-skill baru: `skills/eyd-v-legal/` dan `skills/eyd-v-finance/`.
+  * Dokumentasi baru: `docs/profesional/06-penulisan-hukum-dan-perundang-undangan.md` dan `docs/profesional/07-penulisan-bisnis-dan-finansial.md`.
+* **Dukungan Format Berkas Subtitle (`.srt` & `.vtt`)**:
+  * Pengecekan cerdas naskah dialog film/video tanpa merusak struktur indeks dan stempel waktu (*timestamp*), serta pemulihan in-place via `--fix`.
+* **Ekstensi Resmi VS Code & Cursor IDE (`extensions/vscode/`)**:
+  * Real-time squiggly line diagnostic, hover preview aturan resmi EYD V, dan CodeAction Quick Fix (*Cmd/Ctrl + .*).
+* **Integrasi CI/CD GitHub PR Reviewer & SARIF**:
+  * Dukungan format `--format=github-pr-review` untuk saran inline GitHub PR review comments.
+  * Dukungan format `--format=sarif` untuk integrasi tab GitHub Code Scanning.
+  * Pembaruan `action.yml` dengan input `format` dinamis.
+* **Web Playground Interaktif**:
+  * Penambahan opsi ranah *Hukum & Regulasi* serta *Keuangan & Bisnis*.
+  * Tombol interaktif *Terapkan* pada setiap kartu temuan untuk mengaplikasikan perbaikan secara granular per-kata langsung pada teks input.
+
+---
+
 ## [5.2.1] - 2026-09-17
 
 ### Diperbaiki

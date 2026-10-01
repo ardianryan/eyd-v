@@ -70,6 +70,8 @@
               <option value="marketing">Pemasaran & Medsos</option>
               <option value="seo">Artikel SEO Organik</option>
               <option value="academic">Karya Ilmiah & Akademik</option>
+              <option value="legal">Hukum & Regulasi</option>
+              <option value="finance">Keuangan & Bisnis</option>
             </select>
           </div>
           <div class="text-[11px] font-medium text-emerald-600 flex items-center space-x-1">
@@ -522,17 +524,33 @@
         errorBadgeEl.innerText = `${res.errorCount} temuan`;
         errorBadgeEl.className = 'px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-100 text-rose-700';
 
+        window.currentErrors = res.errors;
         errorListEl.innerHTML = res.errors.map((e, idx) => `
           <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
             <div class="flex items-center justify-between mb-1">
               <span class="font-bold text-slate-800">${idx + 1}. <span class="line-through text-rose-500">${e.original}</span> ➔ <span class="text-emerald-600 font-semibold">${e.suggestion}</span></span>
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-700">${e.type}</span>
+              <div class="flex items-center space-x-1.5">
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-700">${e.type}</span>
+                <button onclick="window.applySingleFix(${idx})" class="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition">Terapkan</button>
+              </div>
             </div>
             <p class="text-[11px] text-slate-500">${e.rule}</p>
           </div>
         `).join('');
       }
     }
+
+    window.applySingleFix = function(idx) {
+      if (!window.currentErrors || !window.currentErrors[idx]) return;
+      const err = window.currentErrors[idx];
+      if (err.index !== undefined && err.suggestion) {
+        const text = inputEl.value;
+        const before = text.substring(0, err.index);
+        const after = text.substring(err.index + err.original.length);
+        inputEl.value = before + err.suggestion + after;
+        performCheck();
+      }
+    };
 
     document.getElementById('domainMode').addEventListener('change', performCheck);
 

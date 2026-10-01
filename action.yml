@@ -11,9 +11,13 @@ inputs:
     required: false
     default: "README.md"
   mode:
-    description: "Ranah penulisan profesional ('general', 'ux', 'marketing', 'seo', 'academic')"
+    description: "Ranah penulisan profesional ('general', 'ux', 'marketing', 'seo', 'academic', 'legal', 'finance')"
     required: false
     default: "general"
+  format:
+    description: "Format pelaporan anotasi ('github', 'github-pr-review', 'sarif', 'json')"
+    required: false
+    default: "github"
   score:
     description: "Tampilkan indeks dan skor keterbacaan naskah (true/false)"
     required: false
@@ -44,5 +48,5 @@ runs:
           FIX_FLAG="--fix"
         fi
 
-        echo "🔍 Menjalankan EYD V Linter pada ${{ inputs.path }}..."
-        npx --yes eyd-v check "${{ inputs.path }}" --mode="${{ inputs.mode }}" --format=github $SCORE_FLAG $FIX_FLAG
+        echo "Menjalankan EYD V Linter pada ${{ inputs.path }}..."
+        npx --yes eyd-v check "${{ inputs.path }}" --mode="${{ inputs.mode }}" --format="${{ inputs.format }}" $SCORE_FLAG $FIX_FLAG

@@ -110,7 +110,78 @@ function runBenchmark() {
     process.exit(1);
   }
 
-  console.log(`\nSeluruh 40 Pengujian Linter & Fitur Lanjutan Lulus 100%!`);
+  // 8. Uji Fitur v5.3.0: Kapitalisasi Geografi vs Nama Jenis
+  const geoRes = checkEyd('Menyeberangi selat sunda menuju pulau jawa.');
+  if (geoRes.errors.some(e => e.type === 'HURUF_KAPITAL_GEOGRAFI' && e.suggestion === 'Selat Sunda')) {
+    console.log(`✅ [HURUF KAPITAL GEOGRAFI] 'selat sunda' -> 'Selat Sunda' PASS`);
+  } else {
+    console.error(`❌ [HURUF KAPITAL GEOGRAFI] Gagal`, geoRes);
+    process.exit(1);
+  }
+
+  const jenisRes = checkEyd('Membeli kunci Inggris dan jeruk Bali.');
+  if (jenisRes.errors.some(e => e.type === 'HURUF_KECIL_NAMA_JENIS' && e.suggestion === 'kunci inggris')) {
+    console.log(`✅ [HURUF KECIL NAMA JENIS] 'kunci Inggris' -> 'kunci inggris' PASS`);
+  } else {
+    console.error(`❌ [HURUF KECIL NAMA JENIS] Gagal`, jenisRes);
+    process.exit(1);
+  }
+
+  // 9. Uji Fitur v5.3.0: Nama Bangsa & Bahasa
+  const bahasaRes = checkEyd('Belajar bahasa inggris bersama suku jawa.');
+  if (bahasaRes.errors.some(e => e.type === 'HURUF_KAPITAL_BANGSA_BAHASA' && e.suggestion === 'bahasa Inggris')) {
+    console.log(`✅ [BANGSA & BAHASA] 'bahasa inggris' -> 'bahasa Inggris' PASS`);
+  } else {
+    console.error(`❌ [BANGSA & BAHASA] Gagal`, bahasaRes);
+    process.exit(1);
+  }
+
+  // 10. Uji Fitur v5.3.0: Penulisan Bilangan Tingkat & Akhiran -an
+  const bilRes = checkEyd('Pemenang ke 5 musik era tahun 80an.');
+  if (bilRes.errors.some(e => e.type === 'BILANGAN_TINGKAT' && e.suggestion === 'ke-5') &&
+      bilRes.errors.some(e => e.type === 'BILANGAN_AKHIRAN_AN' && e.suggestion === 'tahun 80-an')) {
+    console.log(`✅ [BILANGAN TINGKAT & -AN] 'ke 5' -> 'ke-5' & 'tahun 80an' -> 'tahun 80-an' PASS`);
+  } else {
+    console.error(`❌ [BILANGAN TINGKAT & -AN] Gagal`, bilRes);
+    process.exit(1);
+  }
+
+  // 11. Uji Fitur v5.3.0: Angka Awal Kalimat
+  const awalRes = checkEyd('50 orang menghadiri acara.');
+  if (awalRes.errors.some(e => e.type === 'ANGKA_AWAL_KALIMAT')) {
+    console.log(`✅ [ANGKA AWAL KALIMAT] Deteksi angka di awal kalimat PASS`);
+  } else {
+    console.error(`❌ [ANGKA AWAL KALIMAT] Gagal`, awalRes);
+    process.exit(1);
+  }
+
+  // 12. Uji Fitur v5.3.0: Ranah Legal & Finance
+  const { lookupLegalFinanceTerm } = require('../src/index');
+  const legalRes = checkEyd('Dokumen ini memuat klausul khusus.', { mode: 'legal' });
+  if (legalRes.errors.some(e => e.type === 'ISTILAH_HUKUM' && e.suggestion === 'klausula')) {
+    console.log(`✅ [DOMAIN LEGAL] Deteksi 'klausul' -> 'klausula' PASS`);
+  } else {
+    console.error(`❌ [DOMAIN LEGAL] Gagal`, legalRes);
+    process.exit(1);
+  }
+
+  const finRes = checkEyd('Perusahaan memantau cash flow secara ketat.', { mode: 'finance' });
+  if (finRes.errors.some(e => e.type === 'ISTILAH_FINANSIAL' && e.suggestion === 'arus kas')) {
+    console.log(`✅ [DOMAIN FINANCE] Deteksi 'cash flow' -> 'arus kas' PASS`);
+  } else {
+    console.error(`❌ [DOMAIN FINANCE] Gagal`, finRes);
+    process.exit(1);
+  }
+
+  const termMatch = lookupLegalFinanceTerm('force majeure');
+  if (termMatch.length > 0 && termMatch[0].baku.includes('keadaan kahar')) {
+    console.log(`✅ [GLOSARIUM HUKUM/FINANSIAL] lookupLegalFinanceTerm('force majeure') -> keadaan kahar PASS`);
+  } else {
+    console.error(`❌ [GLOSARIUM HUKUM/FINANSIAL] Gagal lookup`, termMatch);
+    process.exit(1);
+  }
+
+  console.log(`\nSeluruh 48 Pengujian Linter & Fitur Lanjutan Lulus 100%!`);
 }
 
 runBenchmark();

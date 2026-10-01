@@ -1,0 +1,177 @@
+[
+  {
+    "term": "legal standing",
+    "baku": "kedudukan hukum",
+    "kategori": "Hukum",
+    "definisi": "Hak atau kapasitas hukum seseorang atau badan hukum untuk mengajukan gugatan atau permohonan ke pengadilan.",
+    "contoh": "Pemohon terbukti memiliki kedudukan hukum (legal standing) dalam perkara pengujian undang-undang."
+  },
+  {
+    "term": "force majeure",
+    "baku": "keadaan kahar",
+    "kategori": "Hukum",
+    "definisi": "Keadaan di luar kendali para pihak dalam suatu perjanjian yang menghalangi terlaksananya kewajiban.",
+    "contoh": "Bencana alam gempa bumi dikategorikan sebagai keadaan kahar dalam kontrak konstruksi."
+  },
+  {
+    "term": "pro bono",
+    "baku": "bantuan hukum cuma-cuma",
+    "kategori": "Hukum",
+    "definisi": "Pelayanan hukum yang diberikan advokat tanpa memungut bayaran demi kepentingan masyarakat tidak mampu.",
+    "contoh": "Lembaga bantuan hukum menyediakan layanan cuma-cuma bagi masyarakat yang membutuhkan."
+  },
+  {
+    "term": "dissenting opinion",
+    "baku": "pendapat berbeda",
+    "kategori": "Hukum",
+    "definisi": "Pendapat atau pertimbangan hukum seorang hakim yang tidak sejalan dengan putusan mayoritas majelis hakim.",
+    "contoh": "Salah satu hakim konstitusi menyampaikan pendapat berbeda dalam putusan sengketa hasil pemilu."
+  },
+  {
+    "term": "hearing",
+    "baku": "rapat dengar pendapat",
+    "kategori": "Hukum & Tata Negara",
+    "definisi": "Pertemuan resmi lembaga perwakilan rakyat untuk meminta keterangan atau masukan dari pemangku kepentingan.",
+    "contoh": "Komisi DPR mengundang para pakar hukum dalam rapat dengar pendapat terkait RUU."
+  },
+  {
+    "term": "concurring opinion",
+    "baku": "alasan berbeda",
+    "kategori": "Hukum",
+    "definisi": "Pendapat hakim yang sepakat dengan amar putusan namun memiliki dasar pertimbangan hukum yang berlainan.",
+    "contoh": "Hakim anggota mencantumkan alasan berbeda dalam putusan perkara perdata."
+  },
+  {
+    "term": "due diligence",
+    "baku": "uji tuntas",
+    "kategori": "Hukum & Bisnis",
+    "definisi": "Proses investigasi atau audit menyeluruh terhadap aspek finansial dan legal sebelum transaksi korporasi.",
+    "contoh": "Perusahaan melakukan uji tuntas sebelum mengakuisisi entitas anak usaha."
+  },
+  {
+    "term": "memorandum of understanding (MoU)",
+    "baku": "nota kesepahaman",
+    "kategori": "Hukum & Bisnis",
+    "definisi": "Dokumen pendahuluan yang mencatat pemahaman bersama antara dua pihak atau lebih sebelum perjanjian definitif.",
+    "contoh": "Kedua kementerian menandatangani nota kesepahaman tentang perlindungan data pribadi."
+  },
+  {
+    "term": "non-disclosure agreement (NDA)",
+    "baku": "perjanjian kerahasiaan",
+    "kategori": "Hukum & Bisnis",
+    "definisi": "Kontrak yang mengikat para pihak untuk menjaga kerahasiaan informasi tertentu yang dibagikan.",
+    "contoh": "Karyawan baru diwajibkan menandatangani perjanjian kerahasiaan data perusahaan."
+  },
+  {
+    "term": "class action",
+    "baku": "gugatan perwakilan kelompok",
+    "kategori": "Hukum",
+    "definisi": "Gugatan perdata yang diajukan oleh satu atau beberapa orang yang mewakili kelompok orang dalam jumlah besar.",
+    "contoh": "Warga terdampak polusi mengajukan gugatan perwakilan kelompok terhadap korporasi pencemar."
+  },
+  {
+    "term": "cash flow",
+    "baku": "arus kas",
+    "kategori": "Keuangan",
+    "definisi": "Kenaikan atau penurunan jumlah uang kas yang dimiliki oleh bisnis atau individu selama periode tertentu.",
+    "contoh": "Manajemen perusahaan fokus menjaga kesehatan arus kas operasional."
+  },
+  {
+    "term": "capital gain",
+    "baku": "keuntungan modal",
+    "kategori": "Keuangan & Pasar Modal",
+    "definisi": "Keuntungan yang diperoleh dari selisih lebih harga jual aset investasi di atas harga belinya.",
+    "contoh": "Investor saham memperoleh keuntungan modal setelah menjual saham berfundamental baik."
+  },
+  {
+    "term": "collateral",
+    "baku": "agunan / jaminan",
+    "kategori": "Keuangan & Perbankan",
+    "definisi": "Aset berharga yang diserahkan peminjam kepada bank sebagai jaminan pelunasan pinjaman kredit.",
+    "contoh": "Sertifikat tanah dijadikan agunan kredit usaha rakyat."
+  },
+  {
+    "term": "hedging",
+    "baku": "lindung nilai",
+    "kategori": "Keuangan & Pasar Modal",
+    "definisi": "Strategi investasi yang ditujukan untuk mengurangi risiko fluktuasi harga aset atau nilai tukar mata uang.",
+    "contoh": "BUMN penerbangan melakukan lindung nilai terhadap pergerakan harga bahan bakar avtur."
+  },
+  {
+    "term": "escrow",
+    "baku": "rekening penampung / rekening bersama",
+    "kategori": "Keuangan & E-Commerce",
+    "definisi": "Rekening pihak ketiga yang memegang dana transaksi sampai seluruh syarat jual beli terpenuhi.",
+    "contoh": "Dana transaksi disimpan di rekening penampung resmi hingga barang diterima pembeli."
+  },
+  {
+    "term": "break-even point",
+    "baku": "titik impas",
+    "kategori": "Keuangan & Manajemen",
+    "definisi": "Kondisi operasional usaha ketika total pendapatan setara dengan total biaya, tidak untung dan tidak rugi.",
+    "contoh": "Usaha rintisan tersebut diproyeksikan mencapai titik impas pada tahun kedua."
+  },
+  {
+    "term": "dividend",
+    "baku": "dividen",
+    "kategori": "Keuangan & Pasar Modal",
+    "definisi": "Bagian keuntungan perusahaan yang dibagikan kepada para pemegang saham berdasarkan porsi kepemilikan.",
+    "contoh": "Rapat umum pemegang saham menyetujui pembagian dividen tunai sebesar 40% laba bersih."
+  },
+  {
+    "term": "insolvency",
+    "baku": "ketakmampuan bayar / insolvensi",
+    "kategori": "Hukum & Keuangan",
+    "definisi": "Keadaan debitur yang tidak mampu melunasi kewajiban utang yang telah jatuh tempo.",
+    "contoh": "Pengadilan niaga menetapkan status insolvensi bagi debitor yang pailit."
+  },
+  {
+    "term": "merger",
+    "baku": "penggabungan usaha / merger",
+    "kategori": "Hukum & Bisnis",
+    "definisi": "Penggabungan dari dua atau lebih perseroan menjadi satu kesatuan perseroan baru atau bertahan.",
+    "contoh": "Penggabungan usaha kedua bank syariah menciptakan entitas perbankan nasional yang kuat."
+  },
+  {
+    "term": "acquisition",
+    "baku": "pengambilalihan / akuisisi",
+    "kategori": "Hukum & Bisnis",
+    "definisi": "Perbuatan hukum yang dilakukan oleh badan hukum atau orang perseorangan untuk mengambil alih saham perseroan.",
+    "contoh": "Proses akuisisi perusahaan teknologi disetujui oleh otoritas persaingan usaha."
+  },
+  {
+    "term": "underwrite / underwriter",
+    "baku": "penjamin emisi",
+    "kategori": "Pasar Modal",
+    "definisi": "Pihak yang membuat kontrak dengan emiten untuk menjamin penjualan efek pada penawaran umum perdana.",
+    "contoh": "Perusahaan sekuritas bertindak sebagai penjamin emisi efek dalam proses IPO."
+  },
+  {
+    "term": "compound interest",
+    "baku": "bunga majemuk / bunga berbunga",
+    "kategori": "Keuangan & Perbankan",
+    "definisi": "Bunga yang dihitung berdasarkan pokok simpanan ditambah bunga yang telah terakumulasi sebelumnya.",
+    "contoh": "Investasi jangka panjang memanfaatkan daya ungkit bunga majemuk."
+  },
+  {
+    "term": "mutual fund",
+    "baku": "reksa dana",
+    "kategori": "Pasar Modal",
+    "definisi": "Wadah yang dipergunakan untuk menghimpun dana dari masyarakat pemodal untuk diinvestasikan dalam portofolio efek.",
+    "contoh": "Investor pemula disarankan memulai investasi melalui produk reksa dana pasar uang."
+  },
+  {
+    "term": "liquidity",
+    "baku": "likuiditas",
+    "kategori": "Keuangan",
+    "definisi": "Kemampuan perusahaan atau individu dalam memenuhi kewajiban finansial jangka pendek dengan cepat.",
+    "contoh": "Bank sentral menjaga kecukupan likuiditas perbankan nasional."
+  },
+  {
+    "term": "leverage",
+    "baku": "daya ungkit",
+    "kategori": "Keuangan",
+    "definisi": "Penggunaan dana pinjaman untuk membiayai pembelian aset dengan harapan meningkatkan potensi imbal hasil.",
+    "contoh": "Perusahaan mengurangi rasio daya ungkit guna meminimalkan risiko beban bunga utang."
+  }
+]

@@ -10,7 +10,7 @@ const path = require('path');
 const os = require('os');
 const readline = require('readline');
 const { execSync } = require('child_process');
-const { checkEyd, searchRules, getRuleById, listCategories, checkSingleWord, lookupTechTerm, getTechTerms, startServer } = require('../src/index');
+const { checkEyd, searchRules, getRuleById, listCategories, checkSingleWord, lookupTechTerm, getTechTerms, lookupLegalFinanceTerm, getLegalFinanceTerms, startServer } = require('../src/index');
 const { startMcpServer } = require('../src/mcp-server');
 
 const PKG = require('../package.json');
@@ -143,11 +143,60 @@ function checkI18nJson(content, options = {}) {
   };
 }
 
+function checkSubtitle(content, options, ext) {
+  const lines = content.split(/\r?\n/);
+  const errors = [];
+  const correctedLines = [...lines];
+
+  let inHeader = ext === '.vtt';
+  const timeRegex = ext === '.srt' 
+    ? /^\d{2}:\d{2}:\d{2}[,\.]\d{3}\s*-->\s*\d{2}:\d{2}:\d{2}[,\.]\d{3}/
+    : /^(?:\d{2}:)?\d{2}:\d{2}\.\d{3}\s*-->\s*(?:\d{2}:)?\d{2}:\d{2}\.\d{3}/;
+  const indexRegex = /^\d+$/;
+
+  for (let i = 0; i < lines.length; i++) {
+    const rawLine = lines[i];
+    const trimmed = rawLine.trim();
+
+    if (!trimmed) {
+      if (inHeader && ext === '.vtt') inHeader = false;
+      continue;
+    }
+    if (inHeader && ext === '.vtt' && (trimmed.startsWith('WEBVTT') || trimmed.startsWith('NOTE') || trimmed.startsWith('STYLE'))) {
+      continue;
+    }
+    if (indexRegex.test(trimmed) || timeRegex.test(trimmed)) {
+      continue;
+    }
+
+    const lineRes = checkEyd(rawLine, options);
+    if (!lineRes.valid) {
+      lineRes.errors.forEach(err => {
+        errors.push({
+          ...err,
+          line: i + 1,
+          subtitleLine: rawLine
+        });
+      });
+      correctedLines[i] = lineRes.correctedText;
+    }
+  }
+
+  return {
+    valid: errors.length === 0,
+    errorCount: errors.length,
+    errors,
+    correctedText: correctedLines.join('\n')
+  };
+}
+
 function handleCheck() {
   const flags = args.filter(a => a.startsWith('-'));
   const isFix = flags.includes('--fix') || flags.includes('-f');
   const isJson = flags.includes('--json') || flags.includes('--format=json');
   const isGithub = flags.includes('--format=github');
+  const isGithubPrReview = flags.includes('--format=github-pr-review');
+  const isSarif = flags.includes('--format=sarif');
   const isScore = flags.includes('--score');
   const isStaged = flags.includes('--staged');
 
@@ -170,10 +219,10 @@ function handleCheck() {
       const output = execSync('git diff --cached --name-only --diff-filter=ACMR', { encoding: 'utf8' });
       const stagedFiles = output.split('\n')
         .map(f => f.trim())
-        .filter(f => f && /\.(md|txt|json)$/i.test(f));
+        .filter(f => f && /\.(md|txt|json|srt|vtt)$/i.test(f));
 
       if (stagedFiles.length === 0) {
-        console.log(`${COLOR.green}Tidak ada berkas teks/markdown/json yang di-stage di git.${COLOR.reset}`);
+        console.log(`${COLOR.green}Tidak ada berkas teks/markdown/json/subtitle yang di-stage di git.${COLOR.reset}`);
         process.exit(0);
       }
 
@@ -185,14 +234,21 @@ function handleCheck() {
         if (fs.existsSync(full)) {
           const content = fs.readFileSync(full, 'utf8');
           const isJsonFile = f.toLowerCase().endsWith('.json');
-          const result = isJsonFile ? checkI18nJson(content, checkOptions) : checkEyd(content, checkOptions);
+          const isSubFile = /\.(srt|vtt)$/i.test(f);
+          const result = isJsonFile 
+            ? checkI18nJson(content, checkOptions) 
+            : isSubFile 
+              ? checkSubtitle(content, checkOptions, path.extname(f).toLowerCase())
+              : checkEyd(content, checkOptions);
 
           if (!result.valid) {
             hasError = true;
             console.log(`${COLOR.yellow}[PERINGATAN] ${f}: ${result.errorCount} potensi ketidaksesuaian EYD V${COLOR.reset}`);
             result.errors.forEach((err, idx) => {
               if (isGithub) {
-                console.log(`::warning file=${f},line=1,col=1::[${err.type}] ${err.original} -> ${err.suggestion}. ${err.rule}`);
+                console.log(`::warning file=${f},line=${err.line || 1},col=1::[${err.type}] ${err.original} -> ${err.suggestion}. ${err.rule}`);
+              } else if (isGithubPrReview) {
+                console.log(`::notice file=${f},line=${err.line || 1}::Kaidah EYD V (${err.type}): ${err.rule}%0A\`\`\`suggestion%0A${err.suggestion}%0A\`\`\``);
               } else {
                 console.log(`   ${COLOR.bold}${idx + 1}.${COLOR.reset} "${COLOR.red}${err.original}${COLOR.reset}" ➔ "${COLOR.green}${err.suggestion}${COLOR.reset}" (${COLOR.dim}${err.rule}${COLOR.reset})`);
               }
@@ -224,7 +280,7 @@ function handleCheck() {
     process.stdin.setEncoding('utf8');
     process.stdin.on('data', chunk => { stdinData += chunk; });
     process.stdin.on('end', () => {
-      runCheckProcess(stdinData.trim(), false, isFix, isJson, isGithub, isScore, null, checkOptions);
+      runCheckProcess(stdinData.trim(), false, isFix, isJson, isGithub, isGithubPrReview, isSarif, isScore, null, checkOptions);
     });
     return;
   }
@@ -248,12 +304,56 @@ function handleCheck() {
     }
   }
 
-  runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isScore, filePath, checkOptions);
+  runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isGithubPrReview, isSarif, isScore, filePath, checkOptions);
 }
 
-function runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isScore, filePath, options) {
+function runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isGithubPrReview, isSarif, isScore, filePath, options) {
   const isJsonFile = isFile && filePath && filePath.toLowerCase().endsWith('.json');
-  const result = isJsonFile ? (checkI18nJson(textToCheck, options) || checkEyd(textToCheck, options)) : checkEyd(textToCheck, options);
+  const isSubFile = isFile && filePath && /\.(srt|vtt)$/i.test(filePath);
+  const ext = isSubFile ? path.extname(filePath).toLowerCase() : '';
+  const result = isJsonFile 
+    ? (checkI18nJson(textToCheck, options) || checkEyd(textToCheck, options)) 
+    : isSubFile
+      ? checkSubtitle(textToCheck, options, ext)
+      : checkEyd(textToCheck, options);
+
+  if (isSarif) {
+    const sarifOutput = {
+      $schema: "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+      version: "2.1.0",
+      runs: [{
+        tool: {
+          driver: {
+            name: "eyd-v",
+            version: PKG.version,
+            informationUri: "https://github.com/ardianryan/eyd-v"
+          }
+        },
+        results: result.errors.map(err => ({
+          ruleId: err.type,
+          level: "warning",
+          message: { text: `[${err.type}] '${err.original}' -> '${err.suggestion}'. ${err.rule}` },
+          locations: [{
+            physicalLocation: {
+              artifactLocation: { uri: filePath ? path.relative(process.cwd(), filePath) : 'stdin' },
+              region: { startLine: err.line || 1 }
+            }
+          }]
+        }))
+      }]
+    };
+    console.log(JSON.stringify(sarifOutput, null, 2));
+    process.exit(result.valid ? 0 : 1);
+  }
+
+  if (isGithubPrReview) {
+    result.errors.forEach(err => {
+      const line = err.line || 1;
+      const target = filePath ? path.relative(process.cwd(), filePath) : 'stdin';
+      console.log(`::notice file=${target},line=${line}::Kaidah EYD V (${err.type}): ${err.rule}%0A\`\`\`suggestion%0A${err.suggestion}%0A\`\`\``);
+    });
+    process.exit(result.valid ? 0 : 1);
+  }
 
   if (isJson) {
     console.log(JSON.stringify(result, null, 2));
@@ -262,7 +362,7 @@ function runCheckProcess(textToCheck, isFile, isFix, isJson, isGithub, isScore, 
 
   if (isGithub) {
     result.errors.forEach(err => {
-      console.log(`::warning file=${filePath || 'stdin'},line=1,col=1::[${err.type}] ${err.original} -> ${err.suggestion}. ${err.rule}`);
+      console.log(`::warning file=${filePath || 'stdin'},line=${err.line || 1},col=1::[${err.type}] ${err.original} -> ${err.suggestion}. ${err.rule}`);
     });
     if (!result.valid) {
       process.exit(1);
@@ -667,17 +767,19 @@ function handleKata() {
 function handleIstilah() {
   const query = args.slice(1).join(' ').trim();
   if (!query) {
-    console.error(`${COLOR.red}[GALAT] Harap masukkan istilah teknologi yang dicari.${COLOR.reset}`);
-    console.log(`Contoh: npx eyd-v istilah cache atau npx eyd-v istilah prompt`);
+    console.error(`${COLOR.red}[GALAT] Harap masukkan istilah yang dicari.${COLOR.reset}`);
+    console.log(`Contoh: npx eyd-v istilah cache atau npx eyd-v istilah "force majeure"`);
     process.exit(1);
   }
 
   const results = lookupTechTerm(query);
-  console.log(`\n${COLOR.bold}Glosarium Istilah Teknologi & AI (Hasil untuk "${query}"):${COLOR.reset}\n`);
-  if (results.length === 0) {
-    console.log(`${COLOR.yellow}Tidak ditemukan padanan langsung untuk "${query}".${COLOR.reset}`);
-    console.log(`Panduan lengkap: docs/profesional/05-glosarium-istilah-teknologi-dan-ai.md\n`);
-  } else {
+  const legalFinResults = lookupLegalFinanceTerm(query);
+
+  let found = false;
+
+  if (results.length > 0) {
+    found = true;
+    console.log(`\n${COLOR.bold}Glosarium Istilah Teknologi & AI (Hasil untuk "${query}"):${COLOR.reset}\n`);
     results.forEach((item, idx) => {
       console.log(`${COLOR.bold}${idx + 1}. ${COLOR.cyan}${item.term}${COLOR.reset} [${COLOR.dim}${item.kategori}${COLOR.reset}]`);
       console.log(`   ${COLOR.bold}Padanan Baku :${COLOR.reset} ${COLOR.green}${COLOR.bold}${item.padanan}${COLOR.reset}`);
@@ -686,6 +788,27 @@ function handleIstilah() {
       }
       console.log('');
     });
+  }
+
+  if (legalFinResults.length > 0) {
+    found = true;
+    console.log(`\n${COLOR.bold}Glosarium Istilah Hukum & Finansial (Hasil untuk "${query}"):${COLOR.reset}\n`);
+    legalFinResults.forEach((item, idx) => {
+      console.log(`${COLOR.bold}${idx + 1}. ${COLOR.cyan}${item.term}${COLOR.reset} [${COLOR.dim}${item.kategori}${COLOR.reset}]`);
+      console.log(`   ${COLOR.bold}Padanan Baku :${COLOR.reset} ${COLOR.green}${COLOR.bold}${item.baku}${COLOR.reset}`);
+      if (item.definisi) {
+        console.log(`   ${COLOR.dim}Definisi     :${COLOR.reset} ${item.definisi}`);
+      }
+      if (item.contoh) {
+        console.log(`   ${COLOR.dim}Contoh       :${COLOR.reset} ${item.contoh}`);
+      }
+      console.log('');
+    });
+  }
+
+  if (!found) {
+    console.log(`\n${COLOR.yellow}Tidak ditemukan padanan langsung untuk "${query}".${COLOR.reset}`);
+    console.log(`Lihat panduan di direktori docs/profesional/\n`);
   }
 }
 
@@ -706,11 +829,11 @@ function handleWatch() {
   }
 
   console.log(`\n${COLOR.cyan}${COLOR.bold}Mode Pengawas (Watcher) Aktif:${COLOR.reset} ${targetDir}`);
-  console.log(`${COLOR.dim}Memantau perubahan berkas .md, .txt, dan .json. Tekan Ctrl+C untuk berhenti.${COLOR.reset}\n`);
+  console.log(`${COLOR.dim}Memantau perubahan berkas .md, .txt, .json, .srt, dan .vtt. Tekan Ctrl+C untuk berhenti.${COLOR.reset}\n`);
 
   let debounceTimer = null;
   fs.watch(targetDir, { recursive: true }, (event, filename) => {
-    if (!filename || !/\.(md|txt|json)$/i.test(filename)) return;
+    if (!filename || !/\.(md|txt|json|srt|vtt)$/i.test(filename)) return;
     if (filename.endsWith('.bak')) return;
 
     clearTimeout(debounceTimer);
@@ -719,7 +842,13 @@ function handleWatch() {
       if (fs.existsSync(full)) {
         console.log(`\n${COLOR.blue}Berkas berubah:${COLOR.reset} ${filename}`);
         const content = fs.readFileSync(full, 'utf8');
-        const res = checkEyd(content, loadConfig());
+        const ext = path.extname(filename).toLowerCase();
+        const res = (ext === '.srt' || ext === '.vtt') 
+          ? checkSubtitle(content, loadConfig(), ext)
+          : (ext === '.json')
+            ? checkI18nJson(content, loadConfig())
+            : checkEyd(content, loadConfig());
+
         if (res.valid) {
           console.log(`   ${COLOR.green}[OK] EYD V: 0 galat${COLOR.reset}`);
         } else {

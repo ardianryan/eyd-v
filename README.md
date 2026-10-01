@@ -79,12 +79,14 @@
 ## 🌟 Keunggulan Utama
 
 * 🏛️ **100% Selaras Pedoman Resmi**: Mencakup 38 menu tampilan dan 4 Bab utama EYD V (Penggunaan Huruf, Penulisan Kata, Penggunaan Tanda Baca, Penulisan Unsur Serapan), SK Penetapan resmi, serta Kata Pengantar Kepala Badan Bahasa.
-* 🎯 **4 Domain Penulisan Profesional**: Modul khusus untuk UX Writing produk digital, Copywriting/Pemasaran (EPI), Penulisan SEO Organik, serta Karya Ilmiah/Akademik.
-* 📖 **Glosarium Istilah Teknologi & AI (115+ Kata)**: Padanan baku resmi istilah komputasi awan, AI, dan rekayasa perangkat lunak beserta panduan alih kode (*code-switching*).
+* 🎯 **6 Domain Penulisan Profesional**: Modul khusus untuk UX Writing produk digital, Copywriting/Pemasaran (EPI), Penulisan SEO Organik, Karya Ilmiah/Akademik, Hukum & Regulasi, serta Bisnis & Finansial.
+* 📖 **Glosarium Istilah Teknologi, AI, Hukum, & Finansial (200+ Entri)**: Padanan baku resmi istilah komputasi awan, AI, perundang-undangan, dan pasar modal beserta contoh kalimat.
+* 🎬 **Dukungan Berkas Subtitle (.srt & .vtt)**: Pemeriksaan dialog video/film tanpa merusak struktur nomor dan stempel waktu (*timestamp*), serta pemulihan *in-place* dengan `--fix`.
+* 💻 **Ekstensi Resmi VS Code & Cursor IDE**: Diagnostik *real-time* garis bawah bergelombang dan *Quick Fix* satu klik langsung di editor kode.
 * 🤖 **Universal Agent Skill (`SKILL.md`) & Sub-Skills**: Siap dipasang ke Google Antigravity, Claude Code, Cursor IDE, Windsurf, Copilot, Cline, dan agen AI lainnya.
 * ⚡ **Model Context Protocol (MCP Server)**: Dilengkapi server MCP bawaan (`npx eyd-v mcp`) dengan tool `check_spelling`, `search_rules`, `lookup_word`, dan `lookup_tech_term`.
 * **Server REST API & Cloud Native**: REST API mandiri tanpa dependensi luar (`npx eyd-v serve`), Dockerfile multi-stage, docker-compose, Cloudflare Workers endpoint, dan GitHub Actions runner.
-* 📊 **Indeks Keterbacaan & DevEx**: Fitur skor kemudahan membaca (`--score`), linting git staged (`--staged`), pemantau berkas (`watch`), pre-commit hook (`hook`), dan parser nilai file i18n JSON.
+* 📊 **Indeks Keterbacaan & DevEx**: Fitur skor kemudahan membaca (`--score`), linting git staged (`--staged`), format SARIF & GitHub PR Review, pemantau berkas (`watch`), dan pre-commit hook (`hook`).
 * ✍️ **Panduan Penulisan Alami & Anti-Slop AI**: Mengeliminasi klise robotik (*"di era modern ini"*, *"sangat krusial"*, *"menyelami"*) serta koma subordinatif liar sebelum kata *karena/sehingga*.
 * 🧠 **AI Fine-Tuning & Alignment Ready**: Dilengkapi dataset SFT (ChatML, Alpaca), DPO (Direct Preference Optimization), UX microcopy, marketing copy, dan evaluasi penulisan ilmiah.
 
@@ -92,7 +94,7 @@
 
 ## 🎯 Domain Penulisan Profesional & Sub-Skill
 
-Versi 5.2.0 menghadirkan modul penulisan domain khusus yang dapat diaktifkan melalui opsi CLI `--mode=<domain>` atau dipasang sebagai sub-skill independen:
+Modul penulisan domain khusus yang dapat diaktifkan melalui opsi CLI `--mode=<domain>` atau dipasang sebagai sub-skill independen:
 
 | Domain | Sub-Skill | Panduan Detail | Fokus Utama |
 |:---|:---|:---|:---|
@@ -100,6 +102,8 @@ Versi 5.2.0 menghadirkan modul penulisan domain khusus yang dapat diaktifkan mel
 | **Pemasaran** | [`skills/eyd-v-marketing/`](skills/eyd-v-marketing/) | [`docs/profesional/02-copywriting-dan-pemasaran.md`](docs/profesional/02-copywriting-dan-pemasaran.md) | Etika Pariwara Indonesia (EPI), pencegahan klaim superlatif berlebihan, formula AIDA/PAS. |
 | **SEO Organik** | [`skills/eyd-v-seo/`](skills/eyd-v-seo/) | [`docs/profesional/03-penulisan-seo-organik.md`](docs/profesional/03-penulisan-seo-organik.md) | Panjang judul (50–60 karakter), deskripsi meta (120–155 karakter), struktur hierarki heading logis. |
 | **Karya Ilmiah** | [`skills/eyd-v-academic/`](skills/eyd-v-academic/) | [`docs/profesional/04-karya-ilmiah-dan-akademik.md`](docs/profesional/04-karya-ilmiah-dan-akademik.md) | Register formal, objektivitas, eliminasi ragam lisan, sitasi standar APA Edisi ke-7 / IEEE. |
+| **Hukum & Regulasi** | [`skills/eyd-v-legal/`](skills/eyd-v-legal/) | [`docs/profesional/06-penulisan-hukum-dan-perundang-undangan.md`](docs/profesional/06-penulisan-hukum-dan-perundang-undangan.md) | Kepatuhan UU No. 12/2011, terminologi baku (*klausula*, *keadaan kahar*), eliminasi ambiguitas. |
+| **Bisnis & Keuangan** | [`skills/eyd-v-finance/`](skills/eyd-v-finance/) | [`docs/profesional/07-penulisan-bisnis-dan-finansial.md`](docs/profesional/07-penulisan-bisnis-dan-finansial.md) | Format rupiah baku, terminologi pasar modal & akuntansi (*arus kas*, *keuntungan modal*, *agunan*). |
 
 ---
 
@@ -439,7 +443,7 @@ Hasil pengujian:
 ========================================
 Hasil Uji Benchmark: 33 Lulus, 0 Gagal (100% Sukses)
 ========================================
-Seluruh 40 Pengujian Linter & Fitur Lanjutan Lulus 100%!
+Seluruh 48 Pengujian Linter & Fitur Lanjutan Lulus 100%!
 ```
 
 ---

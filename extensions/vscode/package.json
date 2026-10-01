@@ -1,0 +1,61 @@
+{
+  "name": "eyd-v-vscode",
+  "displayName": "EYD V: Penyelaras Ejaan Bahasa Indonesia",
+  "description": "Linter resmi kaidah EYD Edisi Kelima dan etika penulisan profesional langsung di editor VS Code / Cursor.",
+  "version": "1.0.0",
+  "publisher": "ardianryan",
+  "icon": "../../demo/icons/icon-512.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ardianryan/eyd-v.git"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Linters",
+    "Education"
+  ],
+  "keywords": [
+    "eyd",
+    "eyd v",
+    "bahasa indonesia",
+    "linter",
+    "spelling",
+    "grammar"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onLanguage:plaintext"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "eyd-v.check",
+        "title": "EYD V: Periksa Dokumen Saat Ini"
+      },
+      {
+        "command": "eyd-v.fixAll",
+        "title": "EYD V: Terapkan Semua Perbaikan Otomatis"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Konfigurasi EYD V Linter",
+      "properties": {
+        "eydv.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Aktifkan diagnostik penulisan EYD V secara realtime."
+        },
+        "eydv.mode": {
+          "type": "string",
+          "enum": ["general", "ux", "marketing", "seo", "academic", "legal", "finance"],
+          "default": "general",
+          "description": "Ranah penulisan profesional yang divalidasi."
+        }
+      }
+    }
+  }
+}

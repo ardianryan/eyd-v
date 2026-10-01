@@ -345,6 +345,132 @@ function checkEyd(text, options = {}) {
     });
   }
 
+  // Huruf kapital nama geografi yang diikuti nama diri (EYD V Bab I.B #6)
+  const unsurGeografi = ['pulau', 'gunung', 'sungai', 'danau', 'selat', 'teluk', 'bukit', 'lembah', 'pegunungan', 'kota', 'kabupaten', 'provinsi'];
+  const namaDiriGeografi = [
+    'jawa', 'sumatra', 'sumatera', 'kalimantan', 'sulawesi', 'papua', 'bali', 'lombok', 'madura', 'flores',
+    'merapi', 'bromo', 'semeru', 'rinjani', 'kerinci', 'sinabung', 'krakatau',
+    'musi', 'kapuas', 'barito', 'mahakam', 'ciliwung', 'cisadane',
+    'toba', 'poso', 'singkarak', 'matano',
+    'sunda', 'malaka', 'makassar'
+  ];
+  const geografiRegex = new RegExp(`\\b(${unsurGeografi.join('|')})\\s+(${namaDiriGeografi.join('|')})\\b`, 'gi');
+  let geoMatch;
+  while ((geoMatch = geografiRegex.exec(text)) !== null) {
+    const p1 = geoMatch[1];
+    const p2 = geoMatch[2];
+    const expected = p1.charAt(0).toUpperCase() + p1.slice(1).toLowerCase() + ' ' + p2.charAt(0).toUpperCase() + p2.slice(1).toLowerCase();
+    if (geoMatch[0] !== expected) {
+      errors.push({
+        type: 'HURUF_KAPITAL_GEOGRAFI',
+        original: geoMatch[0],
+        suggestion: expected,
+        rule: "Huruf kapital digunakan sebagai huruf pertama nama geografi yang diikuti nama diri",
+        reference: 'eyd/penggunaan-huruf/huruf-kapital/#6',
+        index: geoMatch.index
+      });
+    }
+  }
+
+  // Huruf kecil untuk nama jenis yang berasal dari nama geografi (EYD V Bab I.B #6 Catatan)
+  const namaJenisPatterns = [
+    { regex: /\b(kunci\s+Inggris)\b/g, fix: 'kunci inggris', rule: "Nama jenis ditulis dengan huruf kecil: 'kunci inggris'", ref: 'eyd/penggunaan-huruf/huruf-kapital/#6-catatan' },
+    { regex: /\b(jeruk\s+Bali)\b/g, fix: 'jeruk bali', rule: "Nama jenis ditulis dengan huruf kecil: 'jeruk bali'", ref: 'eyd/penggunaan-huruf/huruf-kapital/#6-catatan' },
+    { regex: /\b(petai\s+Cina)\b/g, fix: 'petai cina', rule: "Nama jenis ditulis dengan huruf kecil: 'petai cina'", ref: 'eyd/penggunaan-huruf/huruf-kapital/#6-catatan' },
+    { regex: /\b(pisang\s+Ambon)\b/g, fix: 'pisang ambon', rule: "Nama jenis ditulis dengan huruf kecil: 'pisang ambon'", ref: 'eyd/penggunaan-huruf/huruf-kapital/#6-catatan' },
+    { regex: /\b(bika\s+Ambon)\b/g, fix: 'bika ambon', rule: "Nama jenis makanan ditulis dengan huruf kecil: 'bika ambon'", ref: 'eyd/penggunaan-huruf/huruf-kapital/#6-catatan' },
+    { regex: /\b(gula\s+Jawa)\b/g, fix: 'gula jawa', rule: "Nama jenis ditulis dengan huruf kecil: 'gula jawa'", ref: 'eyd/penggunaan-huruf/huruf-kapital/#6-catatan' },
+    { regex: /\b(garam\s+Inggris)\b/g, fix: 'garam inggris', rule: "Nama jenis ditulis dengan huruf kecil: 'garam inggris'", ref: 'eyd/penggunaan-huruf/huruf-kapital/#6-catatan' },
+    { regex: /\b(salak\s+Pondoh)\b/g, fix: 'salak pondoh', rule: "Nama jenis ditulis dengan huruf kecil: 'salak pondoh'", ref: 'eyd/penggunaan-huruf/huruf-kapital/#6-catatan' }
+  ];
+  namaJenisPatterns.forEach(pat => {
+    let match;
+    while ((match = pat.regex.exec(text)) !== null) {
+      errors.push({
+        type: 'HURUF_KECIL_NAMA_JENIS',
+        original: match[0],
+        suggestion: pat.fix,
+        rule: pat.rule,
+        reference: pat.ref,
+        index: match.index
+      });
+    }
+  });
+
+  // Huruf kapital untuk nama bangsa, suku bangsa, dan bahasa (EYD V Bab I.B #5)
+  const bangsaBahasaPatterns = [
+    { regex: /\b(bahasa)\s+(indonesia|inggris|jepang|jerman|prancis|arab|mandarin|belanda)\b/g, fix: (m, p1, p2) => `${p1} ${p2.charAt(0).toUpperCase() + p2.slice(1)}`, rule: "Nama bahasa diawali huruf kapital", ref: 'eyd/penggunaan-huruf/huruf-kapital/#5' },
+    { regex: /\b(suku)\s+(jawa|sunda|batak|dayak|bugis|minang|bali|madura|banjar)\b/g, fix: (m, p1, p2) => `${p1} ${p2.charAt(0).toUpperCase() + p2.slice(1)}`, rule: "Nama suku bangsa diawali huruf kapital", ref: 'eyd/penggunaan-huruf/huruf-kapital/#5' },
+    { regex: /\b(bangsa)\s+(indonesia)\b/g, fix: (m, p1, p2) => `${p1} ${p2.charAt(0).toUpperCase() + p2.slice(1)}`, rule: "Nama bangsa diawali huruf kapital", ref: 'eyd/penggunaan-huruf/huruf-kapital/#5' }
+  ];
+  bangsaBahasaPatterns.forEach(pat => {
+    let match;
+    while ((match = pat.regex.exec(text)) !== null) {
+      errors.push({
+        type: 'HURUF_KAPITAL_BANGSA_BAHASA',
+        original: match[0],
+        suggestion: pat.fix(...match),
+        rule: pat.rule,
+        reference: pat.ref,
+        index: match.index
+      });
+    }
+  });
+
+  // Bilangan tingkat dengan angka menggunakan 'ke-' bertanda hubung (EYD V Bab II.G)
+  const bilanganTingkatRegex = /\b(ke)\s*(\d+)\b/gi;
+  let btMatch;
+  while ((btMatch = bilanganTingkatRegex.exec(text)) !== null) {
+    if (btMatch[0] !== `ke-${btMatch[2]}`) {
+      errors.push({
+        type: 'BILANGAN_TINGKAT',
+        original: btMatch[0],
+        suggestion: `ke-${btMatch[2]}`,
+        rule: "Bilangan tingkat yang ditulis dengan angka dirangkaikan dengan tanda hubung setelah 'ke-'",
+        reference: 'eyd/penulisan-kata/angka-dan-bilangan/#bilangan-tingkat',
+        index: btMatch.index
+      });
+    }
+  }
+
+  // Bilangan berakhiran -an menggunakan tanda hubung (EYD V Bab II.G)
+  const bilanganAkhiranAnRegex = /\b(tahun\s+)?(\d{2,4})\s*an\b/gi;
+  let anMatch;
+  while ((anMatch = bilanganAkhiranAnRegex.exec(text)) !== null) {
+    const prefix = anMatch[1] || '';
+    const num = anMatch[2];
+    const expected = `${prefix}${num}-an`;
+    if (anMatch[0] !== expected) {
+      errors.push({
+        type: 'BILANGAN_AKHIRAN_AN',
+        original: anMatch[0],
+        suggestion: expected,
+        rule: "Bilangan yang mendapat akhiran '-an' dirangkaikan dengan tanda hubung",
+        reference: 'eyd/penulisan-kata/angka-dan-bilangan/#akhiran-an',
+        index: anMatch.index
+      });
+    }
+  }
+
+  // Bilangan pada awal kalimat (EYD V Bab II.G #3)
+  const awalKalimatAngkaRegex = /(?:^|[.!?]\s+)(\d+)\s+([a-zA-Z]+)/g;
+  let akMatch;
+  while ((akMatch = awalKalimatAngkaRegex.exec(text)) !== null) {
+    const full = akMatch[0];
+    const num = akMatch[1];
+    const word = akMatch[2];
+    const matchOffset = full.indexOf(num);
+    const startIdx = akMatch.index + matchOffset;
+    errors.push({
+      type: 'ANGKA_AWAL_KALIMAT',
+      original: `${num} ${word}`,
+      suggestion: 'Tulis huruf atau susun ulang kalimat',
+      rule: "Bilangan pada awal kalimat ditulis dengan huruf atau susunan kalimat diubah",
+      reference: 'eyd/penulisan-kata/angka-dan-bilangan/#awal-kalimat',
+      index: startIdx
+    });
+  }
+
   // Eliminasi klise dan frasa penggelembung tanpa substansi
   const pleonasmePatterns = [
     { regex: /\b(adalah\s+merupakan)\b/gi, fix: 'adalah', rule: "Hindari pleonasme 'adalah merupakan', pilih salah satu", ref: 'docs/kaidah-kalimat-efektif.md' },
@@ -428,6 +554,48 @@ function checkEyd(text, options = {}) {
         index: pMatch.index
       });
     }
+  } else if (mode === 'legal') {
+    // Penyelarasan bahasa perundang-undangan dan dokumen hukum formal
+    const legalPola = [
+      { regex: /\b(klausul)\b/gi, fix: 'klausula', rule: "Gunakan bentuk baku 'klausula' dalam dokumen hukum formal", ref: 'docs/profesional/06-penulisan-hukum-dan-perundang-undangan.md' },
+      { regex: /\b(merubah)\b/gi, fix: 'mengubah', rule: "Bentuk baku adalah 'mengubah' (bukan 'merubah')", ref: 'docs/profesional/06-penulisan-hukum-dan-perundang-undangan.md' }
+    ];
+    legalPola.forEach(lp => {
+      let lMatch;
+      while ((lMatch = lp.regex.exec(text)) !== null) {
+        if (lp.fix.toLowerCase() !== lMatch[0].toLowerCase()) {
+          errors.push({
+            type: 'ISTILAH_HUKUM',
+            original: lMatch[0],
+            suggestion: lp.fix,
+            rule: lp.rule,
+            reference: lp.ref,
+            index: lMatch.index
+          });
+        }
+      }
+    });
+  } else if (mode === 'finance') {
+    // Penyelarasan istilah keuangan dan pasar modal
+    const finPola = [
+      { regex: /\b(cash\s+flow)\b/gi, fix: 'arus kas', rule: "Gunakan padanan baku 'arus kas' untuk istilah 'cash flow'", ref: 'docs/profesional/07-penulisan-bisnis-dan-finansial.md' },
+      { regex: /\b(capital\s+gain)\b/gi, fix: 'keuntungan modal', rule: "Gunakan padanan baku 'keuntungan modal' untuk istilah 'capital gain'", ref: 'docs/profesional/07-penulisan-bisnis-dan-finansial.md' },
+      { regex: /\b(break\s*even\s*point)\b/gi, fix: 'titik impas', rule: "Gunakan padanan baku 'titik impas' untuk istilah 'break-even point'", ref: 'docs/profesional/07-penulisan-bisnis-dan-finansial.md' },
+      { regex: /\b(hedging)\b/gi, fix: 'lindung nilai', rule: "Gunakan padanan baku 'lindung nilai' untuk istilah 'hedging'", ref: 'docs/profesional/07-penulisan-bisnis-dan-finansial.md' }
+    ];
+    finPola.forEach(fp => {
+      let fMatch;
+      while ((fMatch = fp.regex.exec(text)) !== null) {
+        errors.push({
+          type: 'ISTILAH_FINANSIAL',
+          original: fMatch[0],
+          suggestion: fp.fix,
+          rule: fp.rule,
+          reference: fp.ref,
+          index: fMatch.index
+        });
+      }
+    });
   }
 
   // Filter ignoreWords jika ditetapkan di opsi / .eydvrc.json
@@ -450,7 +618,7 @@ function checkEyd(text, options = {}) {
     uniqueErrors.unshift(err);
 
     // Jangan replace jika suggestion berupa kalimat petunjuk (bukan teks pengganti)
-    const isGuidanceOnly = ['KONSISTENSI_PRONOMINA', 'ETIKA_PARIWARA', 'SEO_TITLE_LENGTH', 'RAGAM_AKADEMIK'].includes(err.type);
+    const isGuidanceOnly = ['KONSISTENSI_PRONOMINA', 'ETIKA_PARIWARA', 'SEO_TITLE_LENGTH', 'RAGAM_AKADEMIK', 'ANGKA_AWAL_KALIMAT'].includes(err.type);
     if (!isGuidanceOnly && err.suggestion) {
       const before = correctedText.substring(0, err.index);
       const after = correctedText.substring(err.index + err.original.length);
@@ -582,10 +750,41 @@ function checkSingleWord(word) {
   };
 }
 
+let legalFinanceTermsData = null;
+function getLegalFinanceTerms() {
+  if (!legalFinanceTermsData) {
+    const termsPath = path.resolve(__dirname, '../data/glosarium-istilah-hukum-finansial.json');
+    if (fs.existsSync(termsPath)) {
+      legalFinanceTermsData = JSON.parse(fs.readFileSync(termsPath, 'utf8'));
+    } else {
+      legalFinanceTermsData = [];
+    }
+  }
+  return legalFinanceTermsData;
+}
+
+/**
+ * Mencari padanan istilah hukum dan finansial
+ * @param {string} query - Kata kunci istilah hukum atau keuangan
+ * @returns {Array<object>} Daftar kecocokan istilah
+ */
+function lookupLegalFinanceTerm(query) {
+  if (!query || typeof query !== 'string') return [];
+  const q = query.trim().toLowerCase();
+  const terms = getLegalFinanceTerms();
+  return terms.filter(t => 
+    t.term.toLowerCase().includes(q) || 
+    t.baku.toLowerCase().includes(q) ||
+    t.kategori.toLowerCase().includes(q)
+  );
+}
+
 module.exports = {
   checkEyd,
   checkSingleWord,
   getLeksikon,
   getTechTerms,
-  lookupTechTerm
+  lookupTechTerm,
+  getLegalFinanceTerms,
+  lookupLegalFinanceTerm
 };

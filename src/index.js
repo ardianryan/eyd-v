@@ -110,7 +110,7 @@ function startServer(port = 3000) {
   });
 }
 
-const { checkSingleWord, getTechTerms, lookupTechTerm } = require('./linter');
+const { checkSingleWord, getTechTerms, lookupTechTerm, getLegalFinanceTerms, lookupLegalFinanceTerm } = require('./linter');
 
 module.exports = {
   checkEyd,
@@ -123,5 +123,7 @@ module.exports = {
   listCategories,
   getTechTerms,
   lookupTechTerm,
+  getLegalFinanceTerms,
+  lookupLegalFinanceTerm,
   startServer
 };

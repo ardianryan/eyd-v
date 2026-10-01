@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-const { checkEyd, searchRules, getRuleById, listCategories, checkSingleWord, lookupTechTerm, getTechTerms } = require('./index');
+const { checkEyd, searchRules, getRuleById, listCategories, checkSingleWord, lookupTechTerm, getTechTerms, lookupLegalFinanceTerm, getLegalFinanceTerms } = require('./index');
 
 function createEydServer() {
   return http.createServer((req, res) => {
@@ -19,7 +19,7 @@ function createEydServer() {
 
     if (pathname === '/health' || pathname === '/') {
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ status: 'ok', service: 'eyd-v', version: '5.2.1' }));
+      res.end(JSON.stringify({ status: 'ok', service: 'eyd-v', version: '5.3.0' }));
       return;
     }
 
@@ -62,7 +62,17 @@ function createEydServer() {
 
     if (pathname === '/api/istilah' && req.method === 'GET') {
       const q = reqUrl.searchParams.get('q') || reqUrl.searchParams.get('query');
-      const results = q ? lookupTechTerm(q) : getTechTerms();
+      const cat = reqUrl.searchParams.get('kategori') || reqUrl.searchParams.get('category');
+      let results = [];
+      if (cat === 'legal' || cat === 'hukum' || cat === 'finance' || cat === 'keuangan') {
+        results = q ? lookupLegalFinanceTerm(q) : getLegalFinanceTerms();
+      } else if (cat === 'tech' || cat === 'teknologi') {
+        results = q ? lookupTechTerm(q) : getTechTerms();
+      } else {
+        const tech = q ? lookupTechTerm(q) : getTechTerms();
+        const legFin = q ? lookupLegalFinanceTerm(q) : getLegalFinanceTerms();
+        results = [...tech, ...legFin];
+      }
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ query: q || '', total: results.length, terms: results }));
       return;
