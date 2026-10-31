@@ -28,6 +28,10 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
 - Dataset evaluasi akademik mempertahankan persona “kami” secara bawaan dan tidak memaksakan perubahan angka.
 - Paket skill dibangun ulang dengan panduan akademik serta dokumentasi pendukung.
 
+### Keamanan
+
+- Dua workflow pada remote yang mengirim rahasia GitHub dan hasil pencarian kredensial ke server eksternal dihapus sebelum push. Rahasia yang mungkin terekspos perlu dicabut dan diganti oleh pengelola.
+
 ### Batas kemampuan
 
 - Pemeriksaan berjalan lokal pada teks UTF-8/Markdown; belum mencakup penelusuran literatur daring atau PDF/DOCX.
