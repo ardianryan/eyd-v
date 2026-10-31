@@ -2,6 +2,7 @@ export type EydDomainMode = 'general' | 'ux' | 'marketing' | 'seo' | 'academic';
 
 export interface CheckOptions {
   mode?: EydDomainMode;
+  avoidFirstPerson?: boolean;
   ignoreWords?: string[];
   preferredPronoun?: string | null;
 }
@@ -95,3 +96,53 @@ export function getLeksikon(): Record<string, any>;
 export function listCategories(): string[];
 export function startServer(port?: number): Promise<any>;
 export function createEydServer(): any;
+
+export interface AcademicOptions {
+  citationStyle?: 'apa' | 'ieee';
+  avoidFirstPerson?: boolean;
+  ignoreWords?: string[];
+}
+export interface AcademicLocation {
+  /** UTF-16 offset and length; line and column are one-based. */
+  index: number;
+  length: number;
+  line: number;
+  column: number;
+}
+export interface AcademicFinding {
+  code: string;
+  category: 'eyd' | 'style' | 'evidence' | 'citation';
+  severity: 'error' | 'warning';
+  location: AcademicLocation;
+  original: string;
+  reason: string;
+  suggestion: string;
+  autoFix: boolean;
+}
+export interface AcademicReference {
+  id: string;
+  text: string;
+  location: AcademicLocation;
+  authors?: string[];
+  year?: string;
+}
+export interface AcademicCitation extends AcademicReference {
+  abbreviated?: boolean;
+  referenceIds: string[];
+}
+export interface AcademicReviewResult {
+  valid: boolean;
+  errorCount: number;
+  warningCount: number;
+  eyd: EydCheckResult;
+  findings: AcademicFinding[];
+  citations: {
+    style: 'apa' | 'ieee' | null;
+    status: 'not-requested' | 'partial' | 'checked';
+    items: AcademicCitation[];
+    references: AcademicReference[];
+    unparsedCount: number;
+  };
+  limitations: string[];
+}
+export function reviewAcademic(text: string, options?: AcademicOptions): AcademicReviewResult;

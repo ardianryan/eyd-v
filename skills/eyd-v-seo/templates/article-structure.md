@@ -18,3 +18,9 @@ Uraikan fakta konkret, data industri, atau penjelasan masalah tanpa bertele-tele
 ### [H3: Pertanyaan Populer 1?]
 Jawaban ringkas dan tuntas berlandaskan kaidah resmi.
 ```
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../../README.md) · [Catatan perubahan](../../../CHANGELOG.md) · [Riset dan penulisan akademik](../../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

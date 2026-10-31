@@ -24,3 +24,18 @@ Cantumkan pasal atau tautan pedoman resmi jika relevan (misal: `https://ejaan.ke
 - Versi OS: [misal: macOS 14 / Ubuntu 22.04 / Windows 11]
 - Versi Node.js: [misal: v20.10.0]
 - Versi eyd-v: [misal: v5.0.0]
+
+**Jika masalah berkaitan dengan tinjauan akademik**
+
+- Antarmuka: CLI / JavaScript / REST API / MCP.
+- Gaya sitasi: `apa` / `ieee` / tidak dipilih.
+- Contoh minimum naskah dan bagian `Daftar Pustaka` atau `References`.
+- Keluaran `--json`, kode temuan, dan bagian yang diharapkan tetap utuh.
+
+Gunakan data sintetis dan jangan sertakan data pribadi atau naskah rahasia.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

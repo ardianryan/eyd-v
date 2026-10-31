@@ -19,3 +19,9 @@
   - ✅ `Simpan Profil` (bukan cuma `OK`)
   - ✅ `Kirim Lamaran` (bukan cuma `Submit`)
   - ✅ `Hapus Berkas` (bukan cuma `Ya`)
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../../README.md) · [Catatan perubahan](../../../CHANGELOG.md) · [Riset dan penulisan akademik](../../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

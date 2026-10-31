@@ -42,3 +42,9 @@ Catatan:
 
 a. Nama diri, seperti nama orang, lembaga, organisasi, atau merek dagang dalam bahasa asing atau bahasa daerah _tidak_ ditulis dengan huruf miring.  
 b. Dalam naskah tulisan tangan atau mesin tik (bukan komputer), bagian yang akan dicetak miring ditandai dengan garis bawah satu.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

@@ -37,3 +37,9 @@ Posisi Akhir |
 | z | _z_eni | la_z_im | ju_z_ |
 
 \*) Huruf _q_ dan _x_ khusus digunakan untuk nama diri dan keperluan bidang tertentu. Huruf _x_ pada posisi awal kata diucapkan \[s\] dan pada posisi tengah atau akhir diucapkan \[ks\].
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

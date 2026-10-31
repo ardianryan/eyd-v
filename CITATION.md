@@ -11,7 +11,7 @@ Bila Anda menggunakan dataset, repositori, atau perkakas **EYD V** dalam publika
   author       = {Ryan, Ardian},
   title        = {EYD V: Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar},
   year         = {2026},
-  version      = {5.2.0},
+  version      = {5.3.0},
   publisher    = {GitHub},
   url          = {https://github.com/ardianryan/eyd-v},
   contact      = {me@ardianryan.com}
@@ -22,7 +22,7 @@ Bila Anda menggunakan dataset, repositori, atau perkakas **EYD V** dalam publika
 
 ## Format APA (Edisi ke-7)
 
-> Ryan, A. (2026). *EYD V: Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar* (Versi 5.2.0) [Perangkat Lunak]. GitHub. https://github.com/ardianryan/eyd-v
+> Ryan, A. (2026). *EYD V: Universal AI Agent Skill, Dataset & Linter for Indonesian Spelling and Grammar* (Versi 5.3.0) [Perangkat Lunak]. GitHub. https://github.com/ardianryan/eyd-v
 
 ---
 
@@ -31,3 +31,15 @@ Bila Anda menggunakan dataset, repositori, atau perkakas **EYD V** dalam publika
 Pastikan Anda juga mengutip dokumen rujukan resmi dari Badan Bahasa:
 
 > Badan Pengembangan dan Pembinaan Bahasa. (2022). *Pedoman Umum Ejaan Bahasa Indonesia yang Disempurnakan (EYD Edisi Kelima)*. Keputusan Kepala Badan Nomor 0424/I/BS.00.01/2022. Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia. https://ejaan.kemendikdasmen.go.id/
+
+## Versi pengembangan dan rujukan naskah
+
+Versi contoh di atas mengikuti metadata paket 5.3.0. Untuk perubahan Unreleased, cantumkan hash commit yang benar-benar digunakan agar hasil dapat direproduksi. Metadata versi ini juga tersedia dalam `CITATION.cff`.
+
+Mengutip EYD V sebagai perangkat lunak tidak menggantikan rujukan ilmiah bagi klaim dalam naskah. Tool `reviewAcademic` mencocokkan sitasi APA/IEEE dengan daftar pustaka secara lokal; keberadaan dan isi sumber tetap perlu diperiksa secara terpisah.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](README.md) · [Catatan perubahan](CHANGELOG.md) · [Riset dan penulisan akademik](docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

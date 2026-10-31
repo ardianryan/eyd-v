@@ -47,3 +47,9 @@ Di bagian **Knowledge**, klik *Upload files* dan unggah berkas:
 
 Centang kemampuan: **Code Interpreter** (opsional) dan **Web Browsing** (opsional).
 Simpan dan publikasikan sebagai **Public**!
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../README.md) · [Catatan perubahan](../CHANGELOG.md) · [Riset dan penulisan akademik](profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

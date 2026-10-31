@@ -10,3 +10,9 @@ Sebelum menyusun naskah artikel organik, tetapkan parameter penelusuran berikut:
    - H1: Judul utama artikel (hanya satu H1 per halaman).
    - H2: Pokok bahasan utama yang menjawab kebutuhan penelusur.
    - H3: Sub-bagian perincian teknis/langkah praktis.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../../README.md) · [Catatan perubahan](../../../CHANGELOG.md) · [Riset dan penulisan akademik](../../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

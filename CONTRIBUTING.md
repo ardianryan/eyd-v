@@ -9,7 +9,7 @@ Untuk menjaga akurasi ortografi dan kualitas kode, setiap kontributor diharapkan
 ## 🧭 Prinsip Utama Kontribusi
 
 1. **Kepatuhan pada Sumber Resmi**: Seluruh penambahan atau koreksi aturan ejaan wajib merujuk langsung pada pedoman resmi Badan Bahasa Kemendikdasmen RI (`https://ejaan.kemendikdasmen.go.id/`) atau Kamus Besar Bahasa Indonesia (KBBI VI).
-2. **Kualitas & Presisi**: Perubahan pada mesin linter (`src/linter.js`) atau dataset (`data/`) wajib dilengkapi dengan kasus uji benchmark pada `tests/benchmark.json`.
+2. **Kualitas & Presisi**: Perubahan pada mesin linter (`src/linter.js`) atau dataset (`data/`) wajib dilengkapi dengan kasus uji yang relevan. Aturan ejaan menggunakan `tests/benchmark.json`; tinjauan akademik dan integrasi menggunakan `tests/academic.test.js`.
 3. **Komunikasi Terbuka & Santun**: Gunakan bahasa Indonesia yang baik, lugas, dan santun dalam setiap diskusi tiket (*issue*) maupun permintaan tarik (*pull request*).
 
 ---
@@ -89,3 +89,23 @@ git commit -m "fix(linter): perbaiki peluluhan fonem s pada kata menyosialisasik
 ## 📬 Pertanyaan & Diskusi
 
 Jika Anda memiliki pertanyaan seputar kontribusi, ingin mendiskusikan gagasan baru, atau memerlukan bantuan, silakan buka **GitHub Discussion** atau hubungi pengelola utama melalui surel: **me@ardianryan.com**.
+
+## Kontribusi riset dan penulisan akademik
+
+Pisahkan aturan EYD, preferensi gaya, dan penilaian bukti. Persona dan struktur mengikuti pedoman tujuan. Saat menyunting, jangan mengubah angka, hasil, kutipan, atau identitas sumber tanpa permintaan yang sesuai.
+
+Untuk perubahan pada `reviewAcademic()`, uji masukan yang sama melalui pustaka, CLI `academic`, REST `/api/academic`, dan MCP `review_academic`. Sertakan naskah benar, rujukan hilang, pengenal ganda, serta format yang belum didukung. Saran gaya harus tetap bersifat anjuran dan tidak diterapkan sebagai koreksi otomatis.
+
+```sh
+npm test
+npm run build:skill
+git diff --check
+```
+
+Perubahan skill harus menjaga tautan relatif agar tetap tersedia setelah instalasi. Bangun ulang arsip skill jika panduan yang didistribusikan berubah. Catat perubahan pada bagian Unreleased di changelog; commit dan push tidak dengan sendirinya menerbitkan paket npm.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](README.md) · [Catatan perubahan](CHANGELOG.md) · [Riset dan penulisan akademik](docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

@@ -28,3 +28,7 @@ Saat menulis teks, dokumentasi, commit message, atau respons dalam bahasa Indone
    - Cetak miring istilah asing bila belum ada padanan mapan.
    - Pada teks antarmuka (UX), gunakan kalimat ringkas dan konsisten pronomina (`Anda` atau `kamu`).
 
+
+## Riset dan integritas bahan
+
+Jangan menciptakan data, hasil, kutipan, atau referensi. Pertahankan angka, satuan, hasil, kutipan, dan identitas sumber saat menyunting. Tandai kekurangan dengan `[PERLU DATA: …]`, `[PERLU RUJUKAN: …]`, atau `[PERLU VERIFIKASI: …]`. Untuk tugas riset atau karya ilmiah, baca .agents/skills/eyd-v/skills/eyd-v-academic/SKILL.md (relatif terhadap akar proyek). Gunakan rujukan yang diperlukan; struktur dan persona mengikuti pedoman tujuan. Pencocokan sitasi tidak membuktikan kebenaran klaim.

@@ -17,3 +17,9 @@ Standar ramah Google Search Central (Helpful Content & E-E-A-T) sekaligus tertib
 * **H1**: Hanya satu per halaman, memuat topik utama.
 * **H2 & H3**: Memecah sub-topik secara logis agar mudah dipindai (*scannable*).
 * Paragraf pembuka langsung menjawab pertanyaan pencari (*search intent*) dalam 2 kalimat pertama.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

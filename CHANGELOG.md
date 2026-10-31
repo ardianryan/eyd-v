@@ -5,6 +5,36 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
 
 ---
 
+## [Unreleased]
+
+### Ditambahkan
+
+- Tinjauan akademik lokal melalui `reviewAcademic`, CLI `academic`, REST `/api/academic`, dan MCP `review_academic`.
+- Pencocokan sitasi umum APA penulis–tahun dan IEEE bernomor, dengan laporan format yang memerlukan pemeriksaan manual.
+- Panduan riset, matriks literatur, peninjauan klaim, dan integritas bahan pada skill serta prompt lintas platform.
+- Pengujian lintas antarmuka dan paket instalasi mandiri.
+
+### Diperbaiki
+
+- Mode akademik melindungi angka, kutipan, kode, URL, DOI, sitasi, dan daftar pustaka dari koreksi otomatis.
+- Persona pertama menjadi preferensi gaya; “saya” dan “kami” tidak dilarang secara bawaan.
+- Templat abstrak menggunakan isian alih-alih angka hasil tanpa sumber.
+- Installer dan arsip skill menyertakan sumber pendukung yang dirujuk.
+
+### Dokumentasi dan distribusi
+
+- Dokumentasi Markdown diselaraskan dengan alur riset akademik dan dilengkapi navigasi silang.
+- Panduan kontribusi, pelaporan masalah, sitasi proyek, dan cakupan ekstensi diperbarui.
+- Dataset evaluasi akademik mempertahankan persona “kami” secara bawaan dan tidak memaksakan perubahan angka.
+- Paket skill dibangun ulang dengan panduan akademik serta dokumentasi pendukung.
+
+### Batas kemampuan
+
+- Pemeriksaan berjalan lokal pada teks UTF-8/Markdown; belum mencakup penelusuran literatur daring atau PDF/DOCX.
+- Pencocokan sitasi memeriksa konsistensi internal, bukan keberadaan publikasi atau dukungan sumber terhadap klaim.
+- Demo web, ekstensi VS Code, dan Worker belum menyediakan antarmuka tinjauan akademik baru.
+- Bagian Unreleased mencatat perubahan di repositori; belum menyatakan publikasi versi npm baru.
+
 ## [5.3.0] - 2026-10-01
 
 ### Ditambahkan
@@ -164,3 +194,9 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
   * Dokumentasi pembaruan EYD V vs PUEBI pada `docs/pembaruan-eyd-v-vs-puebi.md`.
 * **Pengujian & Evaluasi**:
   * Suite pengujian benchmark 25 kasus uji dengan tingkat kelulusan 100%.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](README.md) · [Riset dan penulisan akademik](docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

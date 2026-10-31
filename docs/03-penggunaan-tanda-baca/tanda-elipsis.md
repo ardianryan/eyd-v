@@ -33,3 +33,9 @@ edition: "EYD Edisi V (2022-sekarang)"
 > *   Dalam Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 disebutkan bahwa bahasa negara ialah ....
 > *   "Jadi, mengapa selama ini dia bekerja sebagai ...?"
 > *   "Pergi dari sini jika kamu ...!"
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

@@ -18,3 +18,9 @@ edition: "EYD Edisi V (2022-sekarang)"
 Catatan:
 
 Penggunaan tanda apostrof ini lazim dalam ragam nonstandar.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

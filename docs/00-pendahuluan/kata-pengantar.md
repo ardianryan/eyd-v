@@ -14,3 +14,9 @@ _Ejaan Bahasa Indonesia yang Disempurnakan_—atau yang lebih dikenal dengan sin
 Kami berharap, semoga penerbitan EYD ini dapat menjawab kebutuhan pengguna bahasa akan pedoman kebahasaan yang mutakhir dan akomodatif. Pedoman ini juga diharapkan menjadi sumbangsih lembaga ini dalam mewujudkan tertib berbahasa Indonesia sehingga bahasa Indonesia dapat menjadi bahasa modern yang berwibawa dan layak menjadi bahasa pergaulan antarbangsa.
 
 _Jakarta, 16 Agustus 2022_ _Prof. E. Aminudin Aziz, Ph.D._
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

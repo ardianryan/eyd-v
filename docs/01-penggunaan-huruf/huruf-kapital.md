@@ -279,3 +279,9 @@ c. Istilah kekerabatan yang diikuti oleh kata yang menunjukkan kepemilikan ditul
 > **Misalnya:**
 > *   Kita harus menghormati _b_apak dan _i_bu kita.
 > *   Semua _k_akak dan _a_dik saya sudah berkeluarga.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

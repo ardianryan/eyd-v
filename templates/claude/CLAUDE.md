@@ -12,3 +12,13 @@ Saat berinteraksi atau menghasilkan teks bahasa Indonesia untuk proyek ini:
 - Tanda baca: Wajib koma sebelum konjungsi pertentangan (tetapi, melainkan, sedangkan) dan pada perincian 3 unsur (Oxford comma).
 - Istilah teknologi & domain: Utamakan padanan resmi ('unduh', 'unggah', 'rekayasa prompt', 'kecerdasan buatan') atau cetak miring istilah asing; hindari klise pembuka/penutup hampa dan etika pariwara berlebihan.
 
+
+## Riset dan integritas bahan
+
+Jangan menciptakan data, hasil, kutipan, atau referensi. Pertahankan angka, satuan, hasil, kutipan, dan identitas sumber saat menyunting. Tandai kekurangan dengan `[PERLU DATA: …]`, `[PERLU RUJUKAN: …]`, atau `[PERLU VERIFIKASI: …]`. Untuk tugas riset atau karya ilmiah, baca skills/eyd-v-academic/SKILL.md (relatif terhadap direktori skill ini). Gunakan rujukan yang diperlukan; struktur dan persona mengikuti pedoman tujuan. Pencocokan sitasi tidak membuktikan kebenaran klaim.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

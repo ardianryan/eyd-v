@@ -65,3 +65,9 @@ Unsur-unsur yang dirinci dalam kalimat majemuk setara wajib memiliki bentuk gram
   (Tidak paralel: verba *me-*, nomina *pe-an*, verba *me-*).
 * ✅ **Tugas sekretaris adalah mencatat notula, mengarsipkan surat, dan membuat laporan mingguan.** (Paralel: semua verba aktif *me-*).
 * ✅ **Tugas sekretaris adalah pencatatan notula, pengarsipan surat, dan pembuatan laporan mingguan.** (Paralel: semua nomina *pe-an*).
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../README.md) · [Catatan perubahan](../CHANGELOG.md) · [Riset dan penulisan akademik](profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

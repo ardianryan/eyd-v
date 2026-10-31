@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.join(rootDir, 'dist');
@@ -16,8 +16,7 @@ if (fs.existsSync(tempDir)) {
 fs.mkdirSync(tempDir, { recursive: true });
 
 // Salin SKILL.md dan dokumentasi penting
-fs.copyFileSync(path.join(rootDir, 'SKILL.md'), path.join(tempDir, 'SKILL.md'));
-fs.copyFileSync(path.join(rootDir, 'README.md'), path.join(tempDir, 'README.md'));
+require('../src/skill-bundle').copySkillBundle(tempDir);
 
 // Buat metadata skill
 const pkg = require(path.join(rootDir, 'package.json'));
@@ -37,10 +36,11 @@ if (fs.existsSync(outputSkillFile)) {
 }
 
 try {
-  execSync(`cd "${tempDir}" && zip -r "${outputSkillFile}" .`, { stdio: 'ignore' });
+  execFileSync('zip', ['-r', outputSkillFile, '.'], { cwd: tempDir, stdio: 'ignore' });
   console.log('✅ Claude skill package created:', outputSkillFile);
 } catch (e) {
   console.error('⚠️ Gagal membuat zip archive:', e.message);
+  process.exitCode = 1;
 } finally {
   fs.rmSync(tempDir, { recursive: true, force: true });
 }

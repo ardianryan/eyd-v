@@ -33,3 +33,9 @@ Beri tahu apa yang harus dilakukan pertama kali:
 * Rupiah tanpa titik dan spasi: `Rp150.000` (bukan `Rp. 150.000`).
 * Singkatan waktu: `detik`, `menit`, `jam` (atau `dtk`, `mnt` bila ruang sempit).
 * Jam pemisah titik: `14.30 WIB` (bukan `14:30 WIB`).
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

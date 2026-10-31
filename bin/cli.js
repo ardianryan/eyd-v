@@ -61,6 +61,7 @@ function printHelp() {
   npx eyd-v <perintah> [opsi/argumen]
 
 ${COLOR.bold}PERINTAH UTAMA:${COLOR.reset}
+  ${COLOR.green}academic${COLOR.reset} <berkas|->       Tinjau akademik; --citation-style=apa|ieee --json
   ${COLOR.green}check${COLOR.reset} <teks|berkas>      Periksa ejaan & tata bahasa EYD V (dapat di-pipe)
   ${COLOR.green}kata${COLOR.reset} <kata>              Periksa kebakaan satu kata secara instan
   ${COLOR.green}istilah${COLOR.reset} <istilah>        Cari padanan resmi istilah teknologi & AI (120+ istilah)
@@ -563,25 +564,52 @@ function handleRule() {
   console.log('');
 }
 
+function handleAcademic() {
+  try {
+    const options = {};
+    let target = null;
+    let format = 'human';
+    for (let i = 1; i < args.length; i++) {
+      const arg = args[i];
+      if (arg === '--json') format = 'json';
+      else if (arg === '--avoid-first-person') options.avoidFirstPerson = true;
+      else if (arg === '--citation-style' || arg.startsWith('--citation-style=')) {
+        options.citationStyle = arg.includes('=') ? arg.slice(arg.indexOf('=') + 1) : args[++i];
+        if (!['apa', 'ieee'].includes(options.citationStyle)) throw new Error('--citation-style harus apa atau ieee.');
+      } else if (arg === '--format' || arg.startsWith('--format=')) {
+        format = arg.includes('=') ? arg.slice(arg.indexOf('=') + 1) : args[++i];
+        if (!['human', 'json'].includes(format)) throw new Error('--format harus human atau json.');
+      } else if (arg.startsWith('-') && arg !== '-') throw new Error(`Opsi tidak dikenali: ${arg}`);
+      else if (target !== null) throw new Error('Gunakan satu berkas atau stdin.');
+      else target = arg;
+    }
+    if (target === null && process.stdin.isTTY) throw new Error('Masukkan berkas atau alirkan teks melalui stdin.');
+    const text = fs.readFileSync(target && target !== '-' ? path.resolve(target) : 0, 'utf8');
+    const result = require('../src/academic').reviewAcademic(text, options);
+    if (format === 'json') console.log(JSON.stringify(result, null, 2));
+    else {
+      console.log(`Tinjauan akademik: ${result.errorCount} kesalahan, ${result.warningCount} saran.`);
+      for (const f of result.findings) console.log(`${f.location.line}:${f.location.column} [${f.severity}] ${f.code}: ${f.reason} ${f.suggestion}`);
+      console.log(`Sitasi: ${result.citations.style || 'belum dipilih'} (${result.citations.status}).`);
+      for (const limitation of result.limitations) console.log(`Batas pemeriksaan: ${limitation}`);
+    }
+    process.exitCode = result.valid ? 0 : 1;
+  } catch (error) {
+    console.error(`[GALAT] ${error.message}`);
+    process.exitCode = 2;
+  }
+}
+
 function handleInstall() {
   printBanner();
   const hasFlag = (flag) => args.includes(flag);
   const targetIndex = args.indexOf('--target');
   const customTarget = targetIndex !== -1 ? args[targetIndex + 1] : null;
 
-  const rootPkgDir = path.resolve(__dirname, '..');
-  const skillSource = path.join(rootPkgDir, 'SKILL.md');
-  const cursorSource = path.join(rootPkgDir, 'templates/cursor/eyd-v.mdc');
-  const cursorrulesSource = path.join(rootPkgDir, 'templates/.cursorrules');
-  const claudeSource = path.join(rootPkgDir, 'templates/claude/CLAUDE.md');
-  const windsurfSource = path.join(rootPkgDir, 'templates/windsurf/.windsurfrules');
-  const copilotSource = path.join(rootPkgDir, 'templates/copilot/copilot-instructions.md');
-  const clineSource = path.join(rootPkgDir, 'templates/cline/.clinerules');
-
   if (customTarget) {
     const dest = path.resolve(customTarget);
     fs.mkdirSync(dest, { recursive: true });
-    fs.copyFileSync(skillSource, path.join(dest, 'SKILL.md'));
+    require('../src/skill-bundle').copySkillBundle(dest);
     console.log(`[OK] [Custom Target] Skill terpasang di: ${path.join(dest, 'SKILL.md')}`);
     return;
   }
@@ -650,7 +678,6 @@ function showInteractiveInstallMenu() {
 
 function executeInstallation(targets) {
   const rootPkgDir = path.resolve(__dirname, '..');
-  const skillSource = path.join(rootPkgDir, 'SKILL.md');
   const cursorSource = path.join(rootPkgDir, 'templates/cursor/eyd-v.mdc');
   const cursorrulesSource = path.join(rootPkgDir, 'templates/.cursorrules');
   const claudeSource = path.join(rootPkgDir, 'templates/claude/CLAUDE.md');
@@ -658,13 +685,17 @@ function executeInstallation(targets) {
   const copilotSource = path.join(rootPkgDir, 'templates/copilot/copilot-instructions.md');
   const clineSource = path.join(rootPkgDir, 'templates/cline/.clinerules');
 
+  if (targets.cursor || targets.windsurf || targets.copilot || targets.cline) {
+    require('../src/skill-bundle').copySkillBundle(path.resolve(process.cwd(), '.agents/skills/eyd-v'));
+  }
+
   let count = 0;
 
   if (targets.antigravity) {
     try {
       const dir = path.join(os.homedir(), '.gemini/config/skills/eyd-v');
       fs.mkdirSync(dir, { recursive: true });
-      fs.copyFileSync(skillSource, path.join(dir, 'SKILL.md'));
+      require('../src/skill-bundle').copySkillBundle(dir);
       console.log(`[OK] [Google Antigravity] Terpasang di: ${path.join(dir, 'SKILL.md')}`);
       count++;
     } catch (e) { console.warn(`⚠️ Antigravity error: ${e.message}`); }
@@ -693,7 +724,7 @@ function executeInstallation(targets) {
     try {
       const dir = path.resolve(process.cwd(), '.claude/skills/eyd-v');
       fs.mkdirSync(dir, { recursive: true });
-      fs.copyFileSync(skillSource, path.join(dir, 'SKILL.md'));
+      require('../src/skill-bundle').copySkillBundle(dir);
       fs.copyFileSync(claudeSource, path.join(dir, 'CLAUDE.md'));
       console.log(`[OK] [Claude Code] Skill terpasang di: .claude/skills/eyd-v/SKILL.md`);
       count++;
@@ -863,6 +894,9 @@ function handleWatch() {
 }
 
 switch (command) {
+  case 'academic':
+    handleAcademic();
+    break;
   case 'check':
     handleCheck();
     break;

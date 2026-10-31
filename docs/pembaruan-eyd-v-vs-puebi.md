@@ -71,3 +71,9 @@ Banyak model AI dan naskah lama masih menggunakan aturan PUEBI atau EYD IV. Beri
 ## 6. Penulisan Unsur Serapan
 
 * Penambahan pelafalan dan transliterasi baku untuk ratusan istilah sains, teknologi, dan serapan Arab terbaru pada subbab Penulisan Unsur Serapan Umum dan Khusus.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../README.md) · [Catatan perubahan](../CHANGELOG.md) · [Riset dan penulisan akademik](profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

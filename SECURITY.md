@@ -42,3 +42,15 @@ Sertakan informasi berikut:
 * **Rilis Tambalan**: Perbaikan darurat (*security patch*) akan diterbitkan ke npm sesegera mungkin.
 
 Setelah perbaikan resmi diterbitkan, nama pelapor akan dicantumkan pada catatan rilis sebagai bentuk apresiasi (kecuali jika pelapor meminta tetap anonim).
+
+## Pelaporan pada alur akademik
+
+Kebijakan ini juga mencakup CLI `academic`, REST `/api/academic`, MCP `review_academic`, dan installer sumber pendukung. Gunakan contoh sintetis saat mereproduksi masalah agar naskah belum terbit atau data responden tidak terekspos.
+
+Pemeriksaan akademik berjalan lokal tanpa API key atau penelusuran sumber daring. Jika memakai REST atau MCP, naskah diproses oleh server yang dipilih pengguna. Kesalahan pencocokan sitasi biasa dapat dilaporkan melalui issue; dugaan celah keamanan mengikuti saluran privat di atas.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](README.md) · [Catatan perubahan](CHANGELOG.md) · [Riset dan penulisan akademik](docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

@@ -47,3 +47,9 @@ Setiap agen AI atau penulis harus mematuhi tiga tahap ini:
 3. **Sesudah Menulis (*Post-writing / Verification*)**:
    - Lakukan *read-aloud test* (baca nyaring dalam hati, apakah terdengar mengalir seperti manusia berbicara).
    - Jalankan linter EYD V: `npx eyd-v check <berkas>`.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

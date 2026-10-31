@@ -28,3 +28,9 @@ edition: "EYD Edisi V (2022-sekarang)"
 > | _self quarantine_ | 'karantina mandiri' |
 > | _lockdown_ | 'karantina wilayah' |
 > | _marhūn bih_ | 'utang' atau 'pinjaman' |
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

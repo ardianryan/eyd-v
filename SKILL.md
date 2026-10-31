@@ -205,3 +205,15 @@ Untuk kebutuhan penulisan profesional spesifik, rujuk panduan dan sub-skill beri
    - Utamakan padanan baku terverifikasi (*rekayasa prompt*, *pembelajaran mesin*, *komputasi awan*, *basis data*, *tangkapan layar*, *antarmuka*).
    - Cetak miring istilah asing yang belum memiliki padanan baku mapan.
 
+
+## Klaim dan bahan riset
+
+Saat tulisan memuat klaim faktual, gunakan bahan yang tersedia dan bedakan fakta, interpretasi, serta bahan yang belum dapat diperiksa. Jangan menciptakan angka, hasil, kutipan, atau referensi. Saat menyunting, pertahankan angka, satuan, hasil, kutipan langsung, dan identitas sumber. Gunakan `[PERLU DATA: …]`, `[PERLU RUJUKAN: …]`, atau `[PERLU VERIFIKASI: …]` jika diperlukan.
+
+Untuk tugas penelitian atau naskah ilmiah, baca `skills/eyd-v-academic/SKILL.md` relatif terhadap folder skill utama. Ikuti rujukan pendukung sesuai pekerjaan. Persona dan struktur mengikuti pedoman tujuan; IMRaD dan larangan persona pertama bukan kaidah EYD yang berlaku universal. Pemeriksaan sitasi lokal hanya mencocokkan pengenal, bukan membuktikan kebenaran klaim.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](README.md) · [Catatan perubahan](CHANGELOG.md) · [Riset dan penulisan akademik](docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

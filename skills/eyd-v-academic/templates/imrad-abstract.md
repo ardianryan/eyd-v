@@ -1,21 +1,21 @@
-# Templat Abstrak Standar IMRaD (Karya Ilmiah)
+# Templat abstrak penelitian empiris
 
-Abstrak yang baik terdiri atas satu paragraf padat (150–250 kata) dengan proporsi:
+Sesuaikan panjang, struktur, dan kata kunci dengan pedoman jurnal atau kampus. Hapus label bagian jika abstrak harus berupa satu paragraf.
 
-```markdown
-**ABSTRAK**
+**Latar belakang dan tujuan:** [Masalah spesifik, konteks, dan tujuan penelitian berdasarkan bahan penulis.]
 
-[Latar Belakang & Tujuan (2-3 kalimat)]:
-Penelitian ini bertujuan untuk menguji efektivitas penerapan linter ejaan bahasa Indonesia otomatis berbasis aturan formal terhadap konsistensi penulisan dokumentasi teknis perangkat lunak.
+**Metode:** [Desain, populasi/sampel, instrumen, dan teknik analisis yang benar-benar digunakan.]
 
-[Metode Penelitian (2-3 kalimat)]:
-Metode yang digunakan adalah eksperimen kuasi dengan membandingkan 100 naskah teknis sebelum dan sesudah proses audit menggunakan tolok ukur benchmark 33 aturan EYD Edisi Kelima.
+**Hasil:** [Temuan utama beserta angka dan satuan dari hasil penelitian. Jika belum tersedia: PERLU DATA: hasil penelitian.]
 
-[Hasil Temuan Utama (2-3 kalimat)]:
-Hasil analisis menunjukkan bahwa penerapan linter otomatis berhasil mereduksi kesalahan ortografi sebesar 94,2%, dengan penurunan tertinggi pada kategori preposisi dan peluluhan fonem KTSP.
+**Simpulan:** [Jawaban terhadap tujuan dengan cakupan yang sesuai data; sebutkan batas yang relevan.]
 
-[Kesimpulan & Implikasi (1-2 kalimat)]:
-Temuan ini membuktikan bahwa standardisasi linter berbasis aturan deterministik mampu meningkatkan akurasi tata bahasa secara signifikan tanpa mendistorsi substansi teknis dokumen.
+**Kata kunci:** [Istilah yang mewakili topik, objek, dan metode sesuai ketentuan tujuan.]
 
-**Kata Kunci**: EYD Edisi Kelima, linter ejaan, tata bahasa baku, pemrosesan bahasa alami.
-```
+Jangan mengisi hasil dengan angka contoh. Untuk proposal, ikuti format abstrak proposal tanpa menyajikan hasil yang belum diperoleh.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../../README.md) · [Catatan perubahan](../../../CHANGELOG.md) · [Riset dan penulisan akademik](../../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

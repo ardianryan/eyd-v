@@ -51,3 +51,13 @@ Seluruh laporan akan ditinjau dan diselidiki secara rahasia, objektif, dan secep
 ## Atribusi
 
 Kode Etik ini diadaptasi dari [Contributor Covenant](https://www.contributor-covenant.org), versi 2.1, yang tersedia di [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html).
+
+## Diskusi riset dan naskah
+
+Standar komunitas ini berlaku pula saat meninjau karya ilmiah, bukti, dan sitasi. Kritik diarahkan pada klaim dan bahan yang dapat diperiksa. Ciri gaya bahasa saja tidak cukup untuk menuduh seseorang menggunakan AI atau melakukan plagiarisme. Hormati kerahasiaan naskah dan data penelitian yang dibagikan untuk memperoleh bantuan.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](README.md) · [Catatan perubahan](CHANGELOG.md) · [Riset dan penulisan akademik](docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

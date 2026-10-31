@@ -16,3 +16,9 @@ Kelompok kedua merupakan unsur bahasa sumber yang penulisan dan pelafalannya dis
 Unsur bahasa sumber diserap ke dalam bahasa Indonesia dengan memprioritaskan bentuk. Penyerapan bentuk tersebut meliputi huruf, gabungan huruf, dan imbuhan. Kaidah yang berkaitan dengan imbuhan dijelaskan dalam _Pedoman Umum Pembentukan Istilah_ (PUPI).
 
 Kaidah ejaan yang berlaku bagi unsur serapan dijelaskan di bawah ini. Di dalam kaidah ini ada asal bahasa yang dicantumkan di dalam tanda kurung, misalnya (Wolio), yang berarti berasal dari bahasa Wolio.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

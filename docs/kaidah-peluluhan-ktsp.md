@@ -89,3 +89,9 @@ Kata yang hanya terdiri atas satu suku kata mendapatkan alomorf **menge-** dan *
    * **mengkaji**: meneliti, mempelajari secara kritis/akademis.
 2. **Kata *punya*:**
    * Mempertahankan bentuk **mempunyai** (tidak menjadi *memunyai*).
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../README.md) · [Catatan perubahan](../CHANGELOG.md) · [Riset dan penulisan akademik](profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

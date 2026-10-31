@@ -30,3 +30,9 @@ Dalam naskah tulisan tangan atau mesin tik (bukan komputer), bagian yang akan di
 >     Penelitian ini hanya membatasi perencanaan bahasa ….  
 >   **1.2 Tujuan**  
 >     Penelitian ini bertujuan untuk mengetahui dan mengukur sikap bahasa ….
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

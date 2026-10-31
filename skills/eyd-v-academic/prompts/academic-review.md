@@ -1,15 +1,20 @@
-# Lembar Tinjauan Naskah Ilmiah & Akademik (Academic Review)
+# Lembar tinjauan naskah akademik
 
-Gunakan daftar periksa ini saat memvalidasi skripsi, tesis, makalah, atau artikel jurnal:
+Gunakan sesuai permintaan dan jenis naskah, bukan sebagai kewajiban keluaran setiap penyuntingan.
 
-1. **Ketertiban Struktur IMRaD:**
-   - [ ] Pendahuluan (*Introduction*): Latar belakang, celah penelitian (*research gap*), tujuan.
-   - [ ] Metode (*Method*): Desain penelitian, populasi/sampel, instrumen, analisis data.
-   - [ ] Hasil (*Results*): Temuan empiris, tabel/grafik tanpa interpretasi berlebih.
-   - [ ] Pembahasan (*Discussion*): Analisis komparatif dengan rujukan terdahulu dan implikasi.
-2. **Laras Bahasa Formal:**
-   - [ ] Dilarang menggunakan kata ganti orang pertama informal (*aku*, *kita*, *kamu*). Gunakan *peneliti* atau kalimat pasif.
-   - [ ] Bebas kalimat buntung tanpa subjek (hindari: *"Berdasarkan pengujian membuktikan..."* ➔ ubah ke *"Pengujian ini membuktikan..."*).
-3. **Verifikasi Sitasi & Anti-Halusinasi:**
-   - [ ] Setiap pernyataan fakta luar wajib dilengkapi sitasi ilmiah (nama penulis, tahun).
-   - [ ] Bebas dari rujukan fiktif yang kerap dihalusinasikan oleh model AI.
+- Apakah pertanyaan, tujuan, dan simpulan saling berkaitan?
+- Apakah struktur mengikuti pedoman tujuan? Jika memakai IMRaD, apakah metode, hasil, dan pembahasan menjalankan fungsi masing-masing?
+- Apakah prosedur yang dilaporkan dapat ditelusuri dari bahan yang tersedia?
+- Apakah setiap klaim utama didukung data atau bagian sumber yang benar-benar dibaca?
+- Apakah temuan yang bertentangan, keterbatasan, dan ketidakpastian dijelaskan?
+- Apakah sitasi dan daftar pustaka cocok sesuai gaya pilihan?
+- Apakah kalimat bersubjek jelas, istilah konsisten, dan ejaan sesuai EYD V?
+- Apakah angka, hasil, kutipan, dan identitas sumber tetap utuh setelah penyuntingan?
+
+Laporkan lokasi, persoalan, alasan, dan saran. Pisahkan kesalahan ejaan, preferensi gaya, serta persoalan bukti/metode. Jika sumber belum tersedia, nyatakan belum dapat dinilai.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../../README.md) · [Catatan perubahan](../../../CHANGELOG.md) · [Riset dan penulisan akademik](../../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

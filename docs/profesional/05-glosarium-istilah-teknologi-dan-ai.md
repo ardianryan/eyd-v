@@ -127,3 +127,9 @@ npx eyd-v istilah cache
 npx eyd-v istilah deployment
 npx eyd-v istilah prompt
 ```
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

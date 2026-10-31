@@ -13,11 +13,11 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/eyd-v"><img src="https://img.shields.io/badge/npm-v5.2.0-007acc.svg?style=flat-square&logo=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/eyd-v"><img src="https://img.shields.io/npm/v/eyd-v?style=flat-square&logo=npm" alt="npm version"></a>
   <a href="https://ejaan.kemendikdasmen.go.id/"><img src="https://img.shields.io/badge/Pedoman-EYD%20Edisi%20V-28a745.svg?style=flat-square&logo=readme" alt="EYD V"></a>
   <a href="https://ejaan.kemendikdasmen.go.id/"><img src="https://img.shields.io/badge/Kemendikdasmen-RI-0099ff.svg?style=flat-square" alt="Kemendikdasmen RI"></a>
   <a href="https://modelcontextprotocol.io/"><img src="https://img.shields.io/badge/MCP-Compatible-8a2be2.svg?style=flat-square" alt="MCP Ready"></a>
-  <img src="https://img.shields.io/badge/Tests-40%2F40%20Passed-brightgreen.svg?style=flat-square" alt="Tests">
+  <img src="https://github.com/ardianryan/eyd-v/actions/workflows/ci.yml/badge.svg" alt="CI dan pengujian">
   <a href="https://donate.ppti.me/"><img src="https://img.shields.io/badge/Dukung%20Kami-donate.ppti.me-ff4081.svg?style=flat-square&logo=heart" alt="Donasi"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-orange.svg?style=flat-square" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/AI%20Agents-Universal-success.svg?style=flat-square&logo=openai" alt="AI Agents Universal">
@@ -73,6 +73,7 @@
 - [💖 Dukungan & Donasi](#-dukungan--donasi)
 - [🤝 Komunitas, Kontribusi & Tata Kelola](#-komunitas-kontribusi--tata-kelola)
 - [📄 Lisensi & Hak Cipta](#-lisensi--hak-cipta)
+- [Riset dan penulisan akademik](#riset-dan-penulisan-akademik)
 
 ---
 
@@ -84,7 +85,7 @@
 * 🎬 **Dukungan Berkas Subtitle (.srt & .vtt)**: Pemeriksaan dialog video/film tanpa merusak struktur nomor dan stempel waktu (*timestamp*), serta pemulihan *in-place* dengan `--fix`.
 * 💻 **Ekstensi Resmi VS Code & Cursor IDE**: Diagnostik *real-time* garis bawah bergelombang dan *Quick Fix* satu klik langsung di editor kode.
 * 🤖 **Universal Agent Skill (`SKILL.md`) & Sub-Skills**: Siap dipasang ke Google Antigravity, Claude Code, Cursor IDE, Windsurf, Copilot, Cline, dan agen AI lainnya.
-* ⚡ **Model Context Protocol (MCP Server)**: Dilengkapi server MCP bawaan (`npx eyd-v mcp`) dengan tool `check_spelling`, `search_rules`, `lookup_word`, dan `lookup_tech_term`.
+* ⚡ **Model Context Protocol (MCP Server)**: Dilengkapi server MCP bawaan (`npx eyd-v mcp`) dengan tool `check_spelling`, `search_eyd`, `get_rule`, `lookup_word`, `lookup_tech_term`, dan `review_academic`.
 * **Server REST API & Cloud Native**: REST API mandiri tanpa dependensi luar (`npx eyd-v serve`), Dockerfile multi-stage, docker-compose, Cloudflare Workers endpoint, dan GitHub Actions runner.
 * 📊 **Indeks Keterbacaan & DevEx**: Fitur skor kemudahan membaca (`--score`), linting git staged (`--staged`), format SARIF & GitHub PR Review, pemantau berkas (`watch`), dan pre-commit hook (`hook`).
 * ✍️ **Panduan Penulisan Alami & Anti-Slop AI**: Mengeliminasi klise robotik (*"di era modern ini"*, *"sangat krusial"*, *"menyelami"*) serta koma subordinatif liar sebelum kata *karena/sehingga*.
@@ -101,7 +102,7 @@ Modul penulisan domain khusus yang dapat diaktifkan melalui opsi CLI `--mode=<do
 | **UX Writing** | [`skills/eyd-v-ux/`](skills/eyd-v-ux/) | [`docs/profesional/01-ux-writing-dan-produk.md`](docs/profesional/01-ux-writing-dan-produk.md) | Mikro-kopi ringkas, pesan galat solutif, CTA jelas, konsistensi sapaan (*Anda* vs *kamu*). |
 | **Pemasaran** | [`skills/eyd-v-marketing/`](skills/eyd-v-marketing/) | [`docs/profesional/02-copywriting-dan-pemasaran.md`](docs/profesional/02-copywriting-dan-pemasaran.md) | Etika Pariwara Indonesia (EPI), pencegahan klaim superlatif berlebihan, formula AIDA/PAS. |
 | **SEO Organik** | [`skills/eyd-v-seo/`](skills/eyd-v-seo/) | [`docs/profesional/03-penulisan-seo-organik.md`](docs/profesional/03-penulisan-seo-organik.md) | Panjang judul (50–60 karakter), deskripsi meta (120–155 karakter), struktur hierarki heading logis. |
-| **Karya Ilmiah** | [`skills/eyd-v-academic/`](skills/eyd-v-academic/) | [`docs/profesional/04-karya-ilmiah-dan-akademik.md`](docs/profesional/04-karya-ilmiah-dan-akademik.md) | Register formal, objektivitas, eliminasi ragam lisan, sitasi standar APA Edisi ke-7 / IEEE. |
+| **Karya Ilmiah** | [`skills/eyd-v-academic/`](skills/eyd-v-academic/) | [`docs/profesional/04-karya-ilmiah-dan-akademik.md`](docs/profesional/04-karya-ilmiah-dan-akademik.md) | Perencanaan riset, sintesis literatur, bahasa ilmiah, peninjauan klaim, dan pencocokan sitasi umum APA 7 / IEEE. |
 | **Hukum & Regulasi** | [`skills/eyd-v-legal/`](skills/eyd-v-legal/) | [`docs/profesional/06-penulisan-hukum-dan-perundang-undangan.md`](docs/profesional/06-penulisan-hukum-dan-perundang-undangan.md) | Kepatuhan UU No. 12/2011, terminologi baku (*klausula*, *keadaan kahar*), eliminasi ambiguitas. |
 | **Bisnis & Keuangan** | [`skills/eyd-v-finance/`](skills/eyd-v-finance/) | [`docs/profesional/07-penulisan-bisnis-dan-finansial.md`](docs/profesional/07-penulisan-bisnis-dan-finansial.md) | Format rupiah baku, terminologi pasar modal & akuntansi (*arus kas*, *keuntungan modal*, *agunan*). |
 
@@ -434,17 +435,11 @@ eyd-v/
 
 ## 🧪 Evaluasi & Pengujian
 
-Pengujian mencakup seluruh kasus benchmark ortografi dan fitur lanjutan v5.2.0:
+Pengujian mencakup benchmark ortografi, fitur domain, serta 17 pengujian tinjauan akademik dan integrasi:
 ```bash
 npm test
 ```
-Hasil pengujian:
-```text
-========================================
-Hasil Uji Benchmark: 33 Lulus, 0 Gagal (100% Sukses)
-========================================
-Seluruh 48 Pengujian Linter & Fitur Lanjutan Lulus 100%!
-```
+Suite lama dijalankan melalui `tests/test-linter.js`; suite akademik melalui `tests/academic.test.js`. Pengujian akademik mencakup APA/IEEE, perlindungan saat koreksi, konsistensi lintas antarmuka, dan instalasi mandiri. Skenario evaluasi manual skill tersedia pada [berkas evaluasi](tests/fixtures/academic-skill-scenarios.md).
 
 ---
 
@@ -485,5 +480,59 @@ Proyek ini menjunjung tinggi standar tata kelola proyek sumber terbuka yang tran
 * Perangkat lunak, skrip parsing, SDK, CLI, dan server MCP dilisensikan di bawah lisensi [MIT](LICENSE).
 * Pengelola: **Ardian Ryan** ([me@ardianryan.com](mailto:me@ardianryan.com)).
 
+## Riset dan penulisan akademik
 
-<!-- Security scan triggered at 2026-10-07 11:17:58 -->
+Skill akademik membantu merumuskan pertanyaan, menyusun strategi pencarian, membuat matriks literatur, menyintesis bahan, menyusun draf, dan meninjau klaim. Baca [panduan akademik](skills/eyd-v-academic/SKILL.md). Data atau sumber yang belum tersedia ditandai secara eksplisit; tidak diisi dengan hasil rekaan.
+
+Fitur akademik pada bagian ini tersedia dalam checkout repositori dan dicatat pada bagian **Unreleased** di [changelog](CHANGELOG.md). Sebelum paket npm yang memuat fitur ini diterbitkan, jalankan `node bin/cli.js academic …` dari checkout atau gunakan paket lokal.
+
+### Tinjauan lokal melalui CLI
+
+```sh
+npx eyd-v academic naskah.md --citation-style=apa
+npx eyd-v academic naskah.md --citation-style=ieee --json
+cat naskah.md | npx eyd-v academic --citation-style=apa --format=json
+```
+
+Perintah `academic` membaca berkas UTF-8/Markdown atau stdin tanpa mengubahnya. Gaya sitasi bersifat opsional dan harus dipilih eksplisit untuk pencocokan. Opsi `--avoid-first-person` mengaktifkan saran menghindari persona pertama; secara bawaan “saya” dan “kami” tidak dianggap salah.
+
+Kode keluar: `0` tanpa temuan tingkat kesalahan (saran masih mungkin ada), `1` jika ada kesalahan, dan `2` jika masukan/opsi tidak valid. Koreksi ejaan tetap melalui `check naskah.md --mode=academic --fix`; mode ini melindungi angka, kutipan langsung, kode, URL, DOI, sitasi umum, dan daftar pustaka.
+
+### Pustaka, REST API, dan MCP
+
+```js
+const { reviewAcademic } = require('eyd-v');
+const report = reviewAcademic(text, {
+  citationStyle: 'apa', // atau 'ieee'; hilangkan untuk tinjauan bahasa saja
+  avoidFirstPerson: false,
+  ignoreWords: []
+});
+```
+
+REST API: `POST /api/academic` dengan JSON `{ "text": "…", "options": { "citationStyle": "apa" } }`. Masukan tidak valid menghasilkan HTTP 400; laporan valid, termasuk yang menemukan kesalahan naskah, menghasilkan HTTP 200. MCP menyediakan tool `review_academic` dengan masukan yang sama.
+
+Hasil berisi `eyd`, `findings`, `citations`, `limitations`, `valid`, `errorCount`, dan `warningCount`. Setiap temuan memuat kode, kategori, tingkat keparahan, lokasi, alasan, saran, dan `autoFix`. Lokasi menggunakan indeks UTF-16 mulai nol serta baris/kolom mulai satu. `autoFix` hanya menyatakan kelayakan koreksi ejaan; command `academic` tetap baca saja.
+
+Kategori temuan: `eyd`, `style`, `evidence`, dan `citation`. Saran gaya dan penanda bahan belum lengkap tidak diterapkan otomatis. `valid` berarti tidak ada temuan tingkat kesalahan, bukan penilaian mutu atau kebenaran penelitian.
+
+### Cakupan sitasi dan batas pemeriksaan
+
+APA mendukung bentuk umum penulis–tahun naratif/parentetik, dua penulis, `et al.`, beberapa sumber, dan akhiran tahun. IEEE mendukung nomor tunggal, kelompok, dan rentang `[1–3]` atau `[1]–[3]`. Daftar pustaka berada di akhir naskah di bawah judul `Daftar Pustaka` atau `References`; judul Markdown dan cetak tebal juga dikenali. Setiap entri dimulai pada baris baru; baris lanjutan diberi indentasi.
+
+Status sitasi `not-requested` berarti gaya belum dipilih, `partial` berarti ada bagian yang tidak dapat diproses atau daftar pustaka tidak ditemukan, dan `checked` berarti pemrosesan bentuk yang dikenali selesai. Selalu periksa temuan sitasi: status `checked` dapat disertai rujukan hilang atau pengenal ganda. Alias organisasi, tanggal tanpa tahun numerik, dan bentuk lain di luar cakupan memerlukan tinjauan manual. Ini bukan validator lengkap gaya APA/IEEE.
+
+Pemeriksaan berjalan lokal tanpa API key. Belum mencakup pencarian literatur daring, verifikasi keberadaan publikasi, dukungan sumber terhadap klaim, atau pembacaan PDF/DOCX. Rujuk [panduan sitasi](skills/eyd-v-academic/references/sitasi.md) untuk cakupan dan sumber resmi.
+
+### Distribusi skill
+
+`eyd-v install --target <direktori>` dan instalasi Claude/Antigravity menyertakan skill, dokumentasi, dan sumber pendukung. Instalasi Cursor, Windsurf, Copilot, dan Cline menaruh bundle bersama di `.agents/skills/eyd-v` serta instruksi platform yang menunjuk kepadanya. `npm run build:skill` memperbarui arsip `dist/eyd-v.skill` dengan sumber pendukung yang sama. Demo web dan ekstensi VS Code belum menyediakan tinjauan akademik baru.
+
+### Proyek pembanding
+
+[Academic Research Skills](https://github.com/Imbad0202/academic-research-skills) (CC BY-NC 4.0) dan [naskah-id](https://github.com/nothinx/naskah-id) (MIT; korpus contoh memiliki lisensi tersendiri) ditinjau sebagai pembanding alur riset dan penulisan Indonesia. Kode dan panduan fitur ini ditulis untuk EYD V tanpa menyalin materi kedua proyek tersebut.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Catatan perubahan](CHANGELOG.md) · [Riset dan penulisan akademik](docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

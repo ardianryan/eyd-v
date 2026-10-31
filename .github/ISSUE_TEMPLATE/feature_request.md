@@ -17,3 +17,13 @@ Apakah ada solusi atau pendekatan alternatif lain yang sempat Anda pertimbangkan
 
 **Konteks Tambahan**
 Tambahkan tangkapan layar, contoh teks, atau informasi tambahan lainnya jika ada.
+
+**Untuk fitur riset atau penulisan akademik**
+
+Sebutkan tahap kerja yang dibantu, gaya/pedoman tujuan, bahan masukan, keluaran yang diharapkan, serta kebutuhan akses daring jika ada. Bedakan pemeriksaan bahasa, konsistensi sitasi, verifikasi metadata, dan pemeriksaan dukungan klaim agar cakupan usulan jelas.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

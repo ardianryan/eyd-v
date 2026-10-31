@@ -18,3 +18,9 @@ Posisi Akhir |
 | ng | _ng_arai | ba_ng_un | sena_ng_ |
 | ny | _ny_ata | ba_ny_ak | \- |
 | sy | _sy_arat | mu_sy_awarah | ara_sy_ |
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

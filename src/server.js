@@ -23,6 +23,24 @@ function createEydServer() {
       return;
     }
 
+    if (pathname === '/api/academic' && req.method === 'POST') {
+      let body = '';
+      req.on('data', chunk => { body += chunk; });
+      req.on('end', () => {
+        try {
+          const payload = JSON.parse(body);
+          if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new TypeError('Payload wajib berupa objek.');
+          const result = require('./academic').reviewAcademic(payload.text, payload.options === undefined ? {} : payload.options);
+          res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify(result));
+        } catch (error) {
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ error: 'INVALID_ACADEMIC_INPUT', message: error.message }));
+        }
+      });
+      return;
+    }
+
     if (pathname === '/api/check' && req.method === 'POST') {
       let body = '';
       req.on('data', chunk => { body += chunk; });

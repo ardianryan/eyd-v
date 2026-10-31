@@ -114,6 +114,7 @@ const { checkSingleWord, getTechTerms, lookupTechTerm, getLegalFinanceTerms, loo
 
 module.exports = {
   checkEyd,
+  reviewAcademic: require('./academic').reviewAcademic,
   checkSingleWord,
   getLeksikon,
   getAllRules,

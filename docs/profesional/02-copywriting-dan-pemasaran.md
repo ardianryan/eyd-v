@@ -19,3 +19,9 @@ Pasal EPI menegaskan bahwa klaim keunggulan mutlak wajib didasari bukti ilmiah a
 3. **Call-to-Action (CTA)**: Satu ajakan bertindak yang jelas.
    - ✅ *"Cek tautan di bio untuk coba gratis 14 hari."*
 4. **Hashtag**: Batasi 3–5 tagar yang sangat relevan. Hindari spamming 10+ tagar.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

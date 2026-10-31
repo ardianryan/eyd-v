@@ -930,3 +930,9 @@ edition: "EYD Edisi V (2022-sekarang)"
 > | --- | --- | --- |
 > | _ḥāfi**ẓ**_ | (حَافِظٌ) | hafi_z_ |
 > | _**ẓ**ālim_ | (ظَالِمٌ) | _z_alim |
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

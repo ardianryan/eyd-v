@@ -34,3 +34,15 @@ Untuk komunikasi privat, tawaran kemitraan institusi, pertanyaan keamanan tertut
 Hubungi pengelola proyek:
 * **Surel**: [me@ardianryan.com](mailto:me@ardianryan.com)
 * **Waktu Respons Tipikal**: 1—2 hari kerja
+
+## Bantuan tinjauan akademik
+
+Untuk laporan masalah `academic`, sertakan gaya sitasi (`apa` atau `ieee`), antarmuka yang digunakan, contoh naskah minimum beserta daftar pustaka, dan keluaran JSON. Gunakan bahan sintetis atau samarkan data pribadi tanpa mengubah struktur masalah.
+
+Status `partial` menunjukkan ada bagian yang perlu ditinjau manual. Status `checked` menunjukkan pemrosesan bentuk yang dikenali selesai; periksa temuan yang masih dilaporkan. Pencocokan sitasi tidak memverifikasi keberadaan publikasi atau dukungan sumber terhadap klaim.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](README.md) · [Catatan perubahan](CHANGELOG.md) · [Riset dan penulisan akademik](docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

@@ -13,3 +13,9 @@ Sebelum menerbitkan naskah iklan, takarir media sosial, atau landing page, perik
    - [ ] Bebas dari tanda pisah em dash (—) yang berulang-ulang.
 4. **Kejelasan Aksi (Call-to-Action):**
    - [ ] Menawarkan satu langkah berikutnya yang jelas tanpa membingungkan audiens.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../../README.md) · [Catatan perubahan](../../../CHANGELOG.md) · [Riset dan penulisan akademik](../../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

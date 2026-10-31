@@ -8,6 +8,25 @@ const SERVER_VERSION = '1.0.0';
 
 const TOOLS = [
   {
+    name: 'review_academic',
+    description: 'Meninjau bahasa akademik dan konsistensi sitasi APA atau IEEE secara lokal. Tidak memverifikasi sumber atau kebenaran klaim.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        text: { type: 'string', minLength: 1 },
+        options: {
+          type: 'object',
+          properties: {
+            citationStyle: { type: 'string', enum: ['apa', 'ieee'] },
+            avoidFirstPerson: { type: 'boolean' },
+            ignoreWords: { type: 'array', items: { type: 'string' } }
+          }
+        }
+      },
+      required: ['text']
+    }
+  },
+  {
     name: 'search_eyd',
     description: 'Mencari aturan resmi Ejaan Bahasa Indonesia yang Disempurnakan (EYD V) milik Kemendikdasmen berdasarkan kata kunci atau topik (misal: "huruf kapital nama jabatan", "tanda koma", "partikel pun", "bentuk terikat").',
     inputSchema: {
@@ -91,6 +110,8 @@ const TOOLS = [
 function handleToolCall(name, args) {
   const { lookupTechTerm, checkSingleWord } = require('./index');
   switch (name) {
+    case 'review_academic':
+      return require('./academic').reviewAcademic(args.text, args.options === undefined ? {} : args.options);
     case 'search_eyd': {
       const results = searchRules(args.query, { limit: args.limit || 5 });
       return {

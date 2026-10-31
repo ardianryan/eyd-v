@@ -21,3 +21,11 @@
 - [SFT ChatML Instructions](data/ai-learning/instruction-tuning-chatml.jsonl): 321 pasang instruksi multi-turn untuk fine-tuning LLM.
 - [DPO Preference Dataset](data/ai-learning/dpo-preference.jsonl): 75 pasang respons baku vs nonbaku untuk penyelarasan model.
 - [Kamus Leksikon Baku](data/leksikon-kata-baku.json): Kamus kata baku vs variasi nonbaku populer.
+
+## Riset dan naskah akademik
+
+- Skill: skills/eyd-v-academic/SKILL.md
+- Panduan: docs/profesional/04-karya-ilmiah-dan-akademik.md
+- Command: eyd-v academic naskah.md --citation-style=apa|ieee --json
+- Library: reviewAcademic(text, options); REST: POST /api/academic; MCP: review_academic.
+- Tinjauan lokal memeriksa bahasa dan konsistensi sitasi umum, bukan kebenaran ilmiah atau keberadaan sumber.

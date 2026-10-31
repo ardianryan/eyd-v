@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { protectedRanges, overlaps } = require('./academic-spans');
 
 let leksikonData = null;
 function getLeksikon() {
@@ -541,8 +542,8 @@ function checkEyd(text, options = {}) {
       });
     }
   } else if (mode === 'academic') {
-    // Larangan kata ganti persona pertama informal pada karya ilmiah
-    const academicPronomina = /\b(aku|saya|kita|kamu)\b/gi;
+    // Persona pertama mengikuti pedoman tujuan; ragam percakapan tetap ditandai.
+    const academicPronomina = options.avoidFirstPerson ? /\b(aku|saya|kami|kita|kamu)\b/gi : /\b(aku|kamu)\b/gi;
     let pMatch;
     while ((pMatch = academicPronomina.exec(text)) !== null) {
       errors.push({
@@ -599,7 +600,9 @@ function checkEyd(text, options = {}) {
   }
 
   // Filter ignoreWords jika ditetapkan di opsi / .eydvrc.json
+  const protectedSpans = mode === 'academic' ? protectedRanges(text) : [];
   const filteredErrors = errors.filter(err => {
+    if (overlaps(protectedSpans, err.index, err.original.length)) return false;
     if (ignoreWords.includes(err.original.toLowerCase())) return false;
     return true;
   });

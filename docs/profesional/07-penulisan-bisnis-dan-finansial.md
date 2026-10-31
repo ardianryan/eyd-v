@@ -33,3 +33,9 @@ Panduan ini mengatur standardisasi penulisan laporan keuangan, prospektus, mater
 ## 3. Gaya Bahasa Laporan Korporasi
 * Gunakan kalimat aktif dan lugas dalam mendeskripsikan kinerja keuangan.
 * Hindari ungkapan spekulatif tanpa rujukan data audit atau proyeksi keuangan yang terverifikasi.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

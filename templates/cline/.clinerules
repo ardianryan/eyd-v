@@ -7,3 +7,7 @@
 - Tanpa koma sebelum: 'karena', 'sehingga', 'bahwa' jika anak kalimat berada di belakang.
 - Utamakan padanan teknologi baku ('unduh', 'unggah', 'rekayasa prompt') atau cetak miring kata asing.
 
+
+## Riset dan integritas bahan
+
+Jangan menciptakan data, hasil, kutipan, atau referensi. Pertahankan angka, satuan, hasil, kutipan, dan identitas sumber saat menyunting. Tandai kekurangan dengan `[PERLU DATA: …]`, `[PERLU RUJUKAN: …]`, atau `[PERLU VERIFIKASI: …]`. Untuk tugas riset atau karya ilmiah, baca .agents/skills/eyd-v/skills/eyd-v-academic/SKILL.md (relatif terhadap akar proyek). Gunakan rujukan yang diperlukan; struktur dan persona mengikuti pedoman tujuan. Pencocokan sitasi tidak membuktikan kebenaran klaim.

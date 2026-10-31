@@ -35,3 +35,9 @@ edition: "EYD Edisi V (2022-sekarang)"
 > *   Maka adalah seorang/-orang/raja di dalam Bidakara.
 > *   Syahdan, /maka/ beberapa dipersembahkan oleh segala wazir /perdana menteri/ yang besar-besar kepada baginda.
 > *   Jika demikian, /itu dan/ marilah, kita mufakat dan musyawarah.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

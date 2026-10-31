@@ -22,9 +22,9 @@ task_categories:
 pretty_name: EYD Edisi V Indonesian Grammar Dataset
 ---
 
-# Dataset Resmi EYD Edisi Kelima & Ranah Profesional (Kemendikdasmen RI)
+# Dataset Komunitas Berbasis EYD Edisi Kelima dan Ranah Profesional
 
-Dataset resmi berbasis **Keputusan Kepala Badan Pengembangan dan Pembinaan Bahasa Kemendikbudristek RI Nomor 0424/I/BS.00.01/2022** tentang *Pedoman Umum Ejaan Bahasa Indonesia yang Disempurnakan (EYD Edisi Kelima)* dan standar penulisan 4 ranah profesional (UX Writing, Marketing, SEO, dan Akademik).
+Dataset komunitas berbasis **Keputusan Kepala Badan Pengembangan dan Pembinaan Bahasa Kemendikbudristek RI Nomor 0424/I/BS.00.01/2022** tentang *Pedoman Umum Ejaan Bahasa Indonesia yang Disempurnakan (EYD Edisi Kelima)* dan standar penulisan 4 ranah profesional (UX Writing, Marketing, SEO, dan Akademik).
 
 ## Komposisi Dataset
 
@@ -47,7 +47,7 @@ Dataset resmi berbasis **Keputusan Kepala Badan Pengembangan dan Pembinaan Bahas
    Dataset preferensi DPO untuk melatih model memproduksi copywriting tajam berbasis persona dan membuang bahasa generik klise AI (*AI slop*).
 
 7. **`academic-writing-eval.jsonl` (50 pasang)**:
-   Dataset evaluasi kalimat ilmiah formal berstruktur IMRaD, perbaikan klausa buntung tanpa subjek, dan kepatuhan format waktu/angka.
+   Dataset evaluasi bahasa ilmiah, perbaikan klausa tanpa subjek, preferensi persona, dan format waktu/angka. Dataset ini tidak menilai mutu metode atau kebenaran hasil penelitian.
 
 ## Cara Memuat Dataset dengan Python:
 
@@ -70,3 +70,11 @@ print(f"Total Marketing DPO: {len(mkt_dpo)}")
 aca_eval = load_jsonl("data/ai-learning/academic-writing-eval.jsonl")
 print(f"Total Academic Eval: {len(aca_eval)}")
 ```
+
+Catatan evaluasi akademik: persona “kami” dipertahankan secara bawaan. Preferensi jurnal atau kampus dapat mengubah pilihan gaya, tetapi bukan larangan EYD universal. Evaluasi ini berbeda dari pencocokan sitasi lokal pada command `academic`.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

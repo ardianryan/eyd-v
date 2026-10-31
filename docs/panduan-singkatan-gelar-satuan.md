@@ -84,3 +84,9 @@ Singkatan umum yang terdiri atas **tiga huruf atau lebih** hanya menggunakan **s
 * Gunakan **tanda pisah em-dash (—)** tanpa spasi atau kata 'sampai dengan' untuk menyatakan jangka waktu/tempat:
   * ✅ *Tahun 2020—2026* atau *Tahun 2020 sampai dengan 2026*
   * ❌ *Tahun 2020 - 2026* (Kurang tepat: tanda hubung (-) bukan tanda pisah)
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../README.md) · [Catatan perubahan](../CHANGELOG.md) · [Riset dan penulisan akademik](profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

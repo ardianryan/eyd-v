@@ -37,3 +37,9 @@ edition: "EYD Edisi V (2022-sekarang)"
 > **Misalnya:**
 > *   Kasus perencanaan bahasa di Indonesia dianggap sebagai salah satu yang paling berhasil (Fishman, 1974; Moeliono, 1985; Samuel, 2008; Wardhaugh dan Fuller, 2015).
 > *   Tentang plagiarisme, para penulis (Keraf, 1997; Putra, 2011; Wibowo, 2013) sama-sama mengingatkan pentingnya pengutipan dan perujukan secara cermat untuk menghindari cap plagiat.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

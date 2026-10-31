@@ -34,3 +34,9 @@ Panduan ini mengatur standardisasi penulisan dokumen hukum, perjanjian kontrak, 
 * Nilai nominal, jangka waktu sanksi pidana, atau denda dalam klausul kontrak/undang-undang wajib ditulis dengan angka dan diikuti huruf di dalam kurung guna kepastian hukum:
   * *sebesar Rp100.000.000,00 (seratus juta rupiah)*
   * *paling lama 5 (lima) tahun penjara*
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

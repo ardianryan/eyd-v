@@ -108,3 +108,9 @@ Ketika menulis atau meminta AI menyusun menu dan informasi produk:
    - Singkat, solutif, tanpa basa-basi meminta maaf berlebihan:
      - ❌ *"Mohon maaf sebesar-besarnya atas ketidaknyamanan ini, sistem kami sedang mengalami sedikit kendala sehingga tidak dapat memproses..."*
      - ✅ *"Pembayaran belum berhasil. Silakan periksa koneksi internet Anda atau coba metode lain."*
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../README.md) · [Catatan perubahan](../CHANGELOG.md) · [Riset dan penulisan akademik](profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

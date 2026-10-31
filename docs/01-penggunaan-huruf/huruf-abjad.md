@@ -37,3 +37,9 @@ Huruf dalam abjad bahasa Indonesia ada 26 seperti dalam tabel berikut.
 | X | x | eks | eks |
 | Y | y | ye | ye |
 | Z | z | zet | zet |
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

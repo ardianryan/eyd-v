@@ -128,3 +128,9 @@ edition: "EYD Edisi V (2022-sekarang)"
 > *   12 Oktober 2021
 >     
 > *   Jakarta, 12 Oktober 2021 (tanpa alamat lengkap pada kop surat)
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+Catatan navigasi repositori; bukan bagian dari teks kaidah sumber. [Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

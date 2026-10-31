@@ -16,3 +16,7 @@ Saat menghasilkan atau menyunting konten berbahasa Indonesia (dokumentasi, teks 
    - Utamakan padanan baku: 'unduh', 'unggah', 'rekayasa prompt', 'kecerdasan buatan'.
    - Jaga konsistensi sapaan (Anda vs kamu) pada teks antarmuka (UX writing).
 
+
+## Riset dan integritas bahan
+
+Jangan menciptakan data, hasil, kutipan, atau referensi. Pertahankan angka, satuan, hasil, kutipan, dan identitas sumber saat menyunting. Tandai kekurangan dengan `[PERLU DATA: …]`, `[PERLU RUJUKAN: …]`, atau `[PERLU VERIFIKASI: …]`. Untuk tugas riset atau karya ilmiah, baca .agents/skills/eyd-v/skills/eyd-v-academic/SKILL.md (relatif terhadap akar proyek). Gunakan rujukan yang diperlukan; struktur dan persona mengikuti pedoman tujuan. Pencocokan sitasi tidak membuktikan kebenaran klaim.

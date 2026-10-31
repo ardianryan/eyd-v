@@ -11,3 +11,9 @@ Sebelum menulis teks antarmuka (microcopy, tombol aksi, modal, atau pesan galat)
    - Teks petunjuk (helper text): 1 kalimat padat.
 4. **Pronomina Apa yang Ditetapkan Brand?**
    - Tetapkan konsistensi: gunakan "Anda" untuk formal/finansial, atau "kamu" untuk produk kasual. Dilarang mencampur keduanya.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../../README.md) · [Catatan perubahan](../../../CHANGELOG.md) · [Riset dan penulisan akademik](../../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->

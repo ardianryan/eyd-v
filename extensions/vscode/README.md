@@ -28,3 +28,19 @@ Ekstensi resmi **EYD V** untuk editor Visual Studio Code, Cursor, dan Windsurf. 
    ```bash
    code --install-extension eyd-v-vscode-1.0.0.vsix
    ```
+
+## Cakupan akademik
+
+Mode akademik ekstensi menggunakan linter ejaan. Antarmuka tinjauan riset dan pencocokan sitasi APA/IEEE belum tersedia di ekstensi; gunakan CLI dari akar repositori:
+
+```sh
+node bin/cli.js academic naskah.md --citation-style=apa --json
+```
+
+Perintah ini membaca naskah tanpa menulis ulang berkas. Hasil memisahkan kesalahan ejaan, saran gaya, kekurangan bahan, dan masalah sitasi. Pemeriksaan tidak memverifikasi kebenaran ilmiah.
+
+<!-- eyd-v:docs-navigation -->
+## Dokumentasi terkait
+
+[Panduan proyek](../../README.md) · [Catatan perubahan](../../CHANGELOG.md) · [Riset dan penulisan akademik](../../docs/profesional/04-karya-ilmiah-dan-akademik.md).
+<!-- /eyd-v:docs-navigation -->
