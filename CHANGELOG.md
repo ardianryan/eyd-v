@@ -20,6 +20,7 @@ Format catatan ini mengacu pada panduan [Keep a Changelog](https://keepachangelo
 - Persona pertama menjadi preferensi gaya; “saya” dan “kami” tidak dilarang secara bawaan.
 - Templat abstrak menggunakan isian alih-alih angka hasil tanpa sumber.
 - Installer dan arsip skill menyertakan sumber pendukung yang dirujuk.
+- Aturan gabungan kata tidak lagi menandai “Wali Kota” yang sudah benar dan tidak mengubahnya menjadi “Wali kota”.
 
 ### Dokumentasi dan distribusi
 

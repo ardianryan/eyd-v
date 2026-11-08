@@ -40,6 +40,16 @@
     "type": "GABUNGAN_KATA"
   },
   {
+    "input": "Pak walikota meresmikan taman kota.",
+    "expected": "Pak wali kota meresmikan taman kota.",
+    "type": "GABUNGAN_KATA"
+  },
+  {
+    "input": "Wali Kota Surabaya meresmikan taman kota.",
+    "expected": "Wali Kota Surabaya meresmikan taman kota.",
+    "type": "GABUNGAN_KATA"
+  },
+  {
     "input": "Apapun yang terjadi, kita harus tetap melangkah.",
     "expected": "Apa pun yang terjadi, kita harus tetap melangkah.",
     "type": "PARTIKEL"

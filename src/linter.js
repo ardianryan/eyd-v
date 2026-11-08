@@ -132,7 +132,7 @@ function checkEyd(text, options = {}) {
   gabunganKataPatterns.forEach(pat => {
     let match;
     while ((match = pat.regex.exec(text)) !== null) {
-      if (match[0].toLowerCase() === pat.fix.toLowerCase() && match[0] === pat.fix) continue;
+      if (match[0].replace(/\s+/g, ' ').toLowerCase() === pat.fix.toLowerCase()) continue;
       const original = match[0];
       const isCapitalized = original[0] === original[0].toUpperCase();
       const suggested = isCapitalized ? pat.fix.charAt(0).toUpperCase() + pat.fix.slice(1) : pat.fix;
